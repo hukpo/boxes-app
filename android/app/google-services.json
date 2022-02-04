@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "325174206390",
+    "project_id": "boxes-526bf",
+    "storage_bucket": "boxes-526bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:325174206390:android:6380232d050e8800d7eb17",
+        "android_client_info": {
+          "package_name": "com.hukpo.boxes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "325174206390-7br2p3j0okra8marj50vr8lf2lkd7edi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAE2Y_1PJn2Ckcs1xjrFgpakMeV-ULuZXI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "325174206390-7br2p3j0okra8marj50vr8lf2lkd7edi.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "325174206390-6hu2e7lptuhp205nenc736sad2l7okth.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hukpo.boxes"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
