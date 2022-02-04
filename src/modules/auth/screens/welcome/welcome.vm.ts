@@ -1,9 +1,9 @@
 import { autoInjectable } from 'tsyringe';
 
-import { logger } from '@helpers';
-import { Navigation } from '@navigation';
-import { BoxesMainScreen } from '@modules';
-import { makeSimpleAutoObservable } from '@stores';
+import { logger } from '@/helpers';
+import { Navigation } from '@/navigation';
+import { BoxesMainScreen } from '@/modules';
+import { makeSimpleAutoObservable } from '@/stores';
 
 @autoInjectable()
 export class WelcomeVm {

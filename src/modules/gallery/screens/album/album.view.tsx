@@ -6,7 +6,7 @@ import { useHeaderHeight } from '@react-navigation/elements';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FlatList, Image, ListRenderItem, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 
-import { useVm } from '@hooks';
+import { useVm } from '@/hooks';
 import { AlbumVm } from './album.vm';
 import { Gallery } from '../../refs';
 import { useAlbumNavigation } from './album.navigation';

@@ -3,10 +3,10 @@ import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { useVm } from '@hooks';
+import { useVm } from '@/hooks';
 import { ListVm } from './list.vm';
-import { useNavigationLayout } from '@navigation';
-import { ListItem, ListContainer } from '@components';
+import { useNavigationLayout } from '@/navigation';
+import { ListItem, ListContainer } from '@/components';
 
 export const List: FC = () => {
   const vm = useVm(ListVm);

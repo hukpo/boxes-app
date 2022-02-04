@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import { container } from 'tsyringe';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 
-import { Text } from '@ui-kit';
-import { useTheme } from '@themes';
+import { Text } from '@/ui-kit';
+import { useTheme } from '@/themes';
 import { Navigation } from '../../navigation';
 
 type HeaderButtonProps = {

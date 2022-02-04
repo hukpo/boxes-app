@@ -1,7 +1,7 @@
 import { container } from 'tsyringe';
 import { LanguageDetectorAsyncModule } from 'i18next';
 
-import { SimpleStorage } from '@services';
+import { SimpleStorage } from '@/services';
 
 export const detectLanguage = (fallbackLanguageCode: string): LanguageDetectorAsyncModule => {
   const simpleStorage = container.resolve(SimpleStorage);

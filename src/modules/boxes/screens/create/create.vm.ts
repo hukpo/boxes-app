@@ -1,10 +1,10 @@
 import { autoInjectable } from 'tsyringe';
 
 import { BoxesDB } from '../../db';
-import { Navigation } from '@navigation';
+import { Navigation } from '@/navigation';
 import { Box, BoxType } from '../../models';
-import { getRandomColor, logger } from '@helpers';
-import { InputStore, makeSimpleAutoObservable } from '@stores';
+import { getRandomColor, logger } from '@/helpers';
+import { InputStore, makeSimpleAutoObservable } from '@/stores';
 
 @autoInjectable()
 export class CreateVm {

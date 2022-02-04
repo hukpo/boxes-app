@@ -4,7 +4,7 @@ import { useWindowDimensions } from 'react-native';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 
 import { List } from '../../../screens';
-import { Background } from '@navigation';
+import { Background } from '@/navigation';
 
 export enum BoxesMainScreen {
   LIST = '[BOXES MAIN] LIST',
@@ -22,8 +22,7 @@ export const BoxesMainStack: FC = () => {
       screenOptions={{
         headerTransparent: true,
         headerBackground: () => <Background />,
-      }}
-    >
+      }}>
       <Screen
         name={BoxesMainScreen.LIST}
         component={List}

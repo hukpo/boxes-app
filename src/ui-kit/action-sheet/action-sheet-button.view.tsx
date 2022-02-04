@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { StyleProp, StyleSheet, TextStyle, TouchableHighlight, ViewStyle } from 'react-native';
 
 import { Text } from '../text';
-import { useTheme } from '@themes';
+import { useTheme } from '@/themes';
 
 export type ActionSheetButtonProps = {
   title: string;
@@ -18,8 +18,7 @@ export const ActionSheetButton: FC<ActionSheetButtonProps> = ({ title, onPress, 
     <TouchableHighlight
       style={[styles.container, containerStyle, { backgroundColor: colors.tertiary, borderColor: colors.border }]}
       onPress={onPress}
-      underlayColor={colors.highlight}
-    >
+      underlayColor={colors.highlight}>
       <Text style={[styles.title, titleStyle, { color: colors.primary }]}>{title}</Text>
     </TouchableHighlight>
   );

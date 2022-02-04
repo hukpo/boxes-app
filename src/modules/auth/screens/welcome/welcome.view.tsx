@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { useVm } from '@hooks';
-import { Text, Button } from '@ui-kit';
+import { useVm } from '@/hooks';
+import { Text, Button } from '@/ui-kit';
 import { WelcomeVm } from './welcome.vm';
 
 export const Welcome: FC = () => {

@@ -2,9 +2,9 @@ import { useColorScheme } from 'react-native';
 import { setBackgroundColorAsync } from 'expo-system-ui';
 import { useTheme as useNavigationTheme } from '@react-navigation/native';
 
-import { useStores } from '@stores';
+import { useStores } from '@/stores';
 import { Theme } from './theme.type';
-import { AutoNightMode } from '@modules';
+import { AutoNightMode } from '@/modules';
 import { DARK_THEME } from './dark.theme';
 import { LIGHT_THEME } from './light.theme';
 

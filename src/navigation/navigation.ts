@@ -3,7 +3,7 @@ import { createRef, RefObject } from 'react';
 import analytics from '@react-native-firebase/analytics';
 import { NavigationContainerRef, StackActions } from '@react-navigation/native';
 
-import { logger } from '@helpers';
+import { logger } from '@/helpers';
 import { STACKS } from './constants';
 
 @singleton()

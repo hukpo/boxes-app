@@ -2,9 +2,9 @@ import { runInAction } from 'mobx';
 import { autoInjectable } from 'tsyringe';
 import { Album, getAlbumsAsync, requestPermissionsAsync } from 'expo-media-library';
 
-import { logger } from '@helpers';
-import { Navigation } from '@navigation';
-import { makeSimpleAutoObservable } from '@stores';
+import { logger } from '@/helpers';
+import { Navigation } from '@/navigation';
+import { makeSimpleAutoObservable } from '@/stores';
 import { GalleryMainScreen } from '../../navigation';
 
 @autoInjectable()

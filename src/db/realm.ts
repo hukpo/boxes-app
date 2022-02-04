@@ -3,8 +3,8 @@ import { Auth } from 'aws-amplify';
 import { v4 as uuidv4 } from 'uuid';
 import { singleton } from 'tsyringe';
 
-import { config } from '@config';
-import { logger } from '@helpers';
+import { config } from '@/config';
+import { logger } from '@/helpers';
 import { boxSchema } from './box.schema';
 import { chatMessageSchema } from './chat-message.schema';
 

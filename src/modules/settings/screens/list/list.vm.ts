@@ -1,8 +1,8 @@
 import { Auth } from 'aws-amplify';
 import { autoInjectable } from 'tsyringe';
 
-import { Navigation } from '@navigation';
-import { makeSimpleAutoObservable } from '@stores';
+import { Navigation } from '@/navigation';
+import { makeSimpleAutoObservable } from '@/stores';
 import { SettingsMainScreen } from '../../navigation';
 
 @autoInjectable()

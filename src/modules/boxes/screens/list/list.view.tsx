@@ -4,14 +4,14 @@ import { useTranslation } from 'react-i18next';
 import { FlatList, ListRenderItem } from 'react-native';
 
 import { ListVm } from './list.vm';
-import { useTheme } from '@themes';
-import { ActionSheet } from '@ui-kit';
+import { useTheme } from '@/themes';
+import { ActionSheet } from '@/ui-kit';
 import { BoxObject } from '../../models';
 import { BoxListRow } from '../../components';
 import { BOX_ROW_HEIGHT } from '../../constants';
-import { useNavigationLayout } from '@navigation';
+import { useNavigationLayout } from '@/navigation';
 import { useListNavigation } from './list.navigation';
-import { useRealmListUpdate, useSwipableRows, useVm } from '@hooks';
+import { useRealmListUpdate, useSwipableRows, useVm } from '@/hooks';
 
 export const List = observer(() => {
   const vm = useVm(ListVm);

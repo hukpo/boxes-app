@@ -20,7 +20,7 @@ import {
   PanGestureHandlerEventPayload,
 } from 'react-native-gesture-handler';
 
-import { useTheme } from '@themes';
+import { useTheme } from '@/themes';
 import { ActionSheetButton, ActionSheetButtonProps } from './action-sheet-button.view';
 
 const DEFAULT_PADDING = 10;

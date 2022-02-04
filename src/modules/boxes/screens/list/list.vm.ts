@@ -1,12 +1,12 @@
 import { runInAction, when } from 'mobx';
 import { autoInjectable } from 'tsyringe';
 
-import { logger } from '@helpers';
+import { logger } from '@/helpers';
 import { BoxesDB } from '../../db';
-import { Navigation } from '@navigation';
-import { BoxesCreateScreen } from '@modules';
+import { Navigation } from '@/navigation';
+import { BoxesCreateScreen } from '@/modules';
 import { Box, Boxes, BoxType } from '../../models';
-import { AppStore, makeSimpleAutoObservable } from '@stores';
+import { AppStore, makeSimpleAutoObservable } from '@/stores';
 
 @autoInjectable()
 export class ListVm {

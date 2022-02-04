@@ -1,6 +1,6 @@
 import { singleton } from 'tsyringe';
 
-import { CollectionName, RealmDB } from '@db';
+import { CollectionName, RealmDB } from '@/db';
 import { ChatMessage, ChatMessages, ChatMessageObject } from '../models';
 
 @singleton()

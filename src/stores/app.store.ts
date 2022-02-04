@@ -1,10 +1,10 @@
 import { runInAction } from 'mobx';
 import { autoInjectable, singleton } from 'tsyringe';
 
-import { RealmDB } from '@db';
-import { logger } from '@helpers';
-import { Navigation } from '@navigation';
-import { BoxesMainScreen } from '@modules';
+import { RealmDB } from '@/db';
+import { logger } from '@/helpers';
+import { Navigation } from '@/navigation';
+import { BoxesMainScreen } from '@/modules';
 import { makeSimpleAutoObservable } from './utils';
 
 @singleton()

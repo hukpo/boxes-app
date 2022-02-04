@@ -3,12 +3,12 @@ import { observer } from 'mobx-react-lite';
 import { StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { Text } from '@ui-kit';
-import { useTheme } from '@themes';
+import { Text } from '@/ui-kit';
+import { useTheme } from '@/themes';
 import { BoxImage } from '../box-image';
 import { BoxObject } from '../../models';
-import { SwipableView } from '@components';
-import { useRealmListUpdate, useVm } from '@hooks';
+import { SwipableView } from '@/components';
+import { useRealmListUpdate, useVm } from '@/hooks';
 import { BoxListRowVm } from './box-list-row.vm';
 import {
   BOX_SPACING,
@@ -44,8 +44,7 @@ const BoxListRowNoMemo = observer<BoxListRowProps>(({ box }) => {
       ]}
       snapWidth={BOX_ROW_HEIGHT + right}
       onPress={vm.openBox}
-      onButtonPress={vm.deleteBox}
-    >
+      onButtonPress={vm.deleteBox}>
       <BoxImage
         containerStyle={styles.image}
         size={BOX_ROW_IMAGE_HEIGHT}

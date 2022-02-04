@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { useVm } from '@hooks';
+import { useVm } from '@/hooks';
 import { AppearanceVm } from './appearance.vm';
-import { useNavigationLayout } from '@navigation';
-import { ListContainer, ListItem } from '@components';
+import { useNavigationLayout } from '@/navigation';
+import { ListContainer, ListItem } from '@/components';
 
 export const Appearance = observer(() => {
   const vm = useVm(AppearanceVm);

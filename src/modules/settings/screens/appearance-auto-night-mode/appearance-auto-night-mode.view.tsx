@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { useStores } from '@stores';
+import { useStores } from '@/stores';
 import { AutoNightMode } from '../../models';
-import { useNavigationLayout } from '@navigation';
-import { ListContainer, ListItem } from '@components';
+import { useNavigationLayout } from '@/navigation';
+import { ListContainer, ListItem } from '@/components';
 
 export const AppearanceAutoNightMode = observer(() => {
   const { themeStore } = useStores();

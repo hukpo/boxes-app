@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { BlurView } from 'expo-blur';
 import { Platform, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
-import { useTheme } from '@themes';
+import { useTheme } from '@/themes';
 
 type BackgroundProps = {
   absoluteFill?: boolean;

@@ -6,12 +6,12 @@ import { StatusBar, useWindowDimensions } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 
-import { useStores } from '@stores';
+import { useStores } from '@/stores';
 import { STACKS } from '../../constants';
-import { useContainerTheme } from '@themes';
+import { useContainerTheme } from '@/themes';
 import { Navigation } from '../../navigation';
 import { BottomMenuStack } from '../bottom-menu';
-import { AuthMainStack, BoxesCreateStack, ChatMainStack, GalleryMainStack } from '@modules';
+import { AuthMainStack, BoxesCreateStack, ChatMainStack, GalleryMainStack } from '@/modules';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -35,8 +35,7 @@ export const MainStack = observer(() => {
         theme={theme}
         ref={navigation.ref}
         onReady={navigation.onReady}
-        onStateChange={navigation.onStateChange}
-      >
+        onStateChange={navigation.onStateChange}>
         <PortalProvider>
           <Navigator initialRouteName={STACKS.BottomMenu.name} screenOptions={{ headerShown: false }}>
             <Screen

@@ -3,8 +3,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { Image, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
-import { Text } from '@ui-kit';
-import { shadeColor } from '@helpers';
+import { Text } from '@/ui-kit';
+import { shadeColor } from '@/helpers';
 
 type BoxImageProps = {
   uri: string;

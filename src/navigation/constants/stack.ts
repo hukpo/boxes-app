@@ -5,7 +5,7 @@ import {
   BoxesCreateScreen,
   GalleryMainScreen,
   SettingsMainScreen,
-} from '@modules';
+} from '@/modules';
 
 export const STACKS = {
   BottomMenu: {

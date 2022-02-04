@@ -2,7 +2,7 @@ import React, { useEffect, useLayoutEffect } from 'react';
 import { Route, useNavigation, useRoute } from '@react-navigation/core';
 
 import { CreateVm } from './create.vm';
-import { HeaderButton } from '@navigation';
+import { HeaderButton } from '@/navigation';
 import { Box, BoxType } from '../../models';
 import { useTranslation } from 'react-i18next';
 

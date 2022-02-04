@@ -1,7 +1,7 @@
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import React, { FC, Children, cloneElement, ReactElement } from 'react';
 
-import { useTheme } from '@themes';
+import { useTheme } from '@/themes';
 import { ListItemProps } from './list-item.view';
 
 type ListContainerProps = {

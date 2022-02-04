@@ -3,10 +3,10 @@ import { useTranslation } from 'react-i18next';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 
 import { useVm } from '@/hooks';
-import { useTheme } from '@themes';
-import { getHHMM } from '@helpers';
-import { useStores } from '@stores';
-import { PopupMenu, Text } from '@ui-kit';
+import { useTheme } from '@/themes';
+import { getHHMM } from '@/helpers';
+import { useStores } from '@/stores';
+import { PopupMenu, Text } from '@/ui-kit';
 import { MessageTextVm } from './message-text.vm';
 import { ChatMessageObject, ChatMessageText } from '../../models';
 
@@ -31,8 +31,7 @@ export const MessageText: FC<MessageTextProps> = ({ style, message }) => {
           destructive: true,
           systemIcon: { name: 'trash' },
         },
-      ]}
-    >
+      ]}>
       <Text style={[styles.text, { color: colors.text }]}>{message.text}</Text>
 
       <Text style={[styles.time, { color: colors.greyLight }]}>

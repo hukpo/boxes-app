@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { StyleSheet, TextInput, View } from 'react-native';
 import { useHeaderHeight } from '@react-navigation/elements';
 
-import { useVm } from '@hooks';
-import { useTheme } from '@themes';
+import { useVm } from '@/hooks';
+import { useTheme } from '@/themes';
 import { CreateVm } from './create.vm';
 import { BoxType } from '../../models';
 import { BOX_ROW_IMAGE_HEIGHT } from '../../constants';

@@ -8,15 +8,15 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { StyleSheet, ListRenderItem, Button, TextInput, View, FlatList } from 'react-native';
 
-import { Icon } from '@ui-kit';
+import { Icon } from '@/ui-kit';
 import { MainVm } from './main.vm';
-import { useTheme } from '@themes';
-import { Background } from '@navigation';
+import { useTheme } from '@/themes';
+import { Background } from '@/navigation';
 import { ChatMessageObject } from '../../models';
 import { MESSAGE_MARGIN } from '../../constants';
 import { MessageSwitch } from '../../components';
 import { useMainNavigation } from './main.navigation';
-import { useKeyboard, useRealmListUpdate, useVm } from '@hooks';
+import { useKeyboard, useRealmListUpdate, useVm } from '@/hooks';
 
 const INPUT_HEIGHT = 35;
 const COMPOSER_PADDING = 5;
@@ -67,8 +67,7 @@ export const Main = observer(() => {
 
       <Background
         absoluteFill={false}
-        style={[styles.composerContainer, { borderColor: colors.border, minHeight: composerHeight }]}
-      >
+        style={[styles.composerContainer, { borderColor: colors.border, minHeight: composerHeight }]}>
         <View style={styles.composerContentContainer}>
           <Icon
             style={styles.attachmentIcon}

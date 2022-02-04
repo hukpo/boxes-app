@@ -1,8 +1,8 @@
 import { runInAction } from 'mobx';
 import { Asset, getAssetsAsync, PagedInfo } from 'expo-media-library';
 
-import { logger } from '@helpers';
-import { makeSimpleAutoObservable } from '@stores';
+import { logger } from '@/helpers';
+import { makeSimpleAutoObservable } from '@/stores';
 
 export class AlbumVm {
   private _assetsPagedInfo: PagedInfo<Asset> | null = null;

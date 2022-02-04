@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { Album, Albums } from '../../../screens';
-import { Background, HeaderButton } from '@navigation';
+import { Background, HeaderButton } from '@/navigation';
 
 export enum GalleryMainScreen {
   ALBUM = '[GALLERY] ALBUM',
@@ -20,8 +20,7 @@ export const GalleryMainStack: FC = () => {
       screenOptions={{
         headerTransparent: true,
         headerBackground: () => <Background />,
-      }}
-    >
+      }}>
       <Screen
         name={GalleryMainScreen.ALBUMS}
         component={Albums}

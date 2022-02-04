@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { Create } from '../../../screens';
-import { Background, HeaderButton } from '@navigation';
+import { Background, HeaderButton } from '@/navigation';
 
 export enum BoxesCreateScreen {
   MAIN = '[BOXES CREATE] MAIN',
@@ -19,8 +19,7 @@ export const BoxesCreateStack: FC = () => {
       screenOptions={{
         headerTransparent: true,
         headerBackground: () => <Background />,
-      }}
-    >
+      }}>
       <Screen
         name={BoxesCreateScreen.MAIN}
         component={Create}

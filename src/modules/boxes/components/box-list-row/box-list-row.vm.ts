@@ -2,13 +2,13 @@ import { runInAction } from 'mobx';
 import { Alert } from 'react-native';
 import { autoInjectable } from 'tsyringe';
 
-import { logger } from '@helpers';
+import { logger } from '@/helpers';
 import { BoxesDB } from '../../db';
-import { Navigation } from '@navigation';
-import { SwipableRowsManager } from '@hooks';
-import { makeSimpleAutoObservable } from '@stores';
+import { Navigation } from '@/navigation';
+import { SwipableRowsManager } from '@/hooks';
+import { makeSimpleAutoObservable } from '@/stores';
 import { Boxes, BoxObject, BoxType } from '../../models';
-import { BoxesMainScreen, ChatMainScreen } from '@modules';
+import { BoxesMainScreen, ChatMainScreen } from '@/modules';
 
 @autoInjectable()
 export class BoxListRowVm {

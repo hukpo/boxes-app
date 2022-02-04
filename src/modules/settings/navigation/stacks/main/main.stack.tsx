@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useWindowDimensions } from 'react-native';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 
-import { Background } from '@navigation';
+import { Background } from '@/navigation';
 import { Appearance, AppearanceAutoNightMode, Language, List } from '../../../screens';
 
 export enum SettingsMainScreen {
@@ -28,8 +28,7 @@ export const SettingsMainStack: FC = () => {
         gestureEnabled: true,
         gestureResponseDistance: width,
         ...TransitionPresets.SlideFromRightIOS,
-      }}
-    >
+      }}>
       <Screen
         name={SettingsMainScreen.LIST}
         component={List}

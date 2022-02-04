@@ -1,8 +1,8 @@
 import { autoInjectable } from 'tsyringe';
 
-import { Navigation } from '@navigation';
+import { Navigation } from '@/navigation';
 import { SettingsMainScreen } from '../../navigation';
-import { makeSimpleAutoObservable, ThemeStore } from '@stores';
+import { makeSimpleAutoObservable, ThemeStore } from '@/stores';
 
 @autoInjectable()
 export class AppearanceVm {

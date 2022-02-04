@@ -1,7 +1,7 @@
 import { autoInjectable, singleton } from 'tsyringe';
 
 import { MessagesDB } from '../../chat';
-import { CollectionName, RealmDB } from '@db';
+import { CollectionName, RealmDB } from '@/db';
 import { Box, Boxes, BoxObject, BoxType } from '../models';
 
 @singleton()

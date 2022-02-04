@@ -1,7 +1,7 @@
 import analytics from '@react-native-firebase/analytics';
 import crashlytics from '@react-native-firebase/crashlytics';
 
-import { config } from '@config';
+import { config } from '@/config';
 
 class Logger {
   constructor(

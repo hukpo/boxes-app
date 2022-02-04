@@ -4,8 +4,8 @@ import React, { FC, RefObject, useCallback, useEffect, useLayoutEffect, useRef }
 
 import { Box } from '../../models';
 import { ListVm } from './list.vm';
-import { ActionSheetRef } from '@ui-kit';
-import { HeaderButton } from '@navigation';
+import { ActionSheetRef } from '@/ui-kit';
+import { HeaderButton } from '@/navigation';
 
 export const useListNavigation = (vm: ListVm): { actionSheetRef: RefObject<ActionSheetRef> } => {
   const { t } = useTranslation();

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { Main } from '../../../screens';
-import { Background } from '@navigation';
+import { Background } from '@/navigation';
 
 export enum ChatMainScreen {
   MAIN = '[CHAT MAIN] MAIN',
@@ -20,8 +20,7 @@ export const ChatMainStack: FC = () => {
       screenOptions={{
         headerTransparent: true,
         headerBackground: () => <Background />,
-      }}
-    >
+      }}>
       <Screen
         name={ChatMainScreen.MAIN}
         component={Main}

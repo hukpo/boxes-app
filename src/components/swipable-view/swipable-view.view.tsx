@@ -10,9 +10,9 @@ import {
   PanGestureHandlerEventPayload,
 } from 'react-native-gesture-handler';
 
-import { useTheme } from '@themes';
-import { Icon, Text } from '@ui-kit';
-import { useSwipableRows } from '@hooks';
+import { useTheme } from '@/themes';
+import { Icon, Text } from '@/ui-kit';
+import { useSwipableRows } from '@/hooks';
 
 type SwipableViewProps = {
   id: string;
@@ -80,14 +80,12 @@ export const SwipableView: FC<SwipableViewProps> = ({ children, id, style, snapW
             .onStart(onPanStart)
             .onUpdate(onPanUpdate)
             .onEnd(onPanEnd),
-        )}
-      >
+        )}>
         <Animated.View style={[style, animatedStyle]}>{children}</Animated.View>
       </GestureDetector>
       <Pressable
         style={[styles.container, { backgroundColor: colors.red, paddingLeft: left, paddingRight: right }]}
-        onPress={onButtonPress}
-      >
+        onPress={onButtonPress}>
         <View style={styles.deleteButton}>
           <Icon name="trash" size={27} color="#fff" />
           <Text style={styles.deleteButtonTitle}>{t('delete')}</Text>

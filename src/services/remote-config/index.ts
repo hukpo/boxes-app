@@ -1,7 +1,7 @@
 import { singleton } from 'tsyringe';
 import remoteConfig, { FirebaseRemoteConfigTypes } from '@react-native-firebase/remote-config';
 
-import { logger } from '@helpers';
+import { logger } from '@/helpers';
 
 type Config = {};
 

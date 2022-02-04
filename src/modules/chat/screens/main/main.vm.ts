@@ -4,10 +4,10 @@ import { autoInjectable } from 'tsyringe';
 import { Asset } from 'expo-media-library';
 import { Storage } from '@aws-amplify/storage';
 
-import { logger } from '@helpers';
-import { Gallery } from '@modules';
+import { logger } from '@/helpers';
+import { Gallery } from '@/modules';
 import { MessagesDB } from '../../db';
-import { makeSimpleAutoObservable } from '@stores';
+import { makeSimpleAutoObservable } from '@/stores';
 import {
   ChatMessage,
   ChatMessages,

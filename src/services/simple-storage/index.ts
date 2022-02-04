@@ -1,7 +1,7 @@
 import { singleton } from 'tsyringe';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { logger } from '@helpers';
+import { logger } from '@/helpers';
 
 type SimpleStorageKey = 'languageCode' | 'autoNightMode' | 'nightModeToggled';
 

@@ -3,11 +3,11 @@ import { observer } from 'mobx-react-lite';
 import { ScrollView, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { useVm } from '@hooks';
-import { LANGUAGES } from '@locales';
+import { useVm } from '@/hooks';
+import { LANGUAGES } from '@/locales';
 import { LanguageVm } from './language.vm';
-import { useNavigationLayout } from '@navigation';
-import { ListContainer, ListItem } from '@components';
+import { useNavigationLayout } from '@/navigation';
+import { ListContainer, ListItem } from '@/components';
 
 export const Language = observer(() => {
   const vm = useVm(LanguageVm);

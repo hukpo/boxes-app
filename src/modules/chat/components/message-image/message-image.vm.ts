@@ -2,8 +2,8 @@ import { runInAction, toJS } from 'mobx';
 import { autoInjectable } from 'tsyringe';
 
 import { MessagesStore } from '../../stores';
-import { makeSimpleAutoObservable } from '@stores';
-import { logger, getS3Image, S3Image } from '@helpers';
+import { makeSimpleAutoObservable } from '@/stores';
+import { logger, getS3Image, S3Image } from '@/helpers';
 import { ChatMessageImage, ChatMessageObject } from '../../models';
 
 @autoInjectable()

@@ -1,8 +1,8 @@
 import { runInAction } from 'mobx';
 import { autoInjectable, singleton } from 'tsyringe';
 
-import { AutoNightMode } from '@modules';
-import { SimpleStorage } from '@services';
+import { AutoNightMode } from '@/modules';
+import { SimpleStorage } from '@/services';
 import { makeSimpleAutoObservable } from './utils';
 
 @singleton()

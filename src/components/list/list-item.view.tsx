@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { ColorValue, StyleProp, StyleSheet, Switch, View, ViewStyle, Pressable } from 'react-native';
 
-import { useTheme } from '@themes';
-import { useToggle } from '@hooks';
-import { Icon, IconProps, Text } from '@ui-kit';
+import { useTheme } from '@/themes';
+import { useToggle } from '@/hooks';
+import { Icon, IconProps, Text } from '@/ui-kit';
 
 export type ListItemProps = {
   title: string;
@@ -50,8 +50,7 @@ export const ListItem: FC<ListItemProps> = ({
       ]}
       onPressIn={isPressed.toggle}
       onPressOut={isPressed.toggle}
-      onPress={onPress}
-    >
+      onPress={onPress}>
       {iconName ? (
         <View style={[styles.iconContainer, { backgroundColor: iconBackground }]}>
           <Icon name={iconName} size={20} color={iconColor as string} />
@@ -64,8 +63,7 @@ export const ListItem: FC<ListItemProps> = ({
             style={[
               styles.title,
               { color: disabled ? colors.textDisabled : titleStyle === 'destructive' ? colors.red : colors.text },
-            ]}
-          >
+            ]}>
             {title}
           </Text>
           {subtitle ? (

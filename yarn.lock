@@ -6226,7 +6226,7 @@ expo-system-ui@~1.1.0:
     "@react-native/normalize-color" "^2.0.0"
     debug "^4.3.2"
 
-expo@^44.0.4:
+expo@^44.0.6:
   version "44.0.6"
   resolved "https://registry.yarnpkg.com/expo/-/expo-44.0.6.tgz#5454f08abb07166e55eb55b5fc4d45b5ad416ff4"
   integrity sha512-iHnra6uD5kXZgdSUrvxZ3sLjg1FtgtA4p4uaSKVQ39IaMHJBngo8RKqFUJ+BF2kPDpBLJ251eLlhgYUlnAyuag==

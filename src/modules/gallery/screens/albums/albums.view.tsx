@@ -5,9 +5,9 @@ import { useHeaderHeight } from '@react-navigation/elements';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ScrollView, StyleSheet, TouchableHighlight, View } from 'react-native';
 
-import { useVm } from '@hooks';
-import { useTheme } from '@themes';
-import { Icon, Text } from '@ui-kit';
+import { useVm } from '@/hooks';
+import { useTheme } from '@/themes';
+import { Icon, Text } from '@/ui-kit';
 import { AlbumsVm } from './albums.vm';
 
 export const Albums = observer(() => {

@@ -1,7 +1,7 @@
 import { singleton } from 'tsyringe';
 import { Asset } from 'expo-media-library';
 
-import { Navigation } from '@navigation';
+import { Navigation } from '@/navigation';
 import { GalleryMainScreen } from '../navigation';
 
 type OpenOptions = {

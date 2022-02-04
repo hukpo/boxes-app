@@ -3,12 +3,12 @@ import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
-import { useTheme } from '@themes';
-import { getHHMM } from '@helpers';
-import { useStores } from '@stores';
-import { Image, PopupMenu, Text } from '@ui-kit';
+import { useTheme } from '@/themes';
+import { getHHMM } from '@/helpers';
+import { useStores } from '@/stores';
+import { Image, PopupMenu, Text } from '@/ui-kit';
 import { MessageImageVm } from './message-image.vm';
-import { useRealmObjectUpdate, useVm } from '@hooks';
+import { useRealmObjectUpdate, useVm } from '@/hooks';
 import { PinchableView, ZoomableView } from '@/components';
 import { ChatMessageObject, ChatMessageImage, ChatMessageImageUploadStatus } from '../../models';
 
@@ -41,8 +41,7 @@ export const MessageImage = observer<MessageTextProps>(({ style, message }) => {
           destructive: true,
           systemIcon: { name: 'trash' },
         },
-      ]}
-    >
+      ]}>
       <PinchableView>
         <ZoomableView>
           <View style={[styles.imageContainer, { aspectRatio: message.aspectRatio }]}>

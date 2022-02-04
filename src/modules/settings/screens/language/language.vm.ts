@@ -1,8 +1,8 @@
 import i18next from 'i18next';
 import { runInAction } from 'mobx';
 
-import { LanguageCode } from '@locales';
-import { makeSimpleAutoObservable } from '@stores';
+import { LanguageCode } from '@/locales';
+import { makeSimpleAutoObservable } from '@/stores';
 
 export class LanguageVm {
   private _languageCode = i18next.language as LanguageCode;

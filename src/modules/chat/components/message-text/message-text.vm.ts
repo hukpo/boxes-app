@@ -1,7 +1,7 @@
 import { autoInjectable } from 'tsyringe';
 
 import { MessagesStore } from '../../stores';
-import { makeSimpleAutoObservable } from '@stores';
+import { makeSimpleAutoObservable } from '@/stores';
 import { ChatMessageImage, ChatMessageObject } from '../../models';
 
 @autoInjectable()
