@@ -43,7 +43,6 @@ export const MainStack = observer(() => {
               component={ChatMainStack}
               options={{
                 gestureEnabled: true,
-                keyboardHandlingEnabled: false, // required to persist the keyboard
                 gestureResponseDistance: width,
                 ...TransitionPresets.SlideFromRightIOS,
               }}
