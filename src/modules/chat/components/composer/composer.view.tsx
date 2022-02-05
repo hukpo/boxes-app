@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   View,
   Button,
+  Platform,
   TextInput,
   StyleSheet,
   InputAccessoryView,
@@ -30,6 +31,8 @@ type ComposerProps = {
   parentId: Box['_id'] | undefined;
 };
 
+const Container = Platform.OS === 'ios' ? InputAccessoryView : Fragment;
+
 export const Composer = observer<ComposerProps>(({ parentId }) => {
   const { colors } = useTheme();
   const { t } = useTranslation(['chat']);
@@ -52,7 +55,7 @@ export const Composer = observer<ComposerProps>(({ parentId }) => {
   const composerHeight = currentInputHeight.value + bottom + COMPOSER_PADDING * 2;
 
   return (
-    <InputAccessoryView>
+    <Container>
       <View style={styles.composerContainer}>
         <Icon
           style={[styles.attachmentIcon, { marginBottom: (initialInputHeight.value - ATTACHMENT_ICON_HEIGHT) / 2 }]}
@@ -94,7 +97,7 @@ export const Composer = observer<ComposerProps>(({ parentId }) => {
           ]}
         />
       </View>
-    </InputAccessoryView>
+    </Container>
   );
 });
 
