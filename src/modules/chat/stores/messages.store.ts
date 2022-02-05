@@ -12,7 +12,7 @@ export class MessagesStore {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
   }
 
-  async deleteMessage(message: ChatMessageObject): Promise<void> {
+  async delete(message: ChatMessageObject): Promise<void> {
     try {
       logger.info(`Trying to delete message with id: ${message._id}, type: ${message.type}`);
 

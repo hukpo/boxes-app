@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import { ContextMenuView, MenuActionConfig, MenuAttributes, OnPressMenuItemEvent } from 'react-native-ios-context-menu';
 
-type PopupMenuItem = {
+export type PopupMenuItem = {
   title: string;
   onPress: () => void;
   destructive?: boolean;

@@ -38,7 +38,6 @@ export class ComposerVm {
         parentId: this._parentId,
         text: this._composerText.trim(),
         type: ChatMessageType.TEXT,
-        createdAt: new Date(),
       });
 
       this.setComposerText('');
@@ -64,7 +63,6 @@ export class ComposerVm {
           aspectRatio: asset.width / asset.height,
           parentId: this._parentId,
           type: ChatMessageType.IMAGE,
-          createdAt: new Date(),
           status: ChatMessageImageUploadStatus.IN_PROGRESS,
         });
 

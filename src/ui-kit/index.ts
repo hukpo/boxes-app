@@ -6,4 +6,5 @@ export { PopupMenu } from './popup-menu';
 export { ActionSheet } from './action-sheet';
 
 export type { IconProps } from './icon';
+export type { PopupMenuItem } from './popup-menu';
 export type { ActionSheetRef } from './action-sheet';

@@ -14,8 +14,10 @@ export class MessagesDB {
       .sorted('createdAt', true);
   }
 
-  async save<T extends ChatMessage>(message: Omit<T, '_id'>): Promise<ChatMessageObject<T>> {
-    return this._realmDB.create(CollectionName.MESSAGE, message);
+  async save<T extends ChatMessage>(message: Omit<T, '_id' | 'createdAt'>): Promise<ChatMessageObject<T>> {
+    const _message = Object.assign(message, { createdAt: new Date() }) as Omit<T, '_id'>;
+
+    return this._realmDB.create(CollectionName.MESSAGE, _message);
   }
 
   async update<T extends ChatMessageObject>(message: T, updateObj: Partial<T>): Promise<void> {
