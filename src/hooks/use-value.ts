@@ -1,7 +1,20 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 
-export const useValue = <T>(initialValue: T): { value: T; set: Dispatch<SetStateAction<T>> } => {
-  const [value, set] = useState(initialValue);
+type UseValueResult<T> = { value: T };
 
-  return { value, set };
+export const useValue = <T>(initialValue: T): UseValueResult<T> => {
+  const [value, setValue] = useState(initialValue);
+
+  const result = {} as UseValueResult<T>;
+
+  Object.defineProperty(result, 'value', {
+    get: () => {
+      return value;
+    },
+    set: (newValue: T) => {
+      setValue(newValue);
+    },
+  });
+
+  return result;
 };

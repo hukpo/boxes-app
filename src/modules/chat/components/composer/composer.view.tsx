@@ -32,19 +32,19 @@ type ComposerProps = {
 
 export const Composer = observer<ComposerProps>(({ parentId }) => {
   const { colors } = useTheme();
-  const initialInputHeight = useValue(0);
-  const currentInputHeight = useValue(0);
+  const { t } = useTranslation(['chat']);
   const { bottom } = useSafeAreaInsets();
   const { width } = useWindowDimensions();
-  const { t } = useTranslation(['chat']);
+  const initialInputHeight = useValue(0);
+  const currentInputHeight = useValue(0);
   const vm = useVm(ComposerVm, parentId);
 
   const onInputLayout = ({ nativeEvent: { layout } }: LayoutChangeEvent): void => {
     if (!initialInputHeight.value) {
-      initialInputHeight.set(layout.height);
+      initialInputHeight.value = layout.height;
     }
 
-    currentInputHeight.set(layout.height);
+    currentInputHeight.value = layout.height;
   };
 
   const extraInputSpace = (INPUT_PADDING + INPUT_BORDER_WIDTH) * 2;
