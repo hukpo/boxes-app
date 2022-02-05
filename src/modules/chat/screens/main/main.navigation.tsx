@@ -4,7 +4,7 @@ import { useRoute, Route, useFocusEffect, useNavigation } from '@react-navigatio
 import { MainVm } from './main.vm';
 import { Box } from '../../../boxes';
 
-export const useMainNavigation = (vm: MainVm): void => {
+export const useMainNavigation = (vm: MainVm): { parentId: Box['_id'] | undefined } => {
   const { setOptions } = useNavigation();
   const { params } = useRoute<Route<string, { parentId: Box['_id']; parentName: Box['name'] } | undefined>>();
 
@@ -25,4 +25,6 @@ export const useMainNavigation = (vm: MainVm): void => {
       headerTitle: params?.parentName,
     });
   }, [setOptions, params?.parentName]);
+
+  return { parentId: params?.parentId };
 };

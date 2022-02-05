@@ -39,11 +39,11 @@ export const ListItem: FC<ListItemProps> = ({
   const { colors } = useTheme();
   const pressableRef = useRef<View>(null);
 
-  const onPressIn = () => {
+  const onPressIn = (): void => {
     pressableRef.current?.setNativeProps({ backgroundColor: colors.highlight });
   };
 
-  const onPressOut = () => {
+  const onPressOut = (): void => {
     pressableRef.current?.setNativeProps({ backgroundColor: colors.tertiary });
   };
 
