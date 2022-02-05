@@ -1,18 +1,30 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
-import { Button, InputAccessoryView, StyleSheet, TextInput, useWindowDimensions, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import {
+  View,
+  Button,
+  TextInput,
+  StyleSheet,
+  InputAccessoryView,
+  LayoutChangeEvent,
+  useWindowDimensions,
+} from 'react-native';
 
 import { Icon } from '@/ui-kit';
-import { useVm } from '@/hooks';
 import { Box } from '@/modules';
 import { useTheme } from '@/themes';
 import { Background } from '@/navigation';
+import { useValue, useVm } from '@/hooks';
 import { ComposerVm } from './composer.vm';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const INPUT_HEIGHT = 40;
+const INPUT_PADDING = 10;
 const COMPOSER_PADDING = 5;
+const INPUT_BORDER_WIDTH = 0.5;
+const ATTACHMENT_ICON_HEIGHT = 25;
+const MAX_NUMBER_OF_LINES = 13;
 
 type ComposerProps = {
   parentId: Box['_id'] | undefined;
@@ -20,26 +32,48 @@ type ComposerProps = {
 
 export const Composer = observer<ComposerProps>(({ parentId }) => {
   const { colors } = useTheme();
+  const initialInputHeight = useValue(0);
+  const currentInputHeight = useValue(0);
   const { bottom } = useSafeAreaInsets();
   const { width } = useWindowDimensions();
   const { t } = useTranslation(['chat']);
   const vm = useVm(ComposerVm, parentId);
 
-  const composerHeight = INPUT_HEIGHT + bottom + COMPOSER_PADDING * 2;
+  const onInputLayout = ({ nativeEvent: { layout } }: LayoutChangeEvent): void => {
+    if (!initialInputHeight.value) {
+      initialInputHeight.set(layout.height);
+    }
+
+    currentInputHeight.set(layout.height);
+  };
+
+  const extraInputSpace = (INPUT_PADDING + INPUT_BORDER_WIDTH) * 2;
+  const maxInputHeight = MAX_NUMBER_OF_LINES * (initialInputHeight.value - extraInputSpace) + extraInputSpace;
+  const composerHeight = currentInputHeight.value + bottom + COMPOSER_PADDING * 2;
 
   return (
     <InputAccessoryView>
       <View style={styles.composerContainer}>
         <Icon
-          style={styles.attachmentIcon}
+          style={[styles.attachmentIcon, { marginBottom: (initialInputHeight.value - ATTACHMENT_ICON_HEIGHT) / 2 }]}
           name="paperclip"
-          width={20}
+          size={ATTACHMENT_ICON_HEIGHT}
           color={colors.greyLight}
           onPress={vm.openGallery}
         />
 
         <TextInput
-          style={[styles.input, { backgroundColor: colors.secondary, color: colors.text, borderColor: colors.border }]}
+          multiline={true}
+          onLayout={onInputLayout}
+          style={[
+            styles.input,
+            {
+              color: colors.text,
+              borderColor: colors.border,
+              backgroundColor: colors.secondary,
+              maxHeight: initialInputHeight.value ? maxInputHeight : undefined,
+            },
+          ]}
           value={vm.composerText}
           onChangeText={vm.setComposerText}
           placeholder={t('composerPlaceholder')}
@@ -67,17 +101,18 @@ export const Composer = observer<ComposerProps>(({ parentId }) => {
 const styles = StyleSheet.create({
   composerContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     padding: COMPOSER_PADDING,
     borderTopWidth: StyleSheet.hairlineWidth,
   },
   composerBackground: {
-    position: 'absolute',
     zIndex: -1,
+    position: 'absolute',
   },
 
   attachmentIcon: {
     marginHorizontal: 5,
+    marginBottom: (INPUT_HEIGHT - ATTACHMENT_ICON_HEIGHT) / 2,
   },
 
   input: {
@@ -85,9 +120,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginRight: 10,
     borderRadius: 20,
-    paddingVertical: 0,
     paddingHorizontal: 15,
-    height: INPUT_HEIGHT,
-    borderWidth: StyleSheet.hairlineWidth,
+    paddingTop: INPUT_PADDING,
+    paddingBottom: INPUT_PADDING,
+    borderWidth: INPUT_BORDER_WIDTH,
   },
 });
