@@ -6,7 +6,7 @@ import { StatusBar, useWindowDimensions } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 
-import { useStores } from '@/stores';
+import { AppStore } from '@/stores';
 import { STACKS } from '../../constants';
 import { useContainerTheme } from '@/themes';
 import { Navigation } from '../../navigation';
@@ -16,16 +16,15 @@ import { AuthMainStack, BoxesCreateStack, ChatMainStack, GalleryMainStack } from
 const { Navigator, Screen } = createStackNavigator();
 
 export const MainStack = observer(() => {
-  const { appStore } = useStores();
   const theme = useContainerTheme();
   const { width } = useWindowDimensions();
   const navigation = container.resolve(Navigation);
 
   useEffect(() => {
-    appStore.main();
+    container.resolve(AppStore).main();
 
     return () => navigation.setIsReady(false);
-  }, [appStore, navigation]);
+  }, [navigation]);
 
   return (
     <Fragment>

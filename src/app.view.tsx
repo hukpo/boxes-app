@@ -4,17 +4,14 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { MainStack } from './navigation';
-import { rootStore, RootStoreContext } from './stores';
 
 export const App: FC = require('aws-amplify-react-native').withAuthenticator(
   () => {
     return (
       <GestureHandlerRootView style={styles.container}>
-        <RootStoreContext.Provider value={rootStore}>
-          <SafeAreaProvider>
-            <MainStack />
-          </SafeAreaProvider>
-        </RootStoreContext.Provider>
+        <SafeAreaProvider>
+          <MainStack />
+        </SafeAreaProvider>
       </GestureHandlerRootView>
     );
   },

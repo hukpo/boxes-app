@@ -3,8 +3,6 @@ import { observer } from 'mobx-react-lite';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import { useTheme } from '@/themes';
-import { getHHMM } from '@/helpers';
-import { useStores } from '@/stores';
 import { useMessageDefaults } from '../../hooks';
 import { Image, PopupMenu, Text } from '@/ui-kit';
 import { MessageImageVm } from './message-image.vm';
@@ -19,9 +17,8 @@ type MessageTextProps = {
 
 export const MessageImage = observer<MessageTextProps>(({ style, message }) => {
   const { colors } = useTheme();
-  const { uiStore } = useStores();
   const vm = useVm(MessageImageVm, message);
-  const { popupMenuItems } = useMessageDefaults(message);
+  const { time, popupMenuItems } = useMessageDefaults(message);
 
   useRealmObjectUpdate(message);
 
@@ -45,9 +42,7 @@ export const MessageImage = observer<MessageTextProps>(({ style, message }) => {
         </ZoomableView>
       </PinchableView>
 
-      <Text style={[styles.time, { color: colors.greyLight }]}>
-        {getHHMM(message.createdAt, uiStore.is24HourClock)}
-      </Text>
+      <Text style={[styles.time, { color: colors.greyLight }]}>{time}</Text>
     </PopupMenu>
   );
 });

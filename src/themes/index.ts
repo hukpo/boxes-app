@@ -1,16 +1,17 @@
+import { container } from 'tsyringe';
 import { useColorScheme } from 'react-native';
 import { setBackgroundColorAsync } from 'expo-system-ui';
 import { useTheme as useNavigationTheme } from '@react-navigation/native';
 
-import { useStores } from '@/stores';
 import { Theme } from './theme.type';
+import { ThemeStore } from '@/stores';
 import { AutoNightMode } from '@/modules';
 import { DARK_THEME } from './dark.theme';
 import { LIGHT_THEME } from './light.theme';
 
 export const useContainerTheme = (): Theme | undefined => {
   const scheme = useColorScheme();
-  const { themeStore } = useStores();
+  const themeStore = container.resolve(ThemeStore);
 
   let theme: Theme | undefined;
 
