@@ -9,9 +9,11 @@ import { MESSAGE_MARGIN } from '../../constants';
 import { useRealmListUpdate, useVm } from '@/hooks';
 import { useMainNavigation } from './main.navigation';
 import { Composer, MessageSwitch } from '../../components';
+import { useHeaderHeight } from '@react-navigation/elements';
 
 export const Main = observer(() => {
   const vm = useVm(MainVm);
+  const headerHeight = useHeaderHeight();
   const { parentId } = useMainNavigation(vm);
   const { left, right } = useSafeAreaInsets();
 
@@ -31,6 +33,7 @@ export const Main = observer(() => {
           {
             paddingLeft: left,
             paddingRight: right,
+            paddingBottom: headerHeight + MESSAGE_MARGIN,
           },
         ]}
         data={vm.messages}
@@ -38,6 +41,7 @@ export const Main = observer(() => {
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         keyboardDismissMode="interactive"
+        initialNumToRender={15}
         {...{ automaticallyAdjustKeyboardInsets: true }}
       />
 
@@ -53,6 +57,5 @@ const styles = StyleSheet.create({
 
   contentContainer: {
     flexGrow: 1,
-    paddingTop: MESSAGE_MARGIN,
   },
 });

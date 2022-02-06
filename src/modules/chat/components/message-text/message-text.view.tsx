@@ -39,7 +39,7 @@ export const MessageText = observer<MessageTextProps>(({ style, message }) => {
                   animated: true,
                   modalEnabled: true,
                   enableBarCollapsing: true,
-                  modalPresentationStyle: 'fullScreen',
+                  modalPresentationStyle: 'overFullScreen',
 
                   preferredBarTintColor: colors.secondary,
                   preferredControlTintColor: colors.primary,
