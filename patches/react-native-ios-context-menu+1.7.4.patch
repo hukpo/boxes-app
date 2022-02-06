@@ -1,0 +1,17 @@
+diff --git a/node_modules/react-native-ios-context-menu/ios/src/ReactNative/RNIContextMenuView/RNIContextMenuView.swift b/node_modules/react-native-ios-context-menu/ios/src/ReactNative/RNIContextMenuView/RNIContextMenuView.swift
+index 53ce6ae..06b81df 100644
+--- a/node_modules/react-native-ios-context-menu/ios/src/ReactNative/RNIContextMenuView/RNIContextMenuView.swift
++++ b/node_modules/react-native-ios-context-menu/ios/src/ReactNative/RNIContextMenuView/RNIContextMenuView.swift
+@@ -601,9 +601,9 @@ extension RNIContextMenuView: UIContextMenuInteractionDelegate {
+         self.onMenuWillHide?([:]);
+         self.onPressMenuPreview?([:]);
+         
+-        animator.addCompletion {
+-          self.onMenuDidHide?([:]);
+-        };
++//        animator.addCompletion {
++        self.onMenuDidHide?([:]);
++//        };
+     };
+   };
+ 

@@ -418,7 +418,7 @@ PODS:
     - React-jsi (= 0.68.0-rc.1)
     - React-logger (= 0.68.0-rc.1)
     - React-perflogger (= 0.68.0-rc.1)
-  - RealmJS (10.20.0-beta.1):
+  - RealmJS (10.20.0-beta.0):
     - React
   - RNAWSCognito (5.2.6):
     - React-Core
@@ -447,7 +447,7 @@ PODS:
     - React-Core
   - RNLocalize (2.1.9):
     - React-Core
-  - RNReanimated (2.3.1):
+  - RNReanimated (2.4.0):
     - DoubleConversion
     - FBLazyVector
     - FBReactNativeSpec
@@ -738,7 +738,7 @@ SPEC CHECKSUMS:
   React-RCTVibration: 5cab6419b68d5750482b0fc34dbb27af550469cc
   React-runtimeexecutor: 10cda3a396b14a764a5f86088e7e3810b9c66cec
   ReactCommon: 73a01eb83f22c84a6b09dfb60f3463888ebd4975
-  RealmJS: 74cf2dec0a20e7ca75655b5190eb60c062d106ec
+  RealmJS: 6e47a0a9619d19dd238ef635abee5724cb677247
   RNAWSCognito: d2db2cc6adffe0a2452cc44d7776dadc21541c75
   RNCAsyncStorage: 6bd5a7ba3dde1c3facba418aa273f449bdc5437a
   RNCPicker: cb57c823d5ce8d2d0b5dfb45ad97b737260dc59e
@@ -749,7 +749,7 @@ SPEC CHECKSUMS:
   RNGestureHandler: bf572f552ea324acd5b5464b8d30755b2d8c1de6
   RNInAppBrowser: 3ff3a3b8f458aaf25aaee879d057352862edf357
   RNLocalize: 291e5e21b53cd30b5205c10ed95d31b0dc9b8d63
-  RNReanimated: e4c46bdaaffb3ace36cb876b2cedca1d2e4e72cb
+  RNReanimated: 6b115e2f5f6c971966351b9cadd3162fe2550010
   RNScreens: d6da2b9e29cf523832c2542f47bf1287318b1868
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   SDWebImage: 53179a2dba77246efa8a9b85f5c5b21f8f43e38f
