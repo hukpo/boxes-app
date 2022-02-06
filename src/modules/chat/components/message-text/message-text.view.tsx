@@ -1,9 +1,12 @@
-import React, { FC } from 'react';
+import React from 'react';
+import { observer } from 'mobx-react-lite';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 
+import { useVm } from '@/hooks';
 import { useTheme } from '@/themes';
 import { PopupMenu, Text } from '@/ui-kit';
 import { useMessageDefaults } from '../../hooks';
+import { MessageTextVm } from './message-text.vm';
 import { ChatMessageObject, ChatMessageText } from '../../models';
 
 type MessageTextProps = {
@@ -11,18 +14,44 @@ type MessageTextProps = {
   style?: StyleProp<ViewStyle>;
 };
 
-export const MessageText: FC<MessageTextProps> = ({ style, message }) => {
+export const MessageText = observer<MessageTextProps>(({ style, message }) => {
   const { colors } = useTheme();
+  const vm = useVm(MessageTextVm, message);
   const { time, popupMenuItems } = useMessageDefaults(message);
 
   return (
     <PopupMenu style={[styles.container, { backgroundColor: colors.tertiary }, style]} items={popupMenuItems}>
-      <Text style={[styles.text, { color: colors.text }]}>{message.text}</Text>
+      <Text style={styles.text}>
+        {vm.textChunks.map((chunk, index) => {
+          switch (chunk.type) {
+            case 'text':
+              return (
+                <Text style={{ color: colors.text }} key={index}>
+                  {chunk.text}
+                </Text>
+              );
+
+            case 'uri':
+              return (
+                <Text
+                  key={index}
+                  style={{ color: colors.primary }}
+                  highlightColor={colors.primaryTransparent}
+                  onPress={chunk.onPress}>
+                  {chunk.text}
+                </Text>
+              );
+
+            default:
+              return null;
+          }
+        })}
+      </Text>
 
       <Text style={[styles.time, { color: colors.greyLight }]}>{time}</Text>
     </PopupMenu>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -38,6 +67,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     flexShrink: 1,
+    lineHeight: 20,
   },
 
   time: {
