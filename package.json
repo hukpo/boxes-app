@@ -42,6 +42,7 @@
     "react-native-aws4": "^1.2.1",
     "react-native-gesture-handler": "^2.1.0",
     "react-native-get-random-values": "^1.7.2",
+    "react-native-inappbrowser-reborn": "^3.6.3",
     "react-native-ios-context-menu": "^1.7.4",
     "react-native-localize": "^2.1.7",
     "react-native-reanimated": "^2.3.1",

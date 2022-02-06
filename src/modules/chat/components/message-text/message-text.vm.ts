@@ -1,7 +1,5 @@
-import { Linking } from 'react-native';
-import { makeAutoObservable } from 'mobx';
-
 import { ChatMessageText } from '../../models';
+import { makeSimpleAutoObservable } from '@/stores';
 
 type TextChunk =
   | {
@@ -11,12 +9,11 @@ type TextChunk =
   | {
       type: 'uri';
       text: string;
-      onPress: () => void;
     };
 
 export class MessageTextVm {
   constructor(private _message: ChatMessageText) {
-    makeAutoObservable(this, undefined, { autoBind: true });
+    makeSimpleAutoObservable(this, undefined, { autoBind: true });
   }
 
   get textChunks(): TextChunk[] {
@@ -31,16 +28,12 @@ export class MessageTextVm {
       }
 
       if (urlRegex.test(chunk)) {
-        chunks.push({ type: 'uri', text: chunk, onPress: () => this.onUriPress(chunk) });
+        chunks.push({ type: 'uri', text: chunk });
       } else {
         chunks.push({ type: 'text', text: chunk });
       }
 
       return chunks;
     }, []);
-  }
-
-  private onUriPress(uri: string): void {
-    Linking.openURL(uri).catch();
   }
 }

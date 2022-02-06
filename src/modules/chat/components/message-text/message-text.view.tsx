@@ -1,8 +1,10 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
+import { InAppBrowser } from 'react-native-inappbrowser-reborn';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 
 import { useVm } from '@/hooks';
+import { logger } from '@/helpers';
 import { useTheme } from '@/themes';
 import { PopupMenu, Text } from '@/ui-kit';
 import { useMessageDefaults } from '../../hooks';
@@ -32,12 +34,26 @@ export const MessageText = observer<MessageTextProps>(({ style, message }) => {
               );
 
             case 'uri':
+              const onPress = (): void => {
+                InAppBrowser.open(chunk.text, {
+                  animated: true,
+                  modalEnabled: true,
+                  enableBarCollapsing: true,
+                  modalPresentationStyle: 'fullScreen',
+
+                  preferredBarTintColor: colors.secondary,
+                  preferredControlTintColor: colors.primary,
+
+                  // TODO ANDROID
+                }).catch(logger.error);
+              };
+
               return (
                 <Text
                   key={index}
                   style={{ color: colors.primary }}
                   highlightColor={colors.primaryTransparent}
-                  onPress={chunk.onPress}>
+                  onPress={onPress}>
                   {chunk.text}
                 </Text>
               );
