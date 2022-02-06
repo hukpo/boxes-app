@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
+import React, { Fragment, useRef } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   View,
@@ -8,8 +8,8 @@ import {
   Platform,
   TextInput,
   StyleSheet,
-  InputAccessoryView,
   LayoutChangeEvent,
+  InputAccessoryView,
   useWindowDimensions,
 } from 'react-native';
 
@@ -18,7 +18,7 @@ import { Box } from '@/modules';
 import { useTheme } from '@/themes';
 import { Background } from '@/navigation';
 import { useValue, useVm } from '@/hooks';
-import { ComposerVm } from './composer.vm';
+import { ComposerVm, ComposerMethods } from './composer.vm';
 
 const INPUT_HEIGHT = 40;
 const INPUT_PADDING = 10;
@@ -34,13 +34,17 @@ type ComposerProps = {
 const Container = Platform.OS === 'ios' ? InputAccessoryView : Fragment;
 
 export const Composer = observer<ComposerProps>(({ parentId }) => {
+  const inputRef = useRef<TextInput>(null);
+  const vm = useVm(ComposerVm, parentId, {
+    focus: () => inputRef.current?.focus(),
+  } as ComposerMethods);
+
   const { colors } = useTheme();
   const { t } = useTranslation(['chat']);
   const { bottom } = useSafeAreaInsets();
   const { width } = useWindowDimensions();
   const initialInputHeight = useValue(0);
   const currentInputHeight = useValue(0);
-  const vm = useVm(ComposerVm, parentId);
 
   const onInputLayout = ({ nativeEvent: { layout } }: LayoutChangeEvent): void => {
     if (!initialInputHeight.value) {
@@ -66,6 +70,7 @@ export const Composer = observer<ComposerProps>(({ parentId }) => {
         />
 
         <TextInput
+          ref={inputRef}
           multiline={true}
           onLayout={onInputLayout}
           style={[

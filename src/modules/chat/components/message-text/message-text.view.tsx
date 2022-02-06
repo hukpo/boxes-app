@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
 import { InAppBrowser } from 'react-native-inappbrowser-reborn';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 
-import { useVm } from '@/hooks';
 import { logger } from '@/helpers';
 import { useTheme } from '@/themes';
 import { PopupMenu, Text } from '@/ui-kit';
 import { useMessageDefaults } from '../../hooks';
 import { MessageTextVm } from './message-text.vm';
+import { useRealmObjectUpdate, useVm } from '@/hooks';
 import { ChatMessageObject, ChatMessageText } from '../../models';
 
 type MessageTextProps = {
@@ -20,8 +20,14 @@ type MessageTextProps = {
 export const MessageText = observer<MessageTextProps>(({ style, message }) => {
   const { colors } = useTheme();
   const { t } = useTranslation();
-  const vm = useVm(MessageTextVm, message);
+  const vm = useVm(MessageTextVm);
   const { time, popupMenuItems } = useMessageDefaults(message);
+
+  useRealmObjectUpdate(message);
+
+  useEffect(() => {
+    vm.setMessage(message);
+  }, [message, message.text, vm]);
 
   return (
     <PopupMenu

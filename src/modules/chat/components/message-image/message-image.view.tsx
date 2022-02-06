@@ -17,7 +17,7 @@ type MessageTextProps = {
 
 export const MessageImage = observer<MessageTextProps>(({ style, message }) => {
   const { colors } = useTheme();
-  const vm = useVm(MessageImageVm, message);
+  const vm = useVm(MessageImageVm);
   const { time, popupMenuItems } = useMessageDefaults(message);
 
   useRealmObjectUpdate(message);
