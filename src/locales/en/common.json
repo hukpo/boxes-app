@@ -2,5 +2,7 @@
   "create": "Create",
   "cancel": "Cancel",
   "delete": "Delete",
-  "save": "Save"
+  "save": "Save",
+  "copy": "Copy",
+  "edit": "Edit"
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
+import { useTranslation } from 'react-i18next';
 import { InAppBrowser } from 'react-native-inappbrowser-reborn';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 
@@ -18,11 +19,26 @@ type MessageTextProps = {
 
 export const MessageText = observer<MessageTextProps>(({ style, message }) => {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const vm = useVm(MessageTextVm, message);
   const { time, popupMenuItems } = useMessageDefaults(message);
 
   return (
-    <PopupMenu style={[styles.container, { backgroundColor: colors.tertiary }, style]} items={popupMenuItems}>
+    <PopupMenu
+      style={[styles.container, { backgroundColor: colors.tertiary }, style]}
+      items={[
+        {
+          title: t('copy'),
+          onPress: vm.copyMessage,
+          systemIcon: { name: 'doc.on.doc' },
+        },
+        {
+          title: t('edit'),
+          onPress: vm.editMessage,
+          systemIcon: { name: 'square.and.pencil' },
+        },
+        popupMenuItems.delete,
+      ]}>
       <Text style={styles.text}>
         {vm.textChunks.map((chunk, index) => {
           switch (chunk.type) {

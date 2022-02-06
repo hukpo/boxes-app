@@ -28,6 +28,7 @@
     "aws-amplify-react-native": "6.0.2",
     "expo": "44.0.6",
     "expo-blur": "11.0.0",
+    "expo-clipboard": "2.1.0",
     "expo-linear-gradient": "11.0.2",
     "expo-media-library": "14.0.1",
     "expo-system-ui": "1.1.1",

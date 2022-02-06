@@ -81,6 +81,8 @@ export const Composer = observer<ComposerProps>(({ parentId }) => {
           onChangeText={vm.setComposerText}
           placeholder={t('composerPlaceholder')}
           placeholderTextColor={colors.greyLight}
+          autoCapitalize="none"
+          autoCorrect={false}
         />
 
         <Button disabled={vm.sendButtonDisabled} title={t('send')} onPress={vm.sendMessage} />

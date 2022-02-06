@@ -27,6 +27,7 @@ enableFreeze(true);
 LogBox.ignoreLogs([
   /RCTBridge required dispatch_sync to load RNGestureHandlerModule. This may lead to deadlocks/,
   /\[react-native-gesture-handler\] Seems like you/,
+  /ViewPropTypes will be removed from React Native/,
 ]);
 
 AppRegistry.registerComponent(appName, () => App);

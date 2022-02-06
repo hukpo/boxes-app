@@ -1,3 +1,5 @@
+import { setString } from 'expo-clipboard';
+
 import { ChatMessageText } from '../../models';
 import { makeSimpleAutoObservable } from '@/stores';
 
@@ -36,4 +38,10 @@ export class MessageTextVm {
       return chunks;
     }, []);
   }
+
+  copyMessage(): void {
+    setString(this._message.text);
+  }
+
+  editMessage(): void {}
 }

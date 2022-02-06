@@ -29,7 +29,7 @@ export const MessageImage = observer<MessageTextProps>(({ style, message }) => {
   }, [vm, message.key]);
 
   return (
-    <PopupMenu style={[styles.container, { backgroundColor: colors.tertiary }, style]} items={popupMenuItems}>
+    <PopupMenu style={[styles.container, { backgroundColor: colors.tertiary }, style]} items={[popupMenuItems.delete]}>
       <PinchableView>
         <ZoomableView>
           <View style={[styles.imageContainer, { aspectRatio: message.aspectRatio }]}>

@@ -7,19 +7,23 @@ import { PopupMenuItem } from '@/ui-kit';
 import { MessagesStore } from '../stores';
 import { ChatMessageObject } from '../models';
 
-export const useMessageDefaults = (message: ChatMessageObject): { popupMenuItems: PopupMenuItem[]; time: string } => {
+type PopupMenuItems = {
+  delete: PopupMenuItem;
+};
+
+export const useMessageDefaults = (message: ChatMessageObject): { popupMenuItems: PopupMenuItems; time: string } => {
   const { t } = useTranslation(['chat']);
   const uiStore = container.resolve(UIStore);
   const messagesStore = container.resolve(MessagesStore);
 
-  const popupMenuItems: PopupMenuItem[] = [
-    {
+  const popupMenuItems: PopupMenuItems = {
+    delete: {
       title: t('delete'),
       destructive: true,
       systemIcon: { name: 'trash' },
       onPress: () => messagesStore.delete(message),
     },
-  ];
+  };
 
   return {
     popupMenuItems,
