@@ -1,7 +1,8 @@
-import React, { FC, useRef } from 'react';
+import React, { FC } from 'react';
 import { ColorValue, StyleProp, StyleSheet, Switch, View, ViewStyle, Pressable } from 'react-native';
 
 import { useTheme } from '@/themes';
+import { useToggle } from '@/hooks';
 import { Icon, IconProps, Text } from '@/ui-kit';
 
 export type ListItemProps = {
@@ -37,23 +38,18 @@ export const ListItem: FC<ListItemProps> = ({
   onPress,
 }) => {
   const { colors } = useTheme();
-  const pressableRef = useRef<View>(null);
-
-  const onPressIn = (): void => {
-    pressableRef.current?.setNativeProps({ backgroundColor: colors.highlight });
-  };
-
-  const onPressOut = (): void => {
-    pressableRef.current?.setNativeProps({ backgroundColor: colors.tertiary });
-  };
+  const isPressed = useToggle(false, disabled);
 
   return (
     <Pressable
-      ref={pressableRef}
       disabled={disabled}
-      style={[styles.container, { backgroundColor: colors.tertiary }]}
-      onPressIn={onPressIn}
-      onPressOut={onPressOut}
+      style={[
+        styles.container,
+        { backgroundColor: colors.tertiary },
+        isPressed.value && { backgroundColor: colors.highlight },
+      ]}
+      onPressIn={isPressed.toggle}
+      onPressOut={isPressed.toggle}
       onPress={onPress}>
       {iconName ? (
         <View style={[styles.iconContainer, { backgroundColor: iconBackground }]}>
