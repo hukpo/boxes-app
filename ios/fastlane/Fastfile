@@ -19,9 +19,9 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :dev do
     ensure_git_status_clean
-    increment_build_number(xcodeproj: "ReactNativeStarter.xcodeproj", skip_info_plist: true)
-    commit_version_bump(message: "Version Bump", xcodeproj: "ReactNativeStarter.xcodeproj")
-    build_app(workspace: "ReactNativeStarter.xcworkspace", scheme: "DEV")
+    increment_build_number(xcodeproj: "boxes.xcodeproj", skip_info_plist: true)
+    commit_version_bump(message: "Version Bump", xcodeproj: "boxes.xcodeproj")
+    build_app(workspace: "boxes.xcworkspace", scheme: "boxes")
     upload_to_testflight
   end
 end
