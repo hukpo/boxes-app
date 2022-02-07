@@ -1,4 +1,4 @@
-app_identifier("com.hukpo.boxes") # The bundle identifier of your app
+app_identifier("com.ornuto") # The bundle identifier of your app
 apple_id("pavlo.huk.infocloud@gmail.com") # Your Apple email address
 
 itc_team_id("122590144") # App Store Connect Team ID

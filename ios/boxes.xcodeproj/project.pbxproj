@@ -52,6 +52,7 @@
 		652C357227ACAA9E003523A0 /* CacheImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheImageView.swift; sourceTree = "<group>"; };
 		652C357827ACABA1003523A0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		652C357A27ACB308003523A0 /* boxes-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "boxes-Bridging-Header.h"; sourceTree = "<group>"; };
+		652C357B27B1D473003523A0 /* boxes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = boxes.entitlements; path = boxes/boxes.entitlements; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = boxes/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-boxes-boxesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-boxes-boxesTests.release.xcconfig"; path = "Target Support Files/Pods-boxes-boxesTests/Pods-boxes-boxesTests.release.xcconfig"; sourceTree = "<group>"; };
 		AB466A86E5532B259BE737B3 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-boxes-boxesTests/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
@@ -99,6 +100,7 @@
 		13B07FAE1A68108700A75B9A /* boxes */ = {
 			isa = PBXGroup;
 			children = (
+				652C357B27B1D473003523A0 /* boxes.entitlements */,
 				652C356F27ACAA9E003523A0 /* CacheImage */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
@@ -535,6 +537,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = boxes/boxes.entitlements;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = B4KYTA6974;
 				ENABLE_BITCODE = NO;
@@ -550,7 +553,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hukpo.boxes;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ornuto;
 				PRODUCT_NAME = boxes;
 				SWIFT_OBJC_BRIDGING_HEADER = "boxes-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -566,6 +569,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = boxes/boxes.entitlements;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = B4KYTA6974;
 				INFOPLIST_FILE = boxes/Info.plist;
@@ -580,7 +584,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hukpo.boxes;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ornuto;
 				PRODUCT_NAME = boxes;
 				SWIFT_OBJC_BRIDGING_HEADER = "boxes-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
