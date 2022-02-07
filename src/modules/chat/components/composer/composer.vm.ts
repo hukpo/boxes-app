@@ -34,6 +34,10 @@ export class ComposerVm {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
   }
 
+  get editMessageText(): string | undefined {
+    return this._editMessage?.text;
+  }
+
   get sendButtonDisabled(): boolean {
     return !this._composerText.trim();
   }

@@ -1,10 +1,21 @@
 import React, { FC } from 'react';
 import Svg, { Path } from 'react-native-svg';
 import { StyleProp, ViewStyle } from 'react-native';
-import { Box, Setting2, Trash, Global, Blur, Paperclip2 } from 'iconsax-react-native';
+import { Box, Setting2, Send, Trash, Global, Blur, Edit, CloseCircle, Paperclip2 } from 'iconsax-react-native';
 
 export type IconProps = {
-  name: 'box' | 'gear' | 'trash' | 'global' | 'blur' | 'arrow-right' | 'checkmark' | 'paperclip';
+  name:
+    | 'box'
+    | 'gear'
+    | 'trash'
+    | 'global'
+    | 'blur'
+    | 'arrow-right'
+    | 'checkmark'
+    | 'paperclip'
+    | 'edit'
+    | 'close'
+    | 'send';
   color: string;
 
   size?: number;
@@ -30,6 +41,15 @@ export const Icon: FC<IconProps> = ({ style, onPress, name, color, size, width =
 
     case 'blur':
       return <Blur style={style} size={size} color={color} />;
+
+    case 'edit':
+      return <Edit style={style} size={size} color={color} />;
+
+    case 'close':
+      return <CloseCircle style={style} size={size} color={color} />;
+
+    case 'send':
+      return <Send style={style} size={size} color={color} />;
 
     case 'arrow-right':
       return (
