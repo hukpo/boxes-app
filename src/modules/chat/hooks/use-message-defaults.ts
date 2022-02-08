@@ -12,7 +12,7 @@ type PopupMenuItems = {
 };
 
 export const useMessageDefaults = (message: ChatMessageObject): { popupMenuItems: PopupMenuItems; time: string } => {
-  const { t } = useTranslation(['chat']);
+  const { t } = useTranslation();
   const uiStore = container.resolve(UIStore);
   const messagesStore = container.resolve(MessagesStore);
 

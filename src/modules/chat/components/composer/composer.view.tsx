@@ -7,14 +7,15 @@ import {
   Platform,
   TextInput,
   StyleSheet,
+  TouchableOpacity,
   LayoutChangeEvent,
   InputAccessoryView,
   useWindowDimensions,
 } from 'react-native';
 
-import { Icon } from '@/ui-kit';
 import { Box } from '@/modules';
 import { useTheme } from '@/themes';
+import { Icon, Text } from '@/ui-kit';
 import { Background } from '@/navigation';
 import { useValue, useVm } from '@/hooks';
 import { ComposerVm, ComposerMethods } from './composer.vm';
@@ -24,10 +25,16 @@ const COMPOSER_PADDING_VERTICAL = 5;
 const INPUT_BORDER_WIDTH = 0.5;
 const MAX_NUMBER_OF_LINES = 13;
 
-const SEND_ICON_HEIGHT = 25;
-// const EDIT_ICON_HEIGHT = 25;
+const ICON_SPACE = 35;
+
 const ATTACHMENT_ICON_HEIGHT = 25;
-const ICON_MARGIN_HORIZONTAL = 5;
+const SEND_ICON_HEIGHT = 25;
+const EDIT_ICON_HEIGHT = 25;
+const CLOSE_ICON_HEIGHT = 13;
+
+const EDIT_TEXT_LINE_HEIGHT = 18;
+const EDIT_CONTAINER_PADDING_VERTICAL = 5;
+const EDIT_CONTAINER_HEIGHT = EDIT_TEXT_LINE_HEIGHT * 2 + EDIT_CONTAINER_PADDING_VERTICAL * 2;
 
 type ComposerProps = {
   parentId: Box['_id'] | undefined;
@@ -58,78 +65,88 @@ export const Composer = observer<ComposerProps>(({ parentId }) => {
 
   const extraInputSpace = (INPUT_PADDING + INPUT_BORDER_WIDTH) * 2;
   const maxInputHeight = MAX_NUMBER_OF_LINES * (initialInputHeight.value - extraInputSpace) + extraInputSpace;
-  const composerHeight = currentInputHeight.value + bottom + COMPOSER_PADDING_VERTICAL * 2;
+  const composerHeight =
+    bottom +
+    currentInputHeight.value +
+    COMPOSER_PADDING_VERTICAL * 2 +
+    (vm.editMessageText ? EDIT_CONTAINER_HEIGHT : 0);
 
   return (
     <Container style={styles.container}>
-      {/* <View style={styles.editContainer}>
-        <Icon style={styles.editIcon} name="edit" size={EDIT_ICON_HEIGHT} color={colors.primary} />
+      <View style={[{ borderColor: colors.border, borderTopWidth: StyleSheet.hairlineWidth }]}>
+        {vm.editMessagePreviewText ? (
+          <View style={styles.editContainer}>
+            <Icon style={styles.editIcon} name="pencil" size={EDIT_ICON_HEIGHT} color={colors.primary} />
 
-        <View style={styles.editInfoContainer}>
-          <View style={{ width: 3, borderRadius: 5, height: 40, marginRight: 5, backgroundColor: colors.primary }} />
+            <View style={styles.editInfoContainer}>
+              <View style={[styles.editSeparator, { backgroundColor: colors.primary }]} />
 
-          <View>
-            <Text style={[styles.editMessageText, { color: colors.primary }]}>Edit Message</Text>
-            <Text style={[styles.editMessageText, { color: colors.text }]} numberOfLines={1}>
-              #progress Added fastlane for iOS Add...
-            </Text>
+              <View>
+                <Text style={[styles.editMessageText, { color: colors.primary }]}>{t('editMessage')}</Text>
+                <Text style={[styles.editMessageText, { color: colors.text }]} numberOfLines={1}>
+                  {vm.editMessagePreviewText}
+                </Text>
+              </View>
+            </View>
+
+            <TouchableOpacity onPress={vm.cancelEdit}>
+              <Icon style={styles.closeIcon} name="close" size={CLOSE_ICON_HEIGHT} color={colors.primary} />
+            </TouchableOpacity>
           </View>
+        ) : null}
+
+        <View style={styles.composerContainer}>
+          <TouchableOpacity onPress={vm.openGallery}>
+            <Icon
+              style={[styles.attachmentIcon, { marginBottom: (initialInputHeight.value - ATTACHMENT_ICON_HEIGHT) / 2 }]}
+              name="paperclip"
+              size={ATTACHMENT_ICON_HEIGHT}
+              color={colors.greyLight}
+            />
+          </TouchableOpacity>
+
+          <TextInput
+            ref={inputRef}
+            multiline={true}
+            onLayout={onInputLayout}
+            style={[
+              styles.input,
+              {
+                color: colors.text,
+                borderColor: colors.border,
+                backgroundColor: colors.secondary,
+                maxHeight: initialInputHeight.value ? maxInputHeight : undefined,
+              },
+            ]}
+            value={vm.composerText}
+            onChangeText={vm.setComposerText}
+            placeholder={t('composerPlaceholder')}
+            placeholderTextColor={colors.greyLight}
+            autoCapitalize="none"
+            autoCorrect={false}
+          />
+
+          <TouchableOpacity disabled={vm.sendButtonDisabled} onPress={vm.sendMessage}>
+            <Icon
+              style={[styles.sendIcon, { marginBottom: (initialInputHeight.value - SEND_ICON_HEIGHT) / 2 }]}
+              name="send"
+              size={SEND_ICON_HEIGHT}
+              color={vm.sendButtonDisabled ? colors.textDisabled : colors.primary}
+            />
+          </TouchableOpacity>
+
+          <Background
+            absoluteFill={false}
+            style={[
+              styles.composerBackground,
+              {
+                width,
+                bottom: -bottom,
+                height: composerHeight,
+              },
+            ]}
+          />
         </View>
-
-        <Icon style={styles.editIcon} name="close" size={EDIT_ICON_HEIGHT} color={colors.primary} />
-      </View> */}
-
-      <View style={styles.composerContainer}>
-        <Icon
-          style={[styles.attachmentIcon, { marginBottom: (initialInputHeight.value - ATTACHMENT_ICON_HEIGHT) / 2 }]}
-          name="paperclip"
-          size={ATTACHMENT_ICON_HEIGHT}
-          color={colors.greyLight}
-          onPress={vm.openGallery}
-        />
-
-        <TextInput
-          ref={inputRef}
-          multiline={true}
-          onLayout={onInputLayout}
-          style={[
-            styles.input,
-            {
-              color: colors.text,
-              borderColor: colors.border,
-              backgroundColor: colors.secondary,
-              maxHeight: initialInputHeight.value ? maxInputHeight : undefined,
-            },
-          ]}
-          value={vm.composerText}
-          onChangeText={vm.setComposerText}
-          placeholder={t('composerPlaceholder')}
-          placeholderTextColor={colors.greyLight}
-          autoCapitalize="none"
-          autoCorrect={false}
-        />
-
-        <Icon
-          style={[styles.sendIcon, { marginBottom: (initialInputHeight.value - SEND_ICON_HEIGHT) / 2 }]}
-          name="send"
-          size={SEND_ICON_HEIGHT}
-          onPress={vm.sendButtonDisabled ? undefined : vm.sendMessage}
-          color={vm.sendButtonDisabled ? colors.textDisabled : colors.primary}
-        />
-
-        {/* <Button disabled={vm.sendButtonDisabled} title={t('send')} onPress={vm.sendMessage} /> */}
-
-        <Background
-          absoluteFill={false}
-          style={[
-            styles.composerBackground,
-            {
-              width,
-              bottom: -bottom,
-              height: composerHeight,
-            },
-          ]}
-        />
       </View>
     </Container>
   );
@@ -143,7 +160,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
     paddingVertical: COMPOSER_PADDING_VERTICAL,
-    borderTopWidth: StyleSheet.hairlineWidth,
   },
   composerBackground: {
     zIndex: -1,
@@ -151,10 +167,10 @@ const styles = StyleSheet.create({
   },
 
   attachmentIcon: {
-    marginHorizontal: ICON_MARGIN_HORIZONTAL,
+    margin: (ICON_SPACE - ATTACHMENT_ICON_HEIGHT) / 2,
   },
   sendIcon: {
-    marginHorizontal: ICON_MARGIN_HORIZONTAL,
+    margin: (ICON_SPACE - SEND_ICON_HEIGHT) / 2,
   },
 
   input: {
@@ -170,24 +186,31 @@ const styles = StyleSheet.create({
   },
 
   editContainer: {
-    padding: 5,
+    zIndex: 100,
     flexDirection: 'row',
     alignItems: 'center',
-    // justifyContent: 'space-between',
-
-    backgroundColor: 'rgba(255,0,0,0.2)',
+    paddingVertical: EDIT_CONTAINER_PADDING_VERTICAL,
+  },
+  editSeparator: {
+    width: 3,
+    marginRight: 5,
+    borderRadius: 5,
+    height: EDIT_TEXT_LINE_HEIGHT * 2,
   },
   editIcon: {
-    marginHorizontal: 5,
+    margin: (ICON_SPACE - EDIT_ICON_HEIGHT) / 2,
+  },
+  closeIcon: {
+    margin: (ICON_SPACE - CLOSE_ICON_HEIGHT) / 2,
   },
   editMessageText: {
-    fontSize: 15,
-    lineHeight: 20,
+    fontSize: 13,
     fontWeight: '500',
+    lineHeight: EDIT_TEXT_LINE_HEIGHT,
   },
   editInfoContainer: {
     flex: 1,
     flexDirection: 'row',
-    marginHorizontal: 15,
+    marginHorizontal: 10,
   },
 });

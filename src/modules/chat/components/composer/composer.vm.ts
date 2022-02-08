@@ -34,6 +34,9 @@ export class ComposerVm {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
   }
 
+  get editMessagePreviewText(): string | undefined {
+    return this._editMessage?.text.replace(/\n/g, ' ');
+  }
   get editMessageText(): string | undefined {
     return this._editMessage?.text;
   }
@@ -55,6 +58,11 @@ export class ComposerVm {
     this._methods.focus();
   }
 
+  cancelEdit(): void {
+    runInAction(() => (this._editMessage = null));
+    this.setComposerText('');
+  }
+
   openGallery(): void {
     this._gallery.open({
       selectAssets: this.selectAssets,
@@ -67,16 +75,20 @@ export class ComposerVm {
         throw new Error('No parentId found');
       }
 
+      const parsedComposerText = this._composerText.trim();
+
       if (this._editMessage) {
-        await this._db.update(this._editMessage, {
-          text: this._composerText,
-        });
+        if (parsedComposerText !== this._editMessage.text) {
+          await this._db.update(this._editMessage, {
+            text: parsedComposerText,
+          });
+        }
 
         runInAction(() => (this._editMessage = null));
       } else {
         await this._db.save<ChatMessageText>({
           parentId: this._parentId,
-          text: this._composerText.trim(),
+          text: parsedComposerText,
           type: ChatMessageType.TEXT,
         });
       }
