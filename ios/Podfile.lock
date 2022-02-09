@@ -123,6 +123,8 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.7.0):
     - GoogleUtilities/Logger
+  - hermes-engine (0.11.0)
+  - libevent (2.1.12)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
@@ -140,6 +142,12 @@ PODS:
     - DoubleConversion
     - fmt (~> 6.2.1)
     - glog
+  - RCT-Folly/Futures (2021.06.28.00-v2):
+    - boost
+    - DoubleConversion
+    - fmt (~> 6.2.1)
+    - glog
+    - libevent
   - RCTRequired (0.68.0-rc.1)
   - RCTTypeSafety (0.68.0-rc.1):
     - FBLazyVector (= 0.68.0-rc.1)
@@ -315,6 +323,17 @@ PODS:
     - React-logger (= 0.68.0-rc.1)
     - React-perflogger (= 0.68.0-rc.1)
     - React-runtimeexecutor (= 0.68.0-rc.1)
+  - React-hermes (0.68.0-rc.1):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2021.06.28.00-v2)
+    - RCT-Folly/Futures (= 2021.06.28.00-v2)
+    - React-cxxreact (= 0.68.0-rc.1)
+    - React-jsi (= 0.68.0-rc.1)
+    - React-jsiexecutor (= 0.68.0-rc.1)
+    - React-jsinspector (= 0.68.0-rc.1)
+    - React-perflogger (= 0.68.0-rc.1)
   - React-jsi (0.68.0-rc.1):
     - boost (= 1.76.0)
     - DoubleConversion
@@ -487,6 +506,8 @@ DEPENDENCIES:
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - hermes-engine (~> 0.11.0)
+  - libevent (~> 2.1.12)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -498,6 +519,7 @@ DEPENDENCIES:
   - React-Core/RCTWebSocket (from `../node_modules/react-native/`)
   - React-CoreModules (from `../node_modules/react-native/React/CoreModules`)
   - React-cxxreact (from `../node_modules/react-native/ReactCommon/cxxreact`)
+  - React-hermes (from `../node_modules/react-native/ReactCommon/hermes`)
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
@@ -546,6 +568,8 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
+    - hermes-engine
+    - libevent
     - nanopb
     - PromisesObjC
     - SDWebImage
@@ -597,6 +621,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/React/CoreModules"
   React-cxxreact:
     :path: "../node_modules/react-native/ReactCommon/cxxreact"
+  React-hermes:
+    :path: "../node_modules/react-native/ReactCommon/hermes"
   React-jsi:
     :path: "../node_modules/react-native/ReactCommon/jsi"
   React-jsiexecutor:
@@ -691,6 +717,8 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: aa3cb422fab2b05d2efac543a5720d1a85b9dea5
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
+  hermes-engine: 84e3af1ea01dd7351ac5d8689cbbea1f9903ffc3
+  libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   RCT-Folly: 803a9cfd78114b2ec0f140cfa6fa2a6bafb2d685
@@ -702,6 +730,7 @@ SPEC CHECKSUMS:
   React-Core: 71bd283ea2f85047fda4baedf6934fd2f3571cee
   React-CoreModules: cfbf73b878d68f53604365b395957dd2e36ed0ab
   React-cxxreact: 9f09977545dfb3723528973a1dda5e5f2f915aec
+  React-hermes: c152dd5394b37e9a77f00efb1db7829801acb73f
   React-jsi: 7eb40a56fc0b6752532366ef88f13b5f86f90178
   React-jsiexecutor: b95fc3494e76e7a5832c4386978c3ada3d1e2bed
   React-jsinspector: dc394b84375f124b823720b59e322113d85f23b4
@@ -738,6 +767,6 @@ SPEC CHECKSUMS:
   SDWebImage: 53179a2dba77246efa8a9b85f5c5b21f8f43e38f
   Yoga: d29dba374c1a582b40cfb736647b5e1b5ed35dba
 
-PODFILE CHECKSUM: 951d567f3052c768a529e79d8fd64c83cfe03826
+PODFILE CHECKSUM: 8e00b5b4d55b09fd88c58e3703b4a2c8efaa81cd
 
 COCOAPODS: 1.11.2

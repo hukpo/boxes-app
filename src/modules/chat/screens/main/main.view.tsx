@@ -41,7 +41,7 @@ export const Main = observer(() => {
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         keyboardDismissMode="interactive"
-        initialNumToRender={15}
+        initialNumToRender={20}
         {...{ automaticallyAdjustKeyboardInsets: true }}
       />
 

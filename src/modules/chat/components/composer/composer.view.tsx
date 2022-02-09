@@ -182,7 +182,6 @@ const styles = StyleSheet.create({
     paddingTop: INPUT_PADDING,
     paddingBottom: INPUT_PADDING,
     borderWidth: INPUT_BORDER_WIDTH,
-    fontWeight: '500',
   },
 
   editContainer: {
@@ -204,8 +203,7 @@ const styles = StyleSheet.create({
     margin: (ICON_SPACE - CLOSE_ICON_HEIGHT) / 2,
   },
   editMessageText: {
-    fontSize: 13,
-    fontWeight: '500',
+    fontSize: 14,
     lineHeight: EDIT_TEXT_LINE_HEIGHT,
   },
   editInfoContainer: {
