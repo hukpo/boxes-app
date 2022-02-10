@@ -1,9 +1,9 @@
-export const BOX_SPACING = 9;
-export const BOX_ROW_HEIGHT = 70;
+export const BOX_SPACING = 7;
+export const BOX_ROW_HEIGHT = 75;
+export const BOX_ROW_IMAGE_HEIGHT = 50;
 export const BOX_NAME_LINE_HEIGHT = 20;
-export const BOX_ROW_IMAGE_HEIGHT = BOX_ROW_HEIGHT - BOX_SPACING * 2;
 
 export const BOX_PREVIEW_MARGIN_TOP = 3;
-export const BOX_PREVIEW_ITEM_MARGIN_RIGHT = 3;
+export const BOX_PREVIEW_ITEM_MARGIN_RIGHT = 5;
 export const BOX_PREVIEW_ITEM_HEIGHT = BOX_ROW_HEIGHT - BOX_NAME_LINE_HEIGHT - BOX_SPACING * 2 - BOX_PREVIEW_MARGIN_TOP;
-export const BOX_PREVIEW_MAX_ITEMS = 7;
+export const BOX_PREVIEW_MAX_ITEMS = 5;
