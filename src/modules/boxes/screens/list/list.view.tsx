@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import { observer } from 'mobx-react-lite';
+import { ListRenderItem } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { FlatList, ListRenderItem } from 'react-native';
+import Animated, { ILayoutAnimationBuilder, Layout } from 'react-native-reanimated';
 
 import { ListVm } from './list.vm';
 import { useTheme } from '@/themes';
@@ -38,9 +39,14 @@ export const List = observer(() => {
     offset: BOX_ROW_HEIGHT * index,
   });
 
+  const reanimatedProps: { itemLayoutAnimation: ILayoutAnimationBuilder } = {
+    itemLayoutAnimation: Layout.duration(200),
+  };
+
   return (
     <Fragment>
-      <FlatList
+      <Animated.FlatList
+        {...reanimatedProps}
         style={{ backgroundColor: colors.secondary }}
         contentContainerStyle={style}
         data={vm.boxes}
