@@ -21,8 +21,9 @@ export const useListNavigation = (vm: ListVm): { actionSheetRef: RefObject<Actio
 
   useFocusEffect(
     useCallback(() => {
-      vm.getBoxes();
-    }, [vm]),
+      // TODO AUTH
+      // vm.getBoxes();
+    }, []),
   );
 
   useLayoutEffect(() => {

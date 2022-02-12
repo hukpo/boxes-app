@@ -1,9 +1,11 @@
 import { makeAutoObservable } from 'mobx';
 
 export class InputStore {
-  private _value = '';
+  private _value: string;
 
-  constructor() {
+  constructor(defaultValue = '') {
+    this._value = defaultValue;
+
     makeAutoObservable(this, undefined, { autoBind: true });
   }
 

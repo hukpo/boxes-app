@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>325174206390-6hu2e7lptuhp205nenc736sad2l7okth.apps.googleusercontent.com</string>
+	<string>619678921318-tpkvodqb1b1n9fa2i77sosd0as636mbj.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.325174206390-6hu2e7lptuhp205nenc736sad2l7okth</string>
+	<string>com.googleusercontent.apps.619678921318-tpkvodqb1b1n9fa2i77sosd0as636mbj</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAZPFXHGDZq5Af1uUPRL65fKQkRvy5CBc0</string>
+	<string>AIzaSyB6m14c6l1gOYRHWzS5iZdiHqMKEs9jvA4</string>
 	<key>GCM_SENDER_ID</key>
-	<string>325174206390</string>
+	<string>619678921318</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.hukpo.boxes</string>
+	<string>com.ornuto</string>
 	<key>PROJECT_ID</key>
-	<string>boxes-526bf</string>
+	<string>ornuto-59a7d</string>
 	<key>STORAGE_BUCKET</key>
-	<string>boxes-526bf.appspot.com</string>
+	<string>ornuto-59a7d.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:325174206390:ios:f920966a2acce849d7eb17</string>
+	<string>1:619678921318:ios:4bb5400514c25155f473a7</string>
 </dict>
 </plist>

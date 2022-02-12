@@ -1,8 +1,7 @@
 import { runInAction } from 'mobx';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import { autoInjectable } from 'tsyringe';
-import { Asset } from 'expo-media-library';
-import { Storage } from '@aws-amplify/storage';
+// import { Asset } from 'expo-media-library';
 
 import { logger } from '@/helpers';
 import { MessagesDB } from '../../db';
@@ -11,9 +10,9 @@ import { makeSimpleAutoObservable } from '@/stores';
 import {
   ChatMessageText,
   ChatMessageType,
-  ChatMessageImage,
+  // ChatMessageImage,
   ChatMessageObject,
-  ChatMessageImageUploadStatus,
+  // ChatMessageImageUploadStatus,
 } from '../../models';
 
 export type ComposerMethods = {
@@ -99,34 +98,31 @@ export class ComposerVm {
     }
   }
 
-  async selectAssets(assets: Asset[]): Promise<void> {
-    const uploaders = assets.map(async asset => {
-      try {
-        if (!this._parentId) {
-          throw new Error('No parentId found');
-        }
-
-        const newMessage = await this._db.save<ChatMessageImage>({
-          aspectRatio: asset.width / asset.height,
-          parentId: this._parentId,
-          type: ChatMessageType.IMAGE,
-          status: ChatMessageImageUploadStatus.IN_PROGRESS,
-        });
-
-        const response = await fetch(asset.uri);
-        const blob = await response.blob();
-
-        const { key } = await Storage.put(uuidv4(), blob);
-
-        await this._db.update(newMessage, {
-          key,
-          status: ChatMessageImageUploadStatus.DONE,
-        });
-      } catch (err) {
-        logger.error(err);
-      }
-    });
-
-    await Promise.all(uploaders);
+  async selectAssets(): // assets: Asset[]
+  Promise<void> {
+    // TODO STORAGE
+    // const uploaders = assets.map(async asset => {
+    //   try {
+    //     if (!this._parentId) {
+    //       throw new Error('No parentId found');
+    //     }
+    //     const newMessage = await this._db.save<ChatMessageImage>({
+    //       aspectRatio: asset.width / asset.height,
+    //       parentId: this._parentId,
+    //       type: ChatMessageType.IMAGE,
+    //       status: ChatMessageImageUploadStatus.IN_PROGRESS,
+    //     });
+    //     const response = await fetch(asset.uri);
+    //     const blob = await response.blob();
+    //     const { key } = await Storage.put(uuidv4(), blob);
+    //     await this._db.update(newMessage, {
+    //       key,
+    //       status: ChatMessageImageUploadStatus.DONE,
+    //     });
+    //   } catch (err) {
+    //     logger.error(err);
+    //   }
+    // });
+    // await Promise.all(uploaders);
   }
 }

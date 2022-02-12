@@ -1,9 +1,8 @@
 import Realm from 'realm';
-import { Auth } from 'aws-amplify';
 import { v4 as uuidv4 } from 'uuid';
 import { singleton } from 'tsyringe';
 
-import { config } from '@/config';
+// import { config } from '@/config';
 import { logger } from '@/helpers';
 import { boxSchema } from './box.schema';
 import { chatMessageSchema } from './chat-message.schema';
@@ -24,25 +23,25 @@ export class RealmDB {
   private _realm!: Realm;
 
   async init(): Promise<void> {
-    const realmApp = new Realm.App({
-      id: config.REALM_ID,
-      baseUrl: config.REALM_BASE_URL,
-    });
+    // const realmApp = new Realm.App({
+    //   id: config.REALM_ID,
+    //   baseUrl: config.REALM_BASE_URL,
+    // });
 
-    const session = await Auth.currentSession();
-    const token = session.getIdToken().getJwtToken();
+    // const session = await Auth.currentSession();
+    // const token = session.getIdToken().getJwtToken();
 
-    const credentials = Realm.Credentials.jwt(token);
+    // const credentials = Realm.Credentials.jwt(token);
 
-    const user = await realmApp.logIn(credentials);
+    // const user = await realmApp.logIn(credentials);
 
-    this._realm = await Realm.open({
-      sync: {
-        user,
-        partitionValue: user.id,
-      },
-      schema: [boxSchema, chatMessageSchema],
-    });
+    // this._realm = await Realm.open({
+    //   sync: {
+    //     user,
+    //     partitionValue: user.id,
+    //   },
+    //   schema: [boxSchema, chatMessageSchema],
+    // });
 
     logger.info('Database initialized');
   }

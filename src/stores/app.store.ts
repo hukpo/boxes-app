@@ -1,10 +1,11 @@
 import { runInAction } from 'mobx';
+import auth from '@react-native-firebase/auth';
 import { autoInjectable, singleton } from 'tsyringe';
 
 import { RealmDB } from '@/db';
 import { logger } from '@/helpers';
 import { Navigation } from '@/navigation';
-import { BoxesMainScreen } from '@/modules';
+import { AuthMainScreen, BoxesMainScreen } from '@/modules';
 import { makeSimpleAutoObservable } from './utils';
 
 @singleton()
@@ -24,9 +25,16 @@ export class AppStore {
     try {
       logger.info('[AppStore] main');
 
-      await this._realmDB.init();
+      const isAuthorized = !!auth().currentUser;
 
-      this._navigation.navigate(BoxesMainScreen.LIST);
+      if (isAuthorized) {
+        // TODO AUTH
+        await this._realmDB.init();
+
+        this._navigation.navigate(BoxesMainScreen.LIST);
+      } else {
+        this._navigation.navigate(AuthMainScreen.EMAIL);
+      }
     } catch (err) {
       //TODO ???
       logger.error(err);

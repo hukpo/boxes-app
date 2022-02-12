@@ -1,4 +1,3 @@
-import { Auth } from 'aws-amplify';
 import { autoInjectable } from 'tsyringe';
 
 import { Navigation } from '@/navigation';
@@ -20,6 +19,6 @@ export class ListVm {
   }
 
   logOut(): void {
-    Auth.signOut();
+    // TODO auth
   }
 }
