@@ -1,4 +1,5 @@
 import { autoInjectable } from 'tsyringe';
+import auth from '@react-native-firebase/auth';
 
 import { Navigation } from '@/navigation';
 import { makeSimpleAutoObservable } from '@/stores';
@@ -19,6 +20,6 @@ export class ListVm {
   }
 
   logOut(): void {
-    // TODO auth
+    auth().signOut();
   }
 }

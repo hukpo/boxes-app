@@ -1,35 +1,23 @@
+import storage from '@react-native-firebase/storage';
+
 export type S3Image = {
   uri: string;
   headers: Record<string, string>;
 };
 
 export const getS3Image = async (key: string): Promise<S3Image> => {
-  // try {
-  //   const uri = await Storage.get(key);
-  //   const url = uri.split('?')[0];
+  try {
+    const ref = storage().ref(key);
 
-  //   const credentials = Auth.essentialCredentials(await Auth.currentCredentials());
-
-  //   const { hostname, pathname, search } = new URL(url);
-
-  //   const opts: SignOptions = {
-  //     service: 's3',
-  //     method: 'GET',
-  //     host: hostname,
-  //     path: `${pathname}${search}`,
-  //     region: aws_exports.aws_user_files_s3_bucket_region,
-  //   };
-
-  //   const { headers } = await aws4.sign(opts, credentials);
-
-  //   return {
-  //     headers,
-  //     uri: url,
-  //   };
-  // } catch {
-  return {
-    uri: key,
-    headers: {},
-  };
-  // }
+    return {
+      uri: await ref.getDownloadURL(),
+      headers: {},
+    };
+  } catch (err) {
+    console.error(err);
+    return {
+      uri: key,
+      headers: {},
+    };
+  }
 };

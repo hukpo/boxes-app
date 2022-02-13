@@ -1,40 +1,26 @@
-import { applicationId } from 'expo-application';
 import auth from '@react-native-firebase/auth';
 
 import { logger } from '@/helpers';
 import { InputStore, makeSimpleAutoObservable } from '@/stores';
 
 export class EmailVm {
-  private _email = new InputStore('pavlo.huk@icloud.com');
+  private _phoneNumber = new InputStore('+380664223837');
 
   constructor() {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
   }
 
-  get email(): InputStore {
-    return this._email;
+  get phoneNumber(): InputStore {
+    return this._phoneNumber;
   }
 
   async sendEmail(): Promise<void> {
     try {
-      if (!applicationId) {
-        throw new Error('No applicationId found');
-      }
+      const confirmation = await auth().signInWithPhoneNumber(this._phoneNumber.value);
 
-      // Save the email for latter usage
-      // await AsyncStorage.setItem('emailForSignIn', email);
+      const res = await confirmation.confirm('111111');
 
-      await auth().sendSignInLinkToEmail(this._email.value, {
-        handleCodeInApp: true,
-        url: 'https://link.ornuto.com/magic-link',
-        iOS: {
-          bundleId: applicationId,
-        },
-        android: {
-          installApp: true,
-          packageName: applicationId,
-        },
-      });
+      console.log(JSON.stringify(res, null, 2));
     } catch (err) {
       logger.error(err);
     }

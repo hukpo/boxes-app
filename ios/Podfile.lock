@@ -44,9 +44,9 @@ PODS:
   - Firebase/Crashlytics (8.12.1):
     - Firebase/CoreOnly
     - FirebaseCrashlytics (~> 8.12.0)
-  - Firebase/DynamicLinks (8.12.1):
+  - Firebase/Storage (8.12.1):
     - Firebase/CoreOnly
-    - FirebaseDynamicLinks (~> 8.12.0)
+    - FirebaseStorage (~> 8.12.0)
   - FirebaseAnalytics (8.12.0):
     - FirebaseAnalytics/AdIdSupport (= 8.12.0)
     - FirebaseCore (~> 8.0)
@@ -86,13 +86,14 @@ PODS:
     - GoogleUtilities/Environment (~> 7.7)
     - nanopb (~> 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
-  - FirebaseDynamicLinks (8.12.0):
-    - FirebaseCore (~> 8.0)
   - FirebaseInstallations (8.12.0):
     - FirebaseCore (~> 8.0)
     - GoogleUtilities/Environment (~> 7.7)
     - GoogleUtilities/UserDefaults (~> 7.7)
     - PromisesObjC (< 3.0, >= 1.2)
+  - FirebaseStorage (8.12.0):
+    - FirebaseCore (~> 8.0)
+    - GTMSessionFetcher/Core (~> 1.5)
   - fmt (6.2.1)
   - glog (0.3.5)
   - GoogleAppMeasurement (8.12.0):
@@ -461,9 +462,8 @@ PODS:
     - Firebase/Crashlytics (= 8.12.1)
     - React-Core
     - RNFBApp
-  - RNFBDynamicLinks (14.3.2):
-    - Firebase/DynamicLinks (= 8.12.1)
-    - GoogleUtilities/AppDelegateSwizzler
+  - RNFBStorage (14.3.3):
+    - Firebase/Storage (= 8.12.1)
     - React-Core
     - RNFBApp
   - RNGestureHandler (2.2.0):
@@ -565,7 +565,7 @@ DEPENDENCIES:
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - "RNFBCrashlytics (from `../node_modules/@react-native-firebase/crashlytics`)"
-  - "RNFBDynamicLinks (from `../node_modules/@react-native-firebase/dynamic-links`)"
+  - "RNFBStorage (from `../node_modules/@react-native-firebase/storage`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNInAppBrowser (from `../node_modules/react-native-inappbrowser-reborn`)
   - RNLocalize (from `../node_modules/react-native-localize`)
@@ -583,8 +583,8 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseCrashlytics
-    - FirebaseDynamicLinks
     - FirebaseInstallations
+    - FirebaseStorage
     - fmt
     - GoogleAppMeasurement
     - GoogleDataTransport
@@ -697,8 +697,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/auth"
   RNFBCrashlytics:
     :path: "../node_modules/@react-native-firebase/crashlytics"
-  RNFBDynamicLinks:
-    :path: "../node_modules/@react-native-firebase/dynamic-links"
+  RNFBStorage:
+    :path: "../node_modules/@react-native-firebase/storage"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNInAppBrowser:
@@ -735,8 +735,8 @@ SPEC CHECKSUMS:
   FirebaseCore: 8138de860a90ca7eec5e324da5788fb0ebf1d93c
   FirebaseCoreDiagnostics: 3b40dfadef5b90433a60ae01f01e90fe87aa76aa
   FirebaseCrashlytics: 7952ffd988006128325510664b99dc8ca5851dff
-  FirebaseDynamicLinks: 98a5f0fe542245a89ec55f646d2581298c29219d
   FirebaseInstallations: 25764cf322e77f99449395870a65b2bef88e1545
+  FirebaseStorage: 4b75458c35d8b728e4c1fc1371942997456ab299
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 476ee3e89abb49e07f822b48323c51c57124b572
   GoogleAppMeasurement: ae033c3aad67e68294369373056b4d74cc8ae0d6
@@ -782,7 +782,7 @@ SPEC CHECKSUMS:
   RNFBApp: 096fb7586e167f3ba3dc7a4bf5811a19aec58735
   RNFBAuth: 586d2548d4c5dfef663d6b0ee02b6434309b8e88
   RNFBCrashlytics: 27c5474dfbbe9f7826b54663c44c23fae500c332
-  RNFBDynamicLinks: d251af6ebda6cb0f117a60d6b90ceda2bb5a3034
+  RNFBStorage: d996382f9e53d843ac57b7eed9e17d3f52e3cc1e
   RNGestureHandler: bf572f552ea324acd5b5464b8d30755b2d8c1de6
   RNInAppBrowser: 3ff3a3b8f458aaf25aaee879d057352862edf357
   RNLocalize: 291e5e21b53cd30b5205c10ed95d31b0dc9b8d63

@@ -25,11 +25,12 @@ export class AppStore {
     try {
       logger.info('[AppStore] main');
 
-      const isAuthorized = !!auth().currentUser;
+      const { currentUser } = auth();
 
-      if (isAuthorized) {
-        // TODO AUTH
-        await this._realmDB.init();
+      if (currentUser) {
+        const idToken = await currentUser.getIdToken();
+
+        await this._realmDB.init(idToken);
 
         this._navigation.navigate(BoxesMainScreen.LIST);
       } else {
