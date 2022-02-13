@@ -26,7 +26,7 @@ export class EmailVm {
 
       await auth().sendSignInLinkToEmail(this._email.value, {
         handleCodeInApp: true,
-        url: 'https://go.ornuto.com/magic-link',
+        url: 'https://go.ornuto.com',
         iOS: {
           bundleId: applicationId,
         },
