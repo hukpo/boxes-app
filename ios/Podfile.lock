@@ -436,14 +436,14 @@ PODS:
     - React-Core
   - RNCPicker (2.2.1):
     - React-Core
-  - RNFBAnalytics (14.3.2):
+  - RNFBAnalytics (14.3.3):
     - Firebase/Analytics (= 8.12.1)
     - React-Core
     - RNFBApp
-  - RNFBApp (14.3.2):
+  - RNFBApp (14.3.3):
     - Firebase/CoreOnly (= 8.12.1)
     - React-Core
-  - RNFBCrashlytics (14.3.2):
+  - RNFBCrashlytics (14.3.3):
     - Firebase/Crashlytics (= 8.12.1)
     - React-Core
     - RNFBApp
@@ -481,7 +481,7 @@ PODS:
     - React-RCTText
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNScreens (3.11.0):
+  - RNScreens (3.11.1):
     - React-Core
     - React-RCTImage
   - RNSVG (12.1.1):
@@ -755,14 +755,14 @@ SPEC CHECKSUMS:
   RNAWSCognito: d2db2cc6adffe0a2452cc44d7776dadc21541c75
   RNCAsyncStorage: b49b4e38a1548d03b74b30e558a1d18465b94be7
   RNCPicker: cb57c823d5ce8d2d0b5dfb45ad97b737260dc59e
-  RNFBAnalytics: f762601843421b7644e4d827e7722831762cbc6e
-  RNFBApp: 096fb7586e167f3ba3dc7a4bf5811a19aec58735
-  RNFBCrashlytics: 27c5474dfbbe9f7826b54663c44c23fae500c332
+  RNFBAnalytics: c2f07a0a9db6d726eeef81641f1d8bc29c1bff1e
+  RNFBApp: 920a4992d33019eecca3cfada87caaf3784c1cbd
+  RNFBCrashlytics: 0df5d2b94e63052707cc6398a1618958ffe01984
   RNGestureHandler: bf572f552ea324acd5b5464b8d30755b2d8c1de6
   RNInAppBrowser: 3ff3a3b8f458aaf25aaee879d057352862edf357
   RNLocalize: 291e5e21b53cd30b5205c10ed95d31b0dc9b8d63
   RNReanimated: 3d1432ce7b6b7fc31f375dcabe5b4585e0634a43
-  RNScreens: fd535547baa4ef8aeaee1a8b1e3ffd17b8df44a4
+  RNScreens: 4d83613b50b74ed277026375dc0810893b0c347f
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   SDWebImage: 53179a2dba77246efa8a9b85f5c5b21f8f43e38f
   Yoga: d29dba374c1a582b40cfb736647b5e1b5ed35dba
