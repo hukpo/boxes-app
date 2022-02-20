@@ -11,6 +11,7 @@ type LanguageFiles = {
   boxes: number;
   chat: number;
   gallery: number;
+  auth: number;
 };
 
 const fallbackLng = 'en';
@@ -23,6 +24,7 @@ const resources: Record<LanguageCode, LanguageFiles> = {
     boxes: require('./en/boxes.json'),
     chat: require('./en/chat.json'),
     gallery: require('./en/gallery.json'),
+    auth: require('./en/auth.json'),
   },
   ua: {
     common: require('./ua/common.json'),
@@ -31,6 +33,7 @@ const resources: Record<LanguageCode, LanguageFiles> = {
     boxes: require('./ua/boxes.json'),
     chat: require('./ua/chat.json'),
     gallery: require('./ua/gallery.json'),
+    auth: require('./ua/auth.json'),
   },
 };
 
@@ -42,6 +45,6 @@ i18next
     debug: false,
     compatibilityJSON: 'v3',
     interpolation: { escapeValue: false },
-    ns: ['common', 'navigation', 'boxes', 'chat', 'gallery'],
+    ns: ['common', 'navigation', 'boxes', 'chat', 'gallery', 'auth'],
     resources: resources as unknown as Resource,
   });

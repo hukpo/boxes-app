@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { Email } from '../../../screens';
+import { Code, Phone } from '../../../screens';
 
 export enum AuthMainScreen {
-  EMAIL = '[AUTH] EMAIL',
+  PHONE = '[AUTH] PHONE',
+  CODE = '[AUTH] CODE',
 }
 
 const { Navigator, Screen } = createStackNavigator();
@@ -13,9 +14,24 @@ export const AuthMainStack: FC = () => {
   return (
     <Navigator>
       <Screen
-        name={AuthMainScreen.EMAIL}
-        component={Email}
-        options={{ gestureEnabled: false, headerLeft: () => null }}
+        name={AuthMainScreen.PHONE}
+        component={Phone}
+        options={{
+          gestureEnabled: false,
+          headerTransparent: true,
+          headerTitle: () => null,
+          headerLeft: () => null,
+        }}
+      />
+
+      <Screen
+        name={AuthMainScreen.CODE}
+        component={Code}
+        options={{
+          gestureEnabled: false,
+          headerTransparent: true,
+          headerLeft: () => null,
+        }}
       />
     </Navigator>
   );

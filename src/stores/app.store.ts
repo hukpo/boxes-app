@@ -21,26 +21,38 @@ export class AppStore {
     return this._isLoaded;
   }
 
+  get isAuthorized(): boolean {
+    return !!auth().currentUser;
+  }
+
   async main(): Promise<void> {
     try {
       logger.info('[AppStore] main');
 
-      const { currentUser } = auth();
-
-      if (currentUser) {
-        const idToken = await currentUser.getIdToken();
-
-        await this._realmDB.init(idToken);
-
-        this._navigation.navigate(BoxesMainScreen.LIST);
-      } else {
-        this._navigation.navigate(AuthMainScreen.EMAIL);
+      if (!this.isAuthorized) {
+        return this._navigation.navigate(AuthMainScreen.PHONE);
       }
+
+      await this.initDB();
+
+      this._navigation.navigate(BoxesMainScreen.LIST);
     } catch (err) {
       //TODO ???
       logger.error(err);
     } finally {
       runInAction(() => (this._isLoaded = true));
     }
+  }
+
+  async initDB(): Promise<void> {
+    const { currentUser } = auth();
+
+    if (!currentUser) {
+      throw new Error('No current user found');
+    }
+
+    const idToken = await currentUser.getIdToken();
+
+    await this._realmDB.init(idToken);
   }
 }
