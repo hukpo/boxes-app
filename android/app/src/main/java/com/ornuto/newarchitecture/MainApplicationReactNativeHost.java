@@ -1,4 +1,4 @@
-package com.hukpo.boxes.newarchitecture;
+package com.ornuto.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.hukpo.boxes.BuildConfig;
-import com.hukpo.boxes.newarchitecture.components.MainComponentsRegistry;
-import com.hukpo.boxes.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.ornuto.BuildConfig;
+import com.ornuto.newarchitecture.components.MainComponentsRegistry;
+import com.ornuto.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

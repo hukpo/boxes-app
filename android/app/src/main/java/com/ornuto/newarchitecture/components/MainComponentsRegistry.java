@@ -1,4 +1,4 @@
-package com.hukpo.boxes.newarchitecture.components;
+package com.ornuto.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

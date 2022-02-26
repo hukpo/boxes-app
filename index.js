@@ -10,7 +10,8 @@ import './src/locales';
 import { App } from './src/app.view';
 import { name as appName } from './app.json';
 
-enableFreeze(true);
+// true breaks smooth theme switch
+enableFreeze(false);
 
 LogBox.ignoreLogs([
   /RCTBridge required dispatch_sync to load RNGestureHandlerModule. This may lead to deadlocks/,

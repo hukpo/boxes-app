@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useVm } from '@/hooks';
 import { ListVm } from './list.vm';
@@ -12,10 +11,9 @@ export const List: FC = () => {
   const vm = useVm(ListVm);
   const { style } = useNavigationLayout();
   const { t } = useTranslation(['settings']);
-  const { left, right } = useSafeAreaInsets();
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={[style, { paddingLeft: left, paddingRight: right }]}>
+    <ScrollView style={styles.container} contentContainerStyle={style}>
       <ListContainer>
         <ListItem
           title={t('appearance')}

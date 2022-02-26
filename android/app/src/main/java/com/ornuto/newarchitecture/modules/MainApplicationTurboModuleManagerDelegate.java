@@ -1,4 +1,4 @@
-package com.hukpo.boxes.newarchitecture.modules;
+package com.ornuto.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;

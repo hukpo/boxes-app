@@ -1,4 +1,4 @@
-package com.hukpo.boxes;
+package com.ornuto;
 
 import android.os.Bundle;
 import expo.modules.ReactActivityDelegateWrapper;
