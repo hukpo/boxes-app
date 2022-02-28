@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useLayoutEffect } from 'react';
-import { useRoute, Route, useFocusEffect, useNavigation } from '@react-navigation/core';
+import { useCallback, useEffect } from 'react';
+import { useRoute, Route, useFocusEffect } from '@react-navigation/core';
 
 import { MainVm } from './main.vm';
 import { Box } from '../../../boxes';
+import { useNavigationOptions } from '@/navigation';
 
 export const useMainNavigation = (vm: MainVm): { parentId: Box['_id'] | undefined } => {
-  const { setOptions } = useNavigation();
   const { params } = useRoute<Route<string, { parentId: Box['_id']; parentName: Box['name'] } | undefined>>();
 
   useEffect(() => {
@@ -20,11 +20,12 @@ export const useMainNavigation = (vm: MainVm): { parentId: Box['_id'] | undefine
     }, [vm]),
   );
 
-  useLayoutEffect(() => {
-    setOptions({
+  useNavigationOptions(
+    () => ({
       headerTitle: params?.parentName,
-    });
-  }, [setOptions, params?.parentName]);
+    }),
+    [params?.parentName],
+  );
 
   return { parentId: params?.parentId };
 };
