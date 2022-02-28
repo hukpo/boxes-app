@@ -1,19 +1,26 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet } from 'react-native';
+import { useHeaderHeight } from '@react-navigation/elements';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 import { useVm } from '@/hooks';
 import { ListVm } from './list.vm';
-import { useNavigationLayout } from '@/navigation';
 import { ListItem, ListContainer } from '@/components';
 
 export const List: FC = () => {
   const vm = useVm(ListVm);
-  const { style } = useNavigationLayout();
   const { t } = useTranslation(['settings']);
+  const headerHeight = useHeaderHeight();
+  const bottomMenuHeight = useBottomTabBarHeight();
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={style}>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={{
+        paddingTop: headerHeight,
+        paddingBottom: bottomMenuHeight,
+      }}>
       <ListContainer>
         <ListItem
           title={t('appearance')}

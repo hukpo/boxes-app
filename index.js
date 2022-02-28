@@ -17,6 +17,7 @@ LogBox.ignoreLogs([
   /RCTBridge required dispatch_sync to load RNGestureHandlerModule. This may lead to deadlocks/,
   /\[react-native-gesture-handler\] Seems like you/,
   /ViewPropTypes will be removed from React Native/,
+  /Invalid prop `style` supplied to `React.Fragment`./,
 ]);
 
 AppRegistry.registerComponent(appName, () => App);

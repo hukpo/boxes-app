@@ -1,37 +1,27 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useWindowDimensions } from 'react-native';
-import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { List } from '../../../screens';
-import { Background } from '@/navigation';
+import { useDefaultScreenOptions } from '@/navigation';
 
 export enum BoxesMainScreen {
   LIST = '[BOXES MAIN] LIST',
 }
 
-const { Navigator, Screen } = createStackNavigator();
+const { Navigator, Screen } = createNativeStackNavigator();
 
 export const BoxesMainStack: FC = () => {
   const { t } = useTranslation();
-  const { width } = useWindowDimensions();
+  const defaultScreenOptions = useDefaultScreenOptions();
 
   return (
-    <Navigator
-      initialRouteName={BoxesMainScreen.LIST}
-      screenOptions={{
-        headerTransparent: true,
-        headerBackground: () => <Background />,
-      }}>
+    <Navigator initialRouteName={BoxesMainScreen.LIST} screenOptions={defaultScreenOptions}>
       <Screen
         name={BoxesMainScreen.LIST}
         component={List}
         options={{
           headerTitle: t('boxes:boxes'),
-          headerBackTitle: t('navigation:back'),
-          gestureEnabled: true,
-          gestureResponseDistance: width,
-          ...TransitionPresets.SlideFromRightIOS,
         }}
       />
     </Navigator>

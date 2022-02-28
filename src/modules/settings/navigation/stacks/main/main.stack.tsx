@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { useTheme } from '@/themes';
+import { useDefaultScreenOptions } from '@/navigation';
 import { Appearance, AppearanceAutoNightMode, Language, List } from '../../../screens';
 
 export enum SettingsMainScreen {
@@ -15,17 +15,11 @@ export enum SettingsMainScreen {
 const { Navigator, Screen } = createNativeStackNavigator();
 
 export const SettingsMainStack: FC = () => {
-  const { dark } = useTheme();
   const { t } = useTranslation(['settings']);
+  const defaultScreenOptions = useDefaultScreenOptions();
 
   return (
-    <Navigator
-      screenOptions={{
-        headerTransparent: true,
-        animation: 'slide_from_right',
-        fullScreenGestureEnabled: true,
-        headerBlurEffect: dark ? 'dark' : 'light',
-      }}>
+    <Navigator screenOptions={defaultScreenOptions}>
       <Screen
         name={SettingsMainScreen.LIST}
         component={List}

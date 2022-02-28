@@ -1,6 +1,7 @@
+import { BackHandler } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import React, { FC, useLayoutEffect } from 'react';
 import { useNavigation } from '@react-navigation/core';
+import React, { FC, useEffect, useLayoutEffect } from 'react';
 
 import { PhoneVm } from './phone.vm';
 import { HeaderButton } from '@/navigation';
@@ -8,6 +9,14 @@ import { HeaderButton } from '@/navigation';
 export const usePhoneNavigation = (vm: PhoneVm): void => {
   const { t } = useTranslation();
   const { setOptions } = useNavigation();
+
+  useEffect(() => {
+    const onBackPress = (): boolean => true;
+
+    BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+    return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+  }, []);
 
   useLayoutEffect(() => {
     const headerRight: FC = () => (

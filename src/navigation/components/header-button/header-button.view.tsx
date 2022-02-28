@@ -27,10 +27,7 @@ export const HeaderButton: FC<HeaderButtonProps> = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-    marginVertical: 3,
-    marginHorizontal: 11,
-  },
+  container: {},
   title: {
     fontSize: 17,
     letterSpacing: 0.35,

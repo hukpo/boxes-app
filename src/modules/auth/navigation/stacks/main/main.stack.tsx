@@ -1,25 +1,29 @@
 import React, { FC } from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { Code, Phone } from '../../../screens';
+import { useTranslation } from 'react-i18next';
 
 export enum AuthMainScreen {
   PHONE = '[AUTH] PHONE',
   CODE = '[AUTH] CODE',
 }
 
-const { Navigator, Screen } = createStackNavigator();
+const { Navigator, Screen } = createNativeStackNavigator();
 
 export const AuthMainStack: FC = () => {
+  const { t } = useTranslation(['navigation']);
+
   return (
     <Navigator>
       <Screen
         name={AuthMainScreen.PHONE}
         component={Phone}
         options={{
+          headerTitle: '',
           gestureEnabled: false,
+          headerBackVisible: false,
           headerTransparent: true,
-          headerTitle: () => null,
           headerLeft: () => null,
         }}
       />
@@ -30,7 +34,7 @@ export const AuthMainStack: FC = () => {
         options={{
           gestureEnabled: false,
           headerTransparent: true,
-          headerLeft: () => null,
+          headerBackTitle: t('back'),
         }}
       />
     </Navigator>
