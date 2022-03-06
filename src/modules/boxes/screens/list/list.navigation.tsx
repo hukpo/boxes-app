@@ -26,7 +26,7 @@ export const useListNavigation = (vm: ListVm): { actionSheetRef: RefObject<Actio
 
   useNavigationOptions(
     () => ({
-      headerTitle: params?.parentName,
+      headerTitle: params?.parentName || t('boxes:boxes'),
       headerRight: () => <HeaderButton title={t('create')} onPress={actionSheetRef.current?.open} />,
     }),
     [params?.parentName, t],

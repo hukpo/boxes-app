@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { useTranslation } from 'react-i18next';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { List } from '../../../screens';
@@ -12,18 +11,11 @@ export enum BoxesMainScreen {
 const { Navigator, Screen } = createNativeStackNavigator();
 
 export const BoxesMainStack: FC = () => {
-  const { t } = useTranslation();
   const defaultScreenOptions = useDefaultScreenOptions();
 
   return (
     <Navigator initialRouteName={BoxesMainScreen.LIST} screenOptions={defaultScreenOptions}>
-      <Screen
-        name={BoxesMainScreen.LIST}
-        component={List}
-        options={{
-          headerTitle: t('boxes:boxes'),
-        }}
-      />
+      <Screen name={BoxesMainScreen.LIST} component={List} />
     </Navigator>
   );
 };

@@ -23,7 +23,7 @@ export const BottomMenuStack: FC = () => {
         name={STACKS.BoxesMain.name}
         component={BoxesMainStack}
         options={{
-          tabBarLabel: t('boxes', { ns: 'boxes' }),
+          tabBarLabel: t('boxes:boxes'),
           tabBarIcon: ({ color, size }) => <Icon name="box" size={size} color={color} />,
         }}
       />
@@ -31,7 +31,7 @@ export const BottomMenuStack: FC = () => {
         name={STACKS.Settings.name}
         component={SettingsMainStack}
         options={{
-          tabBarLabel: t('settings', { ns: 'settings' }),
+          tabBarLabel: t('settings:settings'),
           tabBarIcon: ({ color, size }) => <Icon name="gear" size={size} color={color} />,
         }}
       />
