@@ -24,9 +24,10 @@ export const GalleryMainStack: FC = () => {
         component={Albums}
         options={{
           headerTitle: t('gallery:albums'),
+          // TODO CHECK ALL CASES AND ENABLE FOR ANDROID
           ...Platform.select({
             ios: {
-              headerLeft: () => <HeaderButton title={t('cancel')} />,
+              headerLeft: () => <HeaderButton />,
             },
           }),
         }}

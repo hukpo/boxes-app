@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { Code, Phone } from '../../../screens';
-import { useTranslation } from 'react-i18next';
+import { useDefaultScreenOptions } from '@/navigation';
 
 export enum AuthMainScreen {
   PHONE = '[AUTH] PHONE',
@@ -12,31 +12,20 @@ export enum AuthMainScreen {
 const { Navigator, Screen } = createNativeStackNavigator();
 
 export const AuthMainStack: FC = () => {
-  const { t } = useTranslation(['navigation']);
+  const defaultScreenOptions = useDefaultScreenOptions();
 
   return (
-    <Navigator>
+    <Navigator screenOptions={{ ...defaultScreenOptions, headerBlurEffect: undefined, gestureEnabled: false }}>
       <Screen
         name={AuthMainScreen.PHONE}
         component={Phone}
         options={{
           headerTitle: '',
-          gestureEnabled: false,
-          headerBackVisible: false,
-          headerTransparent: true,
-          headerLeft: () => null,
+          headerLeft: undefined,
         }}
       />
 
-      <Screen
-        name={AuthMainScreen.CODE}
-        component={Code}
-        options={{
-          gestureEnabled: false,
-          headerTransparent: true,
-          headerBackTitle: t('back'),
-        }}
-      />
+      <Screen name={AuthMainScreen.CODE} component={Code} />
     </Navigator>
   );
 };

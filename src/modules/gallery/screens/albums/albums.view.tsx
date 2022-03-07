@@ -36,7 +36,7 @@ export const Albums = observer(() => {
                   <Text style={[styles.assetsCount, { color: colors.text }]}>{album.assetCount}</Text>
                 </View>
 
-                <Icon name="arrow-right" width={7} color={colors.greyLight} />
+                <Icon name="arrow.right" width={7} color={colors.greyLight} />
               </View>
             </TouchableHighlight>
           );

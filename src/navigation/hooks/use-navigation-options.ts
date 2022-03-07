@@ -1,9 +1,10 @@
 import { useNavigation } from '@react-navigation/core';
-import { DependencyList, ReactElement, useLayoutEffect, useState } from 'react';
+import { DependencyList, FC, useLayoutEffect, useState } from 'react';
 
 type NavigationOptions = {
   headerTitle: string;
-  headerRight: () => ReactElement;
+  headerLeft: FC | undefined;
+  headerRight: FC | undefined;
 };
 
 export const useNavigationOptions = (

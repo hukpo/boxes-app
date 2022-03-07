@@ -76,7 +76,7 @@ export const ListItem: FC<ListItemProps> = ({
         ) : null}
         {selected ? <Icon name="checkmark" size={12} color={colors.primary} /> : null}
 
-        {hasArrow ? <Icon name="arrow-right" width={7} color={colors.greyLight} /> : null}
+        {hasArrow ? <Icon name="arrow.right" width={7} color={colors.greyLight} /> : null}
       </View>
     </Pressable>
   );

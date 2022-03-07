@@ -21,8 +21,6 @@ export const MainStack = observer(() => {
 
   useEffect(() => {
     container.resolve(AppStore).main();
-
-    return () => navigation.setIsReady(false);
   }, [navigation]);
 
   return (
@@ -41,6 +39,7 @@ export const MainStack = observer(() => {
               component={ChatMainStack}
               options={{
                 animation: 'slide_from_right',
+                fullScreenGestureEnabled: true,
               }}
             />
             <Screen name={STACKS.BottomMenu.name} component={BottomMenuStack} />

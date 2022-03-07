@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { Route, useRoute } from '@react-navigation/core';
 
 import { CreateVm } from './create.vm';
-import { HeaderButton, useNavigationOptions } from '@/navigation';
 import { Box, BoxType } from '../../models';
+import { HeaderButton, useNavigationOptions } from '@/navigation';
 
 export const useCreateNavigation = (vm: CreateVm): { type: BoxType } => {
   const { t } = useTranslation();
@@ -24,7 +24,7 @@ export const useCreateNavigation = (vm: CreateVm): { type: BoxType } => {
       headerRight: () => <HeaderButton title={t('save')} onPress={vm.saveBox} disabled={!vm.boxName.value.trim()} />,
       ...Platform.select({
         ios: {
-          headerLeft: () => <HeaderButton title={t('cancel')} />,
+          headerLeft: () => <HeaderButton />,
         },
       }),
     }),
