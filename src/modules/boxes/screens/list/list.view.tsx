@@ -58,6 +58,7 @@ export const List = observer(() => {
           },
         ]}
         data={vm.boxes}
+        scrollEnabled={!!vm.boxes}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         getItemLayout={getItemLayout}

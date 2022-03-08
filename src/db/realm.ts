@@ -1,6 +1,7 @@
 import Realm from 'realm';
 import { v4 as uuidv4 } from 'uuid';
 import { singleton } from 'tsyringe';
+import auth from '@react-native-firebase/auth';
 
 import { config } from '@/config';
 import { logger } from '@/helpers';
@@ -26,10 +27,8 @@ export class RealmDB {
     baseUrl: config.REALM_BASE_URL,
   });
 
-  async init(idToken: string): Promise<void> {
+  async init(): Promise<void> {
     logger.info('Trying to init database');
-
-    logger.info('Trying to open database');
 
     let user: Realm.User<Realm.DefaultFunctionsFactory, Record<string, unknown>, Realm.DefaultUserProfileData>;
 
@@ -38,10 +37,22 @@ export class RealmDB {
 
       user = this._realmApp.currentUser;
     } else {
-      logger.info('Trying to login user');
+      logger.info('Trying get user credentials');
+
+      const { currentUser } = auth();
+
+      if (!currentUser) {
+        throw new Error('No current user found');
+      }
+
+      const idToken = await currentUser.getIdToken();
+
+      logger.info('Trying to login realm user');
 
       user = await this._realmApp.logIn(Realm.Credentials.jwt(idToken));
     }
+
+    logger.info('Trying to open database');
 
     this._realm = await Realm.open({
       sync: {

@@ -33,24 +33,12 @@ export class AppStore {
         return this._navigation.navigate(AuthMainScreen.PHONE);
       }
 
-      await this.initDB();
+      await this._realmDB.init();
     } catch (err) {
       //TODO ???
       logger.error(err);
     } finally {
       runInAction(() => (this._isLoaded = true));
     }
-  }
-
-  async initDB(): Promise<void> {
-    const { currentUser } = auth();
-
-    if (!currentUser) {
-      throw new Error('No current user found');
-    }
-
-    const idToken = await currentUser.getIdToken();
-
-    await this._realmDB.init(idToken);
   }
 }
