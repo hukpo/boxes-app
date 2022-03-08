@@ -9,7 +9,7 @@ import { AutoNightMode } from '@/modules';
 import { DARK_THEME } from './dark.theme';
 import { LIGHT_THEME } from './light.theme';
 
-export const useContainerTheme = (): Theme | undefined => {
+export const useContainerTheme = (): Theme => {
   const scheme = useColorScheme();
   const themeStore = container.resolve(ThemeStore);
 

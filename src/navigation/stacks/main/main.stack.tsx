@@ -20,7 +20,7 @@ export const MainStack = observer(() => {
 
   return (
     <Fragment>
-      <StatusBar barStyle={theme?.dark ? 'light-content' : 'dark-content'} />
+      <StatusBar barStyle={theme.dark ? 'light-content' : 'dark-content'} />
 
       <NavigationContainer
         theme={theme}

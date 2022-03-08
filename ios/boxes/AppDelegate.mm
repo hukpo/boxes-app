@@ -7,7 +7,7 @@
 #import <React/RCTAppSetupUtils.h>
 
 #import <Firebase.h>
-
+#import "RNBootSplash.h"
 
 #if RCT_NEW_ARCH_ENABLED
 #import <React/CoreModulesPlugins.h>
@@ -54,6 +54,7 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  [RNBootSplash initWithStoryboard:@"LaunchScreen" rootView:rootView];
   [super application:application didFinishLaunchingWithOptions:launchOptions];
   return YES;
 }
