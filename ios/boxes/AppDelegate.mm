@@ -54,7 +54,7 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-  [RNBootSplash initWithStoryboard:@"LaunchScreen" rootView:rootView];
+  [RNBootSplash initWithStoryboard:@"LaunchScreen" rootView:(RCTRootView *)rootView];
   [super application:application didFinishLaunchingWithOptions:launchOptions];
   return YES;
 }
