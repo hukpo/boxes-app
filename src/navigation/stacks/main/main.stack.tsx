@@ -1,12 +1,11 @@
 import { container } from 'tsyringe';
+import React, { Fragment } from 'react';
 import { StatusBar } from 'react-native';
 import { observer } from 'mobx-react-lite';
 import { PortalProvider } from '@gorhom/portal';
-import React, { Fragment, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { AppStore } from '@/stores';
 import { STACKS } from '../../constants';
 import { useContainerTheme } from '@/themes';
 import { Navigation } from '../../navigation';
@@ -18,10 +17,6 @@ const { Navigator, Screen } = createNativeStackNavigator();
 export const MainStack = observer(() => {
   const theme = useContainerTheme();
   const navigation = container.resolve(Navigation);
-
-  useEffect(() => {
-    container.resolve(AppStore).main();
-  }, [navigation]);
 
   return (
     <Fragment>

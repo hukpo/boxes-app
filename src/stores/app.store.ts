@@ -5,7 +5,7 @@ import { autoInjectable, singleton } from 'tsyringe';
 import { RealmDB } from '@/db';
 import { logger } from '@/helpers';
 import { Navigation } from '@/navigation';
-import { AuthMainScreen, BoxesMainScreen } from '@/modules';
+import { AuthMainScreen } from '@/modules';
 import { makeSimpleAutoObservable } from './utils';
 
 @singleton()
@@ -34,8 +34,6 @@ export class AppStore {
       }
 
       await this.initDB();
-
-      this._navigation.navigate(BoxesMainScreen.LIST);
     } catch (err) {
       //TODO ???
       logger.error(err);

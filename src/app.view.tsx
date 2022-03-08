@@ -4,6 +4,10 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { MainStack } from './navigation';
+import { container } from 'tsyringe';
+import { AppStore } from './stores';
+
+container.resolve(AppStore).main();
 
 export const App: FC = () => {
   return (

@@ -21,20 +21,37 @@ type ModelObject = Model & Realm.Object;
 @singleton()
 export class RealmDB {
   private _realm!: Realm;
+  private _realmApp = new Realm.App({
+    id: config.REALM_ID,
+    baseUrl: config.REALM_BASE_URL,
+  });
 
   async init(idToken: string): Promise<void> {
-    const realmApp = new Realm.App({
-      id: config.REALM_ID,
-      baseUrl: config.REALM_BASE_URL,
-    });
+    logger.info('Trying to init database');
 
-    const user = await realmApp.logIn(Realm.Credentials.jwt(idToken));
+    logger.info('Trying to open database');
+
+    let user: Realm.User<Realm.DefaultFunctionsFactory, Record<string, unknown>, Realm.DefaultUserProfileData>;
+
+    if (this._realmApp.currentUser) {
+      logger.info('Got existing user');
+
+      user = this._realmApp.currentUser;
+    } else {
+      logger.info('Trying to login user');
+
+      user = await this._realmApp.logIn(Realm.Credentials.jwt(idToken));
+    }
 
     this._realm = await Realm.open({
       sync: {
         user,
         partitionValue: user.id,
+        existingRealmFileBehavior: {
+          type: 'downloadBeforeOpen' as Realm.OpenRealmBehaviorType.DownloadBeforeOpen,
+        },
       },
+      schemaVersion: 1,
       schema: [boxSchema, chatMessageSchema],
     });
 
