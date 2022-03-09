@@ -47,9 +47,9 @@ class Logger {
   }
 }
 
-if (config.ENVIRONMENT === 'prod') {
+if (config.ENVIRONMENT === 'PROD') {
   console.log = () => null;
   console.error = () => null;
 }
 
-export const logger = new Logger(config.ENVIRONMENT === 'prod' ? { info: () => null, error: () => null } : console);
+export const logger = new Logger(config.ENVIRONMENT === 'PROD' ? { info: () => null, error: () => null } : console);
