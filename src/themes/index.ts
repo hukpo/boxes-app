@@ -9,11 +9,11 @@ import { AutoNightMode } from '@/modules';
 import { DARK_THEME } from './dark.theme';
 import { LIGHT_THEME } from './light.theme';
 
-export const useContainerTheme = (): Theme | undefined => {
+export const useContainerTheme = (): Theme => {
   const scheme = useColorScheme();
   const themeStore = container.resolve(ThemeStore);
 
-  let theme: Theme | undefined;
+  let theme = DARK_THEME;
 
   switch (themeStore.autoNightMode) {
     case AutoNightMode.SYSTEM:
@@ -24,9 +24,7 @@ export const useContainerTheme = (): Theme | undefined => {
       break;
   }
 
-  if (theme) {
-    setBackgroundColorAsync(theme.colors.secondary);
-  }
+  setBackgroundColorAsync(theme.colors.secondary);
 
   return theme;
 };

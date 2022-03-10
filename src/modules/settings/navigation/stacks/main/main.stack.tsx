@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useWindowDimensions } from 'react-native';
-import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { Background } from '@/navigation';
+import { useDefaultScreenOptions } from '@/navigation';
 import { Appearance, AppearanceAutoNightMode, Language, List } from '../../../screens';
 
 export enum SettingsMainScreen {
@@ -13,22 +12,14 @@ export enum SettingsMainScreen {
   LANGUAGE = '[SETTINGS] LANGUAGE',
 }
 
-const { Navigator, Screen } = createStackNavigator();
+const { Navigator, Screen } = createNativeStackNavigator();
 
 export const SettingsMainStack: FC = () => {
-  const { width } = useWindowDimensions();
   const { t } = useTranslation(['settings']);
+  const defaultScreenOptions = useDefaultScreenOptions();
 
   return (
-    <Navigator
-      screenOptions={{
-        headerBackTitle: t('back', { ns: 'navigation' }),
-        headerTransparent: true,
-        headerBackground: () => <Background />,
-        gestureEnabled: true,
-        gestureResponseDistance: width,
-        ...TransitionPresets.SlideFromRightIOS,
-      }}>
+    <Navigator screenOptions={defaultScreenOptions}>
       <Screen
         name={SettingsMainScreen.LIST}
         component={List}

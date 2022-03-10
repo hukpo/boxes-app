@@ -1,7 +1,7 @@
 import Realm from 'realm';
-import { Auth } from 'aws-amplify';
 import { v4 as uuidv4 } from 'uuid';
 import { singleton } from 'tsyringe';
+import auth from '@react-native-firebase/auth';
 
 import { config } from '@/config';
 import { logger } from '@/helpers';
@@ -22,25 +22,47 @@ type ModelObject = Model & Realm.Object;
 @singleton()
 export class RealmDB {
   private _realm!: Realm;
+  private _realmApp = new Realm.App({
+    id: config.REALM_ID,
+    baseUrl: config.REALM_BASE_URL,
+  });
 
   async init(): Promise<void> {
-    const realmApp = new Realm.App({
-      id: config.REALM_ID,
-      baseUrl: config.REALM_BASE_URL,
-    });
+    logger.info('Trying to init database');
 
-    const session = await Auth.currentSession();
-    const token = session.getIdToken().getJwtToken();
+    let user: Realm.User<Realm.DefaultFunctionsFactory, Record<string, unknown>, Realm.DefaultUserProfileData>;
 
-    const credentials = Realm.Credentials.jwt(token);
+    if (this._realmApp.currentUser) {
+      logger.info('Got existing user');
 
-    const user = await realmApp.logIn(credentials);
+      user = this._realmApp.currentUser;
+    } else {
+      logger.info('Trying get user credentials');
+
+      const { currentUser } = auth();
+
+      if (!currentUser) {
+        throw new Error('No current user found');
+      }
+
+      const idToken = await currentUser.getIdToken();
+
+      logger.info('Trying to login realm user');
+
+      user = await this._realmApp.logIn(Realm.Credentials.jwt(idToken));
+    }
+
+    logger.info('Trying to open database');
 
     this._realm = await Realm.open({
       sync: {
         user,
         partitionValue: user.id,
+        existingRealmFileBehavior: {
+          type: 'downloadBeforeOpen' as Realm.OpenRealmBehaviorType.DownloadBeforeOpen,
+        },
       },
+      schemaVersion: 1,
       schema: [boxSchema, chatMessageSchema],
     });
 

@@ -2,7 +2,7 @@ import { runInAction } from 'mobx';
 import { v4 as uuidv4 } from 'uuid';
 import { autoInjectable } from 'tsyringe';
 import { Asset } from 'expo-media-library';
-import { Storage } from '@aws-amplify/storage';
+import storage from '@react-native-firebase/storage';
 
 import { logger } from '@/helpers';
 import { MessagesDB } from '../../db';
@@ -105,7 +105,6 @@ export class ComposerVm {
         if (!this._parentId) {
           throw new Error('No parentId found');
         }
-
         const newMessage = await this._db.save<ChatMessageImage>({
           aspectRatio: asset.width / asset.height,
           parentId: this._parentId,
@@ -113,20 +112,16 @@ export class ComposerVm {
           status: ChatMessageImageUploadStatus.IN_PROGRESS,
         });
 
-        const response = await fetch(asset.uri);
-        const blob = await response.blob();
-
-        const { key } = await Storage.put(uuidv4(), blob);
+        const result = await storage().ref(uuidv4()).putFile(asset.uri);
 
         await this._db.update(newMessage, {
-          key,
+          key: result.metadata.name,
           status: ChatMessageImageUploadStatus.DONE,
         });
       } catch (err) {
         logger.error(err);
       }
     });
-
     await Promise.all(uploaders);
   }
 }

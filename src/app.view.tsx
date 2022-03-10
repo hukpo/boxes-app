@@ -4,42 +4,20 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { MainStack } from './navigation';
+import { container } from 'tsyringe';
+import { AppStore } from './stores';
 
-export const App: FC = require('aws-amplify-react-native').withAuthenticator(
-  () => {
-    return (
-      <GestureHandlerRootView style={styles.container}>
-        <SafeAreaProvider>
-          <MainStack />
-        </SafeAreaProvider>
-      </GestureHandlerRootView>
-    );
-  },
-  {
-    usernameAttributes: 'email',
-    signUpConfig: {
-      hideAllDefaults: true,
-      signUpFields: [
-        {
-          label: 'Email',
-          key: 'username',
-          required: true,
-          displayOrder: 1,
-          type: 'string',
-          placeholder: 'Enter your email',
-        },
-        {
-          label: 'Password',
-          key: 'password',
-          required: true,
-          displayOrder: 2,
-          type: 'password',
-          placeholder: 'Enter your password',
-        },
-      ],
-    },
-  },
-);
+container.resolve(AppStore).main();
+
+export const App: FC = () => {
+  return (
+    <GestureHandlerRootView style={styles.container}>
+      <SafeAreaProvider>
+        <MainStack />
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

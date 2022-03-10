@@ -1,40 +1,49 @@
 {
   "project_info": {
-    "project_number": "325174206390",
-    "project_id": "boxes-526bf",
-    "storage_bucket": "boxes-526bf.appspot.com"
+    "project_number": "619678921318",
+    "project_id": "ornuto-59a7d",
+    "storage_bucket": "ornuto-59a7d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:325174206390:android:6380232d050e8800d7eb17",
+        "mobilesdk_app_id": "1:619678921318:android:0b7bdb25ad6e4f0df473a7",
         "android_client_info": {
-          "package_name": "com.hukpo.boxes"
+          "package_name": "com.ornuto"
         }
       },
       "oauth_client": [
         {
-          "client_id": "325174206390-7br2p3j0okra8marj50vr8lf2lkd7edi.apps.googleusercontent.com",
+          "client_id": "619678921318-2pkg3htkqckljghc3bmo976hkfqhk6e4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ornuto",
+            "certificate_hash": "abd1ed3226e5709f6492c91232bdd79a767b4c68"
+          }
+        },
+        {
+          "client_id": "619678921318-arotfo0mfa392q5ho6ibu4uur62aqmjo.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAE2Y_1PJn2Ckcs1xjrFgpakMeV-ULuZXI"
+          "current_key": "AIzaSyB_d22D48bNGDrchwogA5ixy3rL7-YefTk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "325174206390-7br2p3j0okra8marj50vr8lf2lkd7edi.apps.googleusercontent.com",
+              "client_id": "619678921318-arotfo0mfa392q5ho6ibu4uur62aqmjo.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "325174206390-6hu2e7lptuhp205nenc736sad2l7okth.apps.googleusercontent.com",
+              "client_id": "619678921318-83cpndqlh59p8edhduoi015luj6i0be8.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.hukpo.boxes"
+                "bundle_id": "com.ornuto",
+                "app_store_id": "1608969459"
               }
             }
           ]

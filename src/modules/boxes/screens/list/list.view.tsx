@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react';
 import { observer } from 'mobx-react-lite';
-import { ListRenderItem } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { useHeaderHeight } from '@react-navigation/elements';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { ActivityIndicator, ListRenderItem, StyleSheet } from 'react-native';
 import Animated, { ILayoutAnimationBuilder, Layout } from 'react-native-reanimated';
 
 import { ListVm } from './list.vm';
@@ -10,7 +12,6 @@ import { ActionSheet } from '@/ui-kit';
 import { BoxObject } from '../../models';
 import { BoxListRow } from '../../components';
 import { BOX_ROW_HEIGHT } from '../../constants';
-import { useNavigationLayout } from '@/navigation';
 import { useListNavigation } from './list.navigation';
 import { useRealmListUpdate, useSwipableRows, useVm } from '@/hooks';
 
@@ -19,8 +20,9 @@ export const List = observer(() => {
   const { colors } = useTheme();
   const rowsManager = useSwipableRows();
   const { t } = useTranslation(['boxes']);
-  const { style } = useNavigationLayout();
   const { actionSheetRef } = useListNavigation(vm);
+  const headerHeight = useHeaderHeight();
+  const bottomMenuHeight = useBottomTabBarHeight();
 
   useRealmListUpdate(vm.boxes);
 
@@ -48,13 +50,21 @@ export const List = observer(() => {
       <Animated.FlatList
         {...reanimatedProps}
         style={{ backgroundColor: colors.secondary }}
-        contentContainerStyle={style}
+        contentContainerStyle={[
+          styles.contentContainer,
+          {
+            paddingTop: headerHeight,
+            paddingBottom: bottomMenuHeight,
+          },
+        ]}
         data={vm.boxes}
+        scrollEnabled={!!vm.boxes}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         getItemLayout={getItemLayout}
         onScrollBeginDrag={rowsManager.closeAll}
         removeClippedSubviews={false}
+        ListEmptyComponent={<ActivityIndicator style={styles.loader} />}
       />
 
       <ActionSheet.Container ref={actionSheetRef}>
@@ -63,4 +73,13 @@ export const List = observer(() => {
       </ActionSheet.Container>
     </Fragment>
   );
+});
+
+const styles = StyleSheet.create({
+  contentContainer: {
+    flexGrow: 1,
+  },
+  loader: {
+    flex: 1,
+  },
 });

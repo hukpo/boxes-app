@@ -1,9 +1,4 @@
-import aws4, { SignOptions } from 'react-native-aws4';
-
-import { Auth } from '@aws-amplify/auth';
-import { Storage } from '@aws-amplify/storage';
-
-import aws_exports from '@/aws-exports';
+import storage from '@react-native-firebase/storage';
 
 export type S3Image = {
   uri: string;
@@ -12,28 +7,14 @@ export type S3Image = {
 
 export const getS3Image = async (key: string): Promise<S3Image> => {
   try {
-    const uri = await Storage.get(key);
-    const url = uri.split('?')[0];
-
-    const credentials = Auth.essentialCredentials(await Auth.currentCredentials());
-
-    const { hostname, pathname, search } = new URL(url);
-
-    const opts: SignOptions = {
-      service: 's3',
-      method: 'GET',
-      host: hostname,
-      path: `${pathname}${search}`,
-      region: aws_exports.aws_user_files_s3_bucket_region,
-    };
-
-    const { headers } = await aws4.sign(opts, credentials);
+    const ref = storage().ref(key);
 
     return {
-      headers,
-      uri: url,
+      uri: await ref.getDownloadURL(),
+      headers: {},
     };
-  } catch {
+  } catch (err) {
+    console.error(err);
     return {
       uri: key,
       headers: {},

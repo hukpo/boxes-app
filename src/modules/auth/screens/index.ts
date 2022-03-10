@@ -1,1 +1,2 @@
-export * from './welcome';
+export * from './code';
+export * from './phone';

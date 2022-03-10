@@ -36,6 +36,10 @@ export class ListVm {
       // Boxes screen is main so this function can be called before database initialization
       await when(() => this._appStore.isLoaded);
 
+      if (!this._appStore.isAuthorized) {
+        return;
+      }
+
       logger.info(`Trying to get Boxes, parentId: ${this._parentId}`);
 
       const boxes = await this._db.getByParentId(this._parentId);

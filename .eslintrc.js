@@ -8,5 +8,11 @@ module.exports = {
         allowExpressions: true,
       },
     ],
+    'react-hooks/exhaustive-deps': [
+      'error',
+      {
+        additionalHooks: 'useNavigationOptions',
+      },
+    ],
   },
 };

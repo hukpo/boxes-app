@@ -7,7 +7,7 @@
 #import <React/RCTAppSetupUtils.h>
 
 #import <Firebase.h>
-
+#import "RNBootSplash.h"
 
 #if RCT_NEW_ARCH_ENABLED
 #import <React/CoreModulesPlugins.h>
@@ -47,18 +47,14 @@
 #endif
 
   UIView *rootView = RCTAppSetupDefaultRootView(bridge, @"boxes", nil);
-
-  if (@available(iOS 13.0, *)) {
-    rootView.backgroundColor = [UIColor systemBackgroundColor];
-  } else {
-    rootView.backgroundColor = [UIColor whiteColor];
-  }
+  rootView.backgroundColor = [UIColor blackColor];
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [self.reactDelegate createRootViewController];
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  [RNBootSplash initWithStoryboard:@"LaunchScreen" rootView:(RCTRootView *)rootView];
   [super application:application didFinishLaunchingWithOptions:launchOptions];
   return YES;
 }

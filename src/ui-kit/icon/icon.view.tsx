@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import Svg, { Path } from 'react-native-svg';
+import Svg, { G, Path } from 'react-native-svg';
 import { StyleProp, ViewStyle } from 'react-native';
 import { Box, Setting2, Send, Trash, Global, Blur, Paperclip2 } from 'iconsax-react-native';
 
@@ -10,7 +10,8 @@ export type IconProps = {
     | 'trash'
     | 'global'
     | 'blur'
-    | 'arrow-right'
+    | 'arrow.left'
+    | 'arrow.right'
     | 'checkmark'
     | 'paperclip'
     | 'pencil'
@@ -64,9 +65,27 @@ export const Icon: FC<IconProps> = ({ style, name, color, size, width = 0, heigh
         </Svg>
       );
 
-    case 'arrow-right':
+    case 'arrow.left':
       return (
-        <Svg width={width || (height / 24) * 13} height={height || (width / 13) * 24} fill="none" viewBox="0 0 13 24">
+        <Svg style={style} width={width || (height / 20) * 11} height={height || (width / 11) * 20} viewBox="0 0 11 20">
+          <G fill="none" fillRule="evenodd">
+            <Path opacity={0.87} d="M-6-2h24v24H-6z" />
+            <Path
+              d="M10.62.99a1.25 1.25 0 0 0-1.77 0L.54 9.3a.996.996 0 0 0 0 1.41l8.31 8.31c.49.49 1.28.49 1.77 0s.49-1.28 0-1.77L3.38 10l7.25-7.25c.48-.48.48-1.28-.01-1.76Z"
+              fill={color}
+            />
+          </G>
+        </Svg>
+      );
+
+    case 'arrow.right':
+      return (
+        <Svg
+          style={style}
+          width={width || (height / 24) * 13}
+          height={height || (width / 13) * 24}
+          fill="none"
+          viewBox="0 0 13 24">
           <Path
             d="m1.88 22.56 8.693-8.693a2.648 2.648 0 0 0 0-3.734L1.88 1.44"
             stroke={color}

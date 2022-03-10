@@ -1,22 +1,31 @@
 import React, { FC } from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { Welcome } from '../../../screens';
+import { Code, Phone } from '../../../screens';
+import { useDefaultScreenOptions } from '@/navigation';
 
 export enum AuthMainScreen {
-  WELCOME = '[AUTH] WELCOME',
+  PHONE = '[AUTH] PHONE',
+  CODE = '[AUTH] CODE',
 }
 
-const { Navigator, Screen } = createStackNavigator();
+const { Navigator, Screen } = createNativeStackNavigator();
 
 export const AuthMainStack: FC = () => {
+  const defaultScreenOptions = useDefaultScreenOptions();
+
   return (
-    <Navigator>
+    <Navigator screenOptions={{ ...defaultScreenOptions, headerBlurEffect: undefined, gestureEnabled: false }}>
       <Screen
-        name={AuthMainScreen.WELCOME}
-        component={Welcome}
-        options={{ gestureEnabled: false, headerLeft: () => null }}
+        name={AuthMainScreen.PHONE}
+        component={Phone}
+        options={{
+          headerTitle: '',
+          headerLeft: undefined,
+        }}
       />
+
+      <Screen name={AuthMainScreen.CODE} component={Code} />
     </Navigator>
   );
 };

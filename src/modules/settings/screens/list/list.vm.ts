@@ -1,5 +1,5 @@
-import { Auth } from 'aws-amplify';
 import { autoInjectable } from 'tsyringe';
+import auth from '@react-native-firebase/auth';
 
 import { Navigation } from '@/navigation';
 import { makeSimpleAutoObservable } from '@/stores';
@@ -20,6 +20,6 @@ export class ListVm {
   }
 
   logOut(): void {
-    Auth.signOut();
+    auth().signOut();
   }
 }

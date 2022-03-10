@@ -125,8 +125,7 @@ export const PinchableView: FC<PinchableViewProps> = ({ children }) => {
           .onTouchesDown(onTouchesDown)
           .onStart(onPinchStart)
           .onUpdate(onPinchUpdate)
-          .onEnd(onPinchEnd)}
-      >
+          .onEnd(onPinchEnd)}>
         <Animated.View onLayout={onChildLayout} style={animatedChildStyle}>
           {children}
         </Animated.View>

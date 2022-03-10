@@ -14,8 +14,11 @@ class RNTCacheImageManager: RCTViewManager {
   override init() {
     super.init()
 
-    SDWebImageManager.shared.cacheKeyFilter = SDWebImageCacheKeyFilter { url in
-      return url.path.components(separatedBy: "/").last?.description ?? url.absoluteString
+    SDWebImageManager.shared.cacheKeyFilter = SDWebImageCacheKeyFilter { uri in
+      let url = uri.path.components(separatedBy: "?").first?.description
+      let key = url?.components(separatedBy: "/").last?.description
+      
+      return key ?? uri.absoluteString
     }
   }
  

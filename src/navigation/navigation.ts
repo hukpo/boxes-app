@@ -1,5 +1,6 @@
 import { singleton } from 'tsyringe';
 import { createRef, RefObject } from 'react';
+import { hide } from 'react-native-bootsplash';
 import analytics from '@react-native-firebase/analytics';
 import { NavigationContainerRef, StackActions } from '@react-navigation/native';
 
@@ -118,6 +119,8 @@ export class Navigation {
   };
 
   onReady = (): void => {
+    // TODO ANDROID
+    hide({ fade: true });
     this.setIsReady(true);
     this._routeNameRef = { current: this.getRouteName() };
   };

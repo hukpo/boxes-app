@@ -1,15 +1,14 @@
 import { useTranslation } from 'react-i18next';
-import { useNavigation, useRoute, Route, useFocusEffect } from '@react-navigation/core';
-import React, { FC, RefObject, useCallback, useEffect, useLayoutEffect, useRef } from 'react';
+import { useRoute, Route, useFocusEffect } from '@react-navigation/core';
+import React, { RefObject, useCallback, useEffect, useRef } from 'react';
 
 import { Box } from '../../models';
 import { ListVm } from './list.vm';
 import { ActionSheetRef } from '@/ui-kit';
-import { HeaderButton } from '@/navigation';
+import { HeaderButton, useNavigationOptions } from '@/navigation';
 
 export const useListNavigation = (vm: ListVm): { actionSheetRef: RefObject<ActionSheetRef> } => {
   const { t } = useTranslation();
-  const { setOptions } = useNavigation();
   const actionSheetRef = useRef<ActionSheetRef>(null);
   const { params } = useRoute<Route<string, { parentId: Box['parentId']; parentName: Box['name'] } | undefined>>();
 
@@ -25,18 +24,13 @@ export const useListNavigation = (vm: ListVm): { actionSheetRef: RefObject<Actio
     }, [vm]),
   );
 
-  useLayoutEffect(() => {
-    const headerRight: FC = () => <HeaderButton title={t('create')} onPress={actionSheetRef.current?.open} />;
-
-    if (params?.parentName) {
-      setOptions({
-        headerRight,
-        headerTitle: params?.parentName,
-      });
-    } else {
-      setOptions({ headerRight });
-    }
-  }, [setOptions, t, params?.parentName]);
+  useNavigationOptions(
+    () => ({
+      headerTitle: params?.parentName || t('boxes:boxes'),
+      headerRight: () => <HeaderButton title={t('create')} onPress={actionSheetRef.current?.open} />,
+    }),
+    [params?.parentName, t],
+  );
 
   return {
     actionSheetRef,

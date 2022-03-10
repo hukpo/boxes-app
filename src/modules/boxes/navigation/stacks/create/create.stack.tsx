@@ -1,32 +1,21 @@
 import React, { FC } from 'react';
-import { useTranslation } from 'react-i18next';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { Create } from '../../../screens';
-import { Background, HeaderButton } from '@/navigation';
+import { useDefaultScreenOptions } from '@/navigation';
 
 export enum BoxesCreateScreen {
   MAIN = '[BOXES CREATE] MAIN',
 }
 
-const { Navigator, Screen } = createStackNavigator();
+const { Navigator, Screen } = createNativeStackNavigator();
 
 export const BoxesCreateStack: FC = () => {
-  const { t } = useTranslation();
+  const defaultScreenOptions = useDefaultScreenOptions();
 
   return (
-    <Navigator
-      screenOptions={{
-        headerTransparent: true,
-        headerBackground: () => <Background />,
-      }}>
-      <Screen
-        name={BoxesCreateScreen.MAIN}
-        component={Create}
-        options={{
-          headerLeft: ({ onPress }) => <HeaderButton title={t('cancel')} onPress={onPress} />,
-        }}
-      />
+    <Navigator screenOptions={defaultScreenOptions}>
+      <Screen name={BoxesCreateScreen.MAIN} component={Create} />
     </Navigator>
   );
 };

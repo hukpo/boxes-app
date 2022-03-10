@@ -156,8 +156,7 @@ export const ZoomableView: FC<ZoomableViewProps> = ({ children }: ZoomableViewPr
             Gesture.Pan().onUpdate(onPanUpdate).onEnd(onPanEnd),
             Gesture.Pinch().onStart(onPinchStart).onUpdate(onPinchUpdate),
             Gesture.Tap().numberOfTaps(2).onEnd(onDoubleTapEnd),
-          )}
-        >
+          )}>
           <Animated.View style={[styles.zoomableContainer, animatedZoomableStyle]}>
             {cloneElement(children, {
               style: StyleSheet.flatten([
