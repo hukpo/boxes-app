@@ -22,6 +22,7 @@ export const AuthMainStack: FC = () => {
         options={{
           headerTitle: '',
           headerLeft: undefined,
+          headerBackVisible: false,
         }}
       />
 

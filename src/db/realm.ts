@@ -52,7 +52,7 @@ export class RealmDB {
       user = await this._realmApp.logIn(Realm.Credentials.jwt(idToken));
     }
 
-    logger.info('Trying to open database');
+    logger.info(`Trying to open database with userId: ${user.id}`);
 
     this._realm = await Realm.open({
       sync: {

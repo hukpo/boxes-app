@@ -1,15 +1,16 @@
 import { autoInjectable } from 'tsyringe';
 
+import { RealmDB } from '@/db';
 import { logger } from '@/helpers';
 import { AuthStore } from '../../stores';
 import { Navigation } from '@/navigation';
-import { AppStore, InputStore, makeSimpleAutoObservable } from '@/stores';
+import { InputStore, makeSimpleAutoObservable } from '@/stores';
 
 @autoInjectable()
 export class CodeVm {
   private _code = new InputStore('');
 
-  constructor(private _authStore: AuthStore, private _appStore: AppStore, private _navigation: Navigation) {
+  constructor(private _authStore: AuthStore, private _realmDB: RealmDB, private _navigation: Navigation) {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
   }
 
@@ -28,7 +29,7 @@ export class CodeVm {
   async confirmPhone(): Promise<void> {
     try {
       await this._authStore.confirmation?.confirm(this._code.value);
-      await this._appStore.initDB();
+      await this._realmDB.init();
 
       this._navigation.popToTop();
       this._navigation.goBack();

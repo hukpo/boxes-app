@@ -447,7 +447,7 @@ PODS:
     - React-jsi (= 0.68.0-rc.2)
     - React-logger (= 0.68.0-rc.2)
     - React-perflogger (= 0.68.0-rc.2)
-  - RealmJS (10.20.0-beta.1):
+  - RealmJS (10.20.0-beta.2):
     - React
   - RNBootSplash (4.1.3):
     - React-Core
@@ -472,7 +472,7 @@ PODS:
     - Firebase/Storage (= 8.12.1)
     - React-Core
     - RNFBApp
-  - RNGestureHandler (2.3.0):
+  - RNGestureHandler (2.3.1):
     - React-Core
   - RNInAppBrowser (3.6.3):
     - React-Core
@@ -785,7 +785,7 @@ SPEC CHECKSUMS:
   React-RCTVibration: 25ef5d6f6141ea389d41d93d5a2ca1b4771920b4
   React-runtimeexecutor: 37e5fa0b81067a8e487391e2816bae8813b226a5
   ReactCommon: 4c7431a20d472996669b2230f34df0115bf5dc8d
-  RealmJS: 74cf2dec0a20e7ca75655b5190eb60c062d106ec
+  RealmJS: 8ac5e506db083da32923a5e38c86e69c6b9f195d
   RNBootSplash: 4f34ccf1a0c2573cb4ba918ab7f69d51d610827f
   RNCAsyncStorage: b49b4e38a1548d03b74b30e558a1d18465b94be7
   RNFBAnalytics: 74cd9c60531ed33e5347b2dccafa172ae1a851a4
@@ -793,7 +793,7 @@ SPEC CHECKSUMS:
   RNFBAuth: ed314ff1732011c23041570ac4a98bc6070f9f4d
   RNFBCrashlytics: 33615211c6c6c4039ae71849091f6ac38ab65aba
   RNFBStorage: 495f37ba9f233e3be134c8bc0f31ff011a9eecec
-  RNGestureHandler: 77d59828d40838c9fabb76a12d2d0a80c006906f
+  RNGestureHandler: 68f660f1080d3300936a67ce5c6879bd8f26ecc2
   RNInAppBrowser: 3ff3a3b8f458aaf25aaee879d057352862edf357
   RNLocalize: 6571ea792a7dcb6d217c98c14d9147e9417cef62
   RNReanimated: 3d1432ce7b6b7fc31f375dcabe5b4585e0634a43
