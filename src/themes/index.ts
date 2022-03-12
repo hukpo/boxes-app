@@ -1,5 +1,5 @@
 import { container } from 'tsyringe';
-import { useColorScheme } from 'react-native';
+import { StatusBar, useColorScheme } from 'react-native';
 import { setBackgroundColorAsync } from 'expo-system-ui';
 import { useTheme as useNavigationTheme } from '@react-navigation/native';
 
@@ -25,8 +25,11 @@ export const useContainerTheme = (): Theme => {
   }
 
   setBackgroundColorAsync(theme.colors.secondary);
+  StatusBar.setBarStyle(theme.dark ? 'light-content' : 'dark-content');
 
   return theme;
 };
 
 export const useTheme = useNavigationTheme as () => Theme;
+
+export type { Theme } from './theme.type';

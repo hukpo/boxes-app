@@ -68,16 +68,14 @@ export class Navigation {
 
     try {
       if (this._isNavigationReadyRef.current && this._navigationRef.current) {
-        for (const stackDefinition in STACKS) {
-          const stack = STACKS[stackDefinition as keyof typeof STACKS];
+        for (const stackName in STACKS) {
+          const screens = STACKS[stackName as keyof typeof STACKS];
 
-          if ('screens' in stack) {
-            if ((stack.screens as string[]).includes(screenName)) {
-              return this._navigationRef.current?.navigate(stack.name, {
-                screen: screenName,
-                params,
-              });
-            }
+          if (screens.includes(screenName)) {
+            return this._navigationRef.current?.navigate(stackName, {
+              screen: screenName,
+              params,
+            });
           }
         }
 

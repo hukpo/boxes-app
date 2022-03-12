@@ -1,2 +1,2 @@
 export { AutoNightMode } from './models';
-export { SettingsMainScreen, SettingsMainStack } from './navigation';
+export { SettingsMainScreen, SettingsMainStackConfig } from './navigation';

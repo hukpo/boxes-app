@@ -1,38 +1,16 @@
-import {
-  AuthMainScreen,
-  ChatMainScreen,
-  BoxesMainScreen,
-  BoxesCreateScreen,
-  GalleryMainScreen,
-  SettingsMainScreen,
-} from '@/modules';
+import { BottomMenuStackConfig } from '../stacks';
+import { AuthMainStackConfig, BoxesMainStackConfig, GalleryMainStackConfig, SettingsMainStackConfig } from '@/modules';
 
-export const STACKS = {
-  BottomMenu: {
-    name: '[STACKS] BOTTOM MENU',
-  },
-  BoxesMain: {
-    name: '[STACKS] BOXES MAIN',
-    screens: Object.values(BoxesMainScreen),
-  },
-  BoxesCreate: {
-    name: '[STACKS] BOXES CREATE',
-    screens: Object.values(BoxesCreateScreen),
-  },
-  ChatMain: {
-    name: '[STACKS] CHAT MAIN',
-    screens: Object.values(ChatMainScreen),
-  },
-  Settings: {
-    name: '[STACKS] SETTINGS MAIN',
-    screens: Object.values(SettingsMainScreen),
-  },
-  AuthMain: {
-    name: '[STACKS] AUTH MAIN',
-    screens: Object.values(AuthMainScreen),
-  },
-  GalleryMain: {
-    name: '[STACKS] GALLERY MAIN',
-    screens: Object.values(GalleryMainScreen),
-  },
-};
+export const STACKS = [
+  BottomMenuStackConfig,
+  BoxesMainStackConfig,
+  SettingsMainStackConfig,
+  AuthMainStackConfig,
+  GalleryMainStackConfig,
+].reduce<Record<string, string[]>>((stacks, stack) => {
+  stack.screens.forEach(screen => {
+    stacks[screen.name] = screen.children || [];
+  });
+
+  return stacks;
+}, {});

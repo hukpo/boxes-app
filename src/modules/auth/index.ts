@@ -1,1 +1,1 @@
-export { AuthMainScreen, AuthMainStack } from './navigation';
+export { AuthMainScreen, AuthMainStackConfig } from './navigation';

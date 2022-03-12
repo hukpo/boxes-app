@@ -1,12 +1,12 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { ScrollView, StyleSheet } from 'react-native';
-import { useHeaderHeight } from '@react-navigation/elements';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 import { useVm } from '@/hooks';
 import { LANGUAGES } from '@/locales';
 import { LanguageVm } from './language.vm';
+import { useHeaderHeight } from '@/navigation';
 import { ListContainer, ListItem } from '@/components';
 
 export const Language = observer(() => {

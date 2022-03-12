@@ -4,12 +4,12 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StyleSheet, ListRenderItem, View, FlatList } from 'react-native';
 
 import { MainVm } from './main.vm';
+import { useHeaderHeight } from '@/navigation';
 import { ChatMessageObject } from '../../models';
 import { MESSAGE_MARGIN } from '../../constants';
 import { useRealmListUpdate, useVm } from '@/hooks';
 import { useMainNavigation } from './main.navigation';
 import { Composer, MessageSwitch } from '../../components';
-import { useHeaderHeight } from '@react-navigation/elements';
 
 export const Main = observer(() => {
   const vm = useVm(MainVm);

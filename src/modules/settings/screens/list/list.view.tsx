@@ -1,17 +1,17 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet } from 'react-native';
-import { useHeaderHeight } from '@react-navigation/elements';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 import { useVm } from '@/hooks';
 import { ListVm } from './list.vm';
+import { useHeaderHeight } from '@/navigation';
 import { ListItem, ListContainer } from '@/components';
 
 export const List: FC = () => {
   const vm = useVm(ListVm);
-  const { t } = useTranslation(['settings']);
   const headerHeight = useHeaderHeight();
+  const { t } = useTranslation(['settings']);
   const bottomMenuHeight = useBottomTabBarHeight();
 
   return (

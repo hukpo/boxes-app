@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useFocusEffect } from '@react-navigation/native';
-import { useHeaderHeight } from '@react-navigation/elements';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ScrollView, StyleSheet, TouchableHighlight, View } from 'react-native';
 
@@ -9,11 +8,12 @@ import { useVm } from '@/hooks';
 import { useTheme } from '@/themes';
 import { Icon, Text } from '@/ui-kit';
 import { AlbumsVm } from './albums.vm';
+import { useHeaderHeight } from '@/navigation';
 
 export const Albums = observer(() => {
   const vm = useVm(AlbumsVm);
   const { colors } = useTheme();
-  const headerHeight = useHeaderHeight();
+  const headerHeight = useHeaderHeight(true);
   const { left, right } = useSafeAreaInsets();
 
   useFocusEffect(

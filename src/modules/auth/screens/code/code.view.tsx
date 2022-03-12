@@ -1,11 +1,11 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { StyleSheet, TextInput, View } from 'react-native';
-import { useHeaderHeight } from '@react-navigation/elements';
 
 import { useVm } from '@/hooks';
 import { CodeVm } from './code.vm';
 import { useTheme } from '@/themes';
+import { useHeaderHeight } from '@/navigation';
 import { useCodeNavigation } from './code.navigation';
 
 const CONTENT_PADDING = 50;

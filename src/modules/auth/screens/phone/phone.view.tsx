@@ -2,12 +2,12 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, TextInput, View } from 'react-native';
-import { useHeaderHeight } from '@react-navigation/elements';
 
 import { useVm } from '@/hooks';
 import { Text } from '@/ui-kit';
 import { useTheme } from '@/themes';
 import { PhoneVm } from './phone.vm';
+import { useHeaderHeight } from '@/navigation';
 import { usePhoneNavigation } from './phone.navigation';
 
 const CONTENT_PADDING = 50;

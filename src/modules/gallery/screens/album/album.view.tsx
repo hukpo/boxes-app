@@ -2,18 +2,18 @@ import { container } from 'tsyringe';
 import React, { useMemo } from 'react';
 import { Asset } from 'expo-media-library';
 import { observer } from 'mobx-react-lite';
-import { useHeaderHeight } from '@react-navigation/elements';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FlatList, Image, ListRenderItem, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 
 import { useVm } from '@/hooks';
 import { AlbumVm } from './album.vm';
 import { Gallery } from '../../refs';
+import { useHeaderHeight } from '@/navigation';
 import { useAlbumNavigation } from './album.navigation';
 
 export const Album = observer(() => {
   const vm = useVm(AlbumVm);
-  const headerHeight = useHeaderHeight();
+  const headerHeight = useHeaderHeight(true);
   const { left, right } = useSafeAreaInsets();
   const { width, height } = useWindowDimensions();
 

@@ -1,26 +1,27 @@
-import React from 'react';
 import { Platform } from 'react-native';
 import { NativeStackNavigationOptions } from '@react-navigation/native-stack';
 
-import { useTheme } from '@/themes';
-import { HeaderButton } from '../components';
+import { useTheme, Theme } from '@/themes';
 
-export const useDefaultScreenOptions = (): NativeStackNavigationOptions => {
-  const { dark, colors } = useTheme();
+export const useDefaultScreenOptions = (overrideTheme?: Theme): NativeStackNavigationOptions => {
+  let theme = useTheme();
+
+  if (overrideTheme) {
+    theme = overrideTheme;
+  }
 
   return {
     animation: 'slide_from_right',
     headerTransparent: true,
     fullScreenGestureEnabled: true,
-    headerLeft: props => <HeaderButton backIconVisible canGoBack={props.canGoBack} />,
     ...Platform.select({
       android: {
         headerStyle: {
-          backgroundColor: colors.card,
+          backgroundColor: theme.colors.card,
         },
       },
       ios: {
-        headerBlurEffect: dark ? 'dark' : 'light',
+        headerBlurEffect: theme.dark ? 'dark' : 'light',
       },
     }),
   };

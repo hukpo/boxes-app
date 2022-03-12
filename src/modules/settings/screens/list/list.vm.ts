@@ -4,6 +4,7 @@ import auth from '@react-native-firebase/auth';
 import { Navigation } from '@/navigation';
 import { makeSimpleAutoObservable } from '@/stores';
 import { SettingsMainScreen } from '../../navigation';
+import { AuthMainScreen } from '@/modules/auth';
 
 @autoInjectable()
 export class ListVm {
@@ -21,5 +22,7 @@ export class ListVm {
 
   logOut(): void {
     auth().signOut();
+
+    this._navigation.navigate(AuthMainScreen.PHONE);
   }
 }

@@ -1,13 +1,13 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
-import { StyleSheet, TextInput, View } from 'react-native';
-import { useHeaderHeight } from '@react-navigation/elements';
+import { ScrollView, StyleSheet, TextInput, View } from 'react-native';
 
 import { useVm } from '@/hooks';
 import { useTheme } from '@/themes';
 import { CreateVm } from './create.vm';
 import { BoxType } from '../../models';
+import { useHeaderHeight } from '@/navigation';
 import { BOX_ROW_IMAGE_HEIGHT } from '../../constants';
 import { useCreateNavigation } from './create.navigation';
 
@@ -16,12 +16,12 @@ const CONTAINER_PADDING = 15;
 export const Create = observer(() => {
   const vm = useVm(CreateVm);
   const { colors } = useTheme();
+  const headerHeight = useHeaderHeight(true);
   const { t } = useTranslation(['boxes']);
-  const headerHeight = useHeaderHeight();
   const { type } = useCreateNavigation(vm);
 
   return (
-    <View style={[styles.container, { paddingTop: headerHeight + CONTAINER_PADDING }]}>
+    <ScrollView style={[styles.container, { paddingTop: headerHeight + CONTAINER_PADDING }]}>
       <View style={[styles.contentContainer, { backgroundColor: colors.tertiary }]}>
         <View
           style={[
@@ -44,7 +44,7 @@ export const Create = observer(() => {
           onChangeText={vm.boxName.setValue}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 });
 

@@ -3,17 +3,17 @@ import { container } from 'tsyringe';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet } from 'react-native';
-import { useHeaderHeight } from '@react-navigation/elements';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 import { ThemeStore } from '@/stores';
 import { AutoNightMode } from '../../models';
+import { useHeaderHeight } from '@/navigation';
 import { ListContainer, ListItem } from '@/components';
 
 export const AppearanceAutoNightMode = observer(() => {
+  const headerHeight = useHeaderHeight();
   const { t } = useTranslation(['settings']);
   const themeStore = container.resolve(ThemeStore);
-  const headerHeight = useHeaderHeight();
   const bottomMenuHeight = useBottomTabBarHeight();
 
   return (

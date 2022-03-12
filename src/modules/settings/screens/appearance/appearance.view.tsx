@@ -2,11 +2,11 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet } from 'react-native';
-import { useHeaderHeight } from '@react-navigation/elements';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 import { useVm } from '@/hooks';
 import { AppearanceVm } from './appearance.vm';
+import { useHeaderHeight } from '@/navigation';
 import { ListContainer, ListItem } from '@/components';
 
 export const Appearance = observer(() => {

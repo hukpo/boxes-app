@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
-import { useHeaderHeight } from '@react-navigation/elements';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { ActivityIndicator, ListRenderItem, StyleSheet } from 'react-native';
 import Animated, { ILayoutAnimationBuilder, Layout } from 'react-native-reanimated';
@@ -11,6 +10,7 @@ import { useTheme } from '@/themes';
 import { ActionSheet } from '@/ui-kit';
 import { BoxObject } from '../../models';
 import { BoxListRow } from '../../components';
+import { useHeaderHeight } from '@/navigation';
 import { BOX_ROW_HEIGHT } from '../../constants';
 import { useListNavigation } from './list.navigation';
 import { useRealmListUpdate, useSwipableRows, useVm } from '@/hooks';
@@ -19,9 +19,9 @@ export const List = observer(() => {
   const vm = useVm(ListVm);
   const { colors } = useTheme();
   const rowsManager = useSwipableRows();
+  const headerHeight = useHeaderHeight();
   const { t } = useTranslation(['boxes']);
   const { actionSheetRef } = useListNavigation(vm);
-  const headerHeight = useHeaderHeight();
   const bottomMenuHeight = useBottomTabBarHeight();
 
   useRealmListUpdate(vm.boxes);
