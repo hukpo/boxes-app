@@ -11,6 +11,7 @@ export const useDefaultScreenOptions = (overrideTheme?: Theme): NativeStackNavig
   }
 
   return {
+    orientation: 'portrait',
     animation: 'slide_from_right',
     headerTransparent: true,
     fullScreenGestureEnabled: true,
