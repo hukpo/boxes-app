@@ -1,10 +1,10 @@
-import { t } from 'i18next';
 import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { Icon } from '@/ui-kit';
-import { BottomTabConfig, useDefaultScreenOptions } from '@/navigation';
-import { Appearance, AppearanceAutoNightMode, Language, List } from '../../screens';
+import { BNC, useDefaultScreenOptions } from '@/navigation';
+import { Appearance, AppearanceAutoNightMode, Language, List } from '../screens';
 
 export enum SettingsMainScreen {
   LIST = '[SETTINGS] LIST',
@@ -16,6 +16,7 @@ export enum SettingsMainScreen {
 const { Navigator, Screen } = createNativeStackNavigator();
 
 const SettingsMainStack: FC = () => {
+  const { t } = useTranslation(['settings']);
   const defaultScreenOptions = useDefaultScreenOptions();
 
   return (
@@ -24,7 +25,7 @@ const SettingsMainStack: FC = () => {
         name={SettingsMainScreen.LIST}
         component={List}
         options={{
-          headerTitle: t('settings:settings'),
+          headerTitle: t('settings'),
         }}
       />
 
@@ -32,14 +33,14 @@ const SettingsMainStack: FC = () => {
         name={SettingsMainScreen.APPEARANCE}
         component={Appearance}
         options={{
-          headerTitle: t('settings:appearance'),
+          headerTitle: t('appearance'),
         }}
       />
       <Screen
         name={SettingsMainScreen.APPEARANCE_AUTO_NIGHT_MODE}
         component={AppearanceAutoNightMode}
         options={{
-          headerTitle: t('settings:autoNightMode'),
+          headerTitle: t('autoNightMode'),
         }}
       />
 
@@ -47,23 +48,23 @@ const SettingsMainStack: FC = () => {
         name={SettingsMainScreen.LANGUAGE}
         component={Language}
         options={{
-          headerTitle: t('settings:language'),
+          headerTitle: t('language'),
         }}
       />
     </Navigator>
   );
 };
 
-export const SettingsMainStackConfig: BottomTabConfig = {
-  parentOptions: {
-    tabBarLabel: t('settings:settings'),
-    tabBarIcon: ({ color, size }) => <Icon name="gear" size={size} color={color} />,
-  },
-  screens: [
-    {
-      name: '[STACKS] SETTINGS MAIN',
-      children: Object.values(SettingsMainScreen),
-      component: SettingsMainStack,
-    },
-  ],
+export const SettingsMainNavigation: BNC = ({ Group, Screen }) => {
+  const { t } = useTranslation(['settings']);
+
+  return (
+    <Group
+      screenOptions={{
+        tabBarLabel: t('settings'),
+        tabBarIcon: ({ color, size }) => <Icon name="gear" size={size} color={color} />,
+      }}>
+      <Screen name="[STACKS] SETTINGS MAIN" component={SettingsMainStack} />
+    </Group>
+  );
 };

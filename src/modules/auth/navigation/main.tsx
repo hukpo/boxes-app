@@ -1,24 +1,24 @@
 import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { Code, Phone } from '../screens';
-import { StackConfig, useDefaultScreenOptions } from '@/navigation';
-import { useTranslation } from 'react-i18next';
+import { STACKS, NC, useDefaultScreenOptions } from '@/navigation';
 
 export enum AuthMainScreen {
   PHONE = '[AUTH] PHONE',
   CODE = '[AUTH] CODE',
 }
 
-const { Navigator, Screen } = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 
 const AuthMainStack: FC = () => {
   const { t } = useTranslation(['navigation']);
   const defaultScreenOptions = useDefaultScreenOptions();
 
   return (
-    <Navigator screenOptions={{ ...defaultScreenOptions, headerBlurEffect: undefined, gestureEnabled: false }}>
-      <Screen
+    <Stack.Navigator screenOptions={{ ...defaultScreenOptions, headerBlurEffect: undefined, gestureEnabled: false }}>
+      <Stack.Screen
         name={AuthMainScreen.PHONE}
         component={Phone}
         options={{
@@ -28,29 +28,27 @@ const AuthMainStack: FC = () => {
         }}
       />
 
-      <Screen
+      <Stack.Screen
         name={AuthMainScreen.CODE}
         component={Code}
         options={{
           headerBackTitle: t('back'),
         }}
       />
-    </Navigator>
+    </Stack.Navigator>
   );
 };
 
-export const AuthMainStackConfig: StackConfig = {
-  parentOptions: {
-    headerShown: false,
-  },
-  screens: [
-    {
-      name: '[STACKS] AUTH MAIN',
-      children: Object.values(AuthMainScreen),
-      component: AuthMainStack,
-      options: {
-        presentation: 'fullScreenModal',
-      },
-    },
-  ],
+export const AuthMainNavigation: NC = ({ Group, Screen }) => {
+  return (
+    <Group screenOptions={{ headerShown: false }}>
+      <Screen
+        name={STACKS.AuthMain.name}
+        component={AuthMainStack}
+        options={{
+          presentation: 'fullScreenModal',
+        }}
+      />
+    </Group>
+  );
 };

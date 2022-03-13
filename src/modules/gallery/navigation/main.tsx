@@ -4,22 +4,22 @@ import { useTranslation } from 'react-i18next';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { Album, Albums } from '../screens';
-import { HeaderButton, StackConfig, useDefaultScreenOptions } from '@/navigation';
+import { HeaderButton, STACKS, NC, useDefaultScreenOptions } from '@/navigation';
 
 export enum GalleryMainScreen {
   ALBUM = '[GALLERY] ALBUM',
   ALBUMS = '[GALLERY] ALBUMS',
 }
 
-const { Navigator, Screen } = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 
 const GalleryMainStack: FC = () => {
   const { t } = useTranslation();
   const defaultScreenOptions = useDefaultScreenOptions();
 
   return (
-    <Navigator screenOptions={defaultScreenOptions}>
-      <Screen
+    <Stack.Navigator screenOptions={defaultScreenOptions}>
+      <Stack.Screen
         name={GalleryMainScreen.ALBUMS}
         component={Albums}
         options={{
@@ -33,23 +33,21 @@ const GalleryMainStack: FC = () => {
         }}
       />
 
-      <Screen name={GalleryMainScreen.ALBUM} component={Album} />
-    </Navigator>
+      <Stack.Screen name={GalleryMainScreen.ALBUM} component={Album} />
+    </Stack.Navigator>
   );
 };
 
-export const GalleryMainStackConfig: StackConfig = {
-  parentOptions: {
-    headerShown: false,
-  },
-  screens: [
-    {
-      name: '[STACKS] GALLERY MAIN',
-      children: Object.values(GalleryMainScreen),
-      component: GalleryMainStack,
-      options: {
-        presentation: 'modal',
-      },
-    },
-  ],
+export const GalleryMainNavigation: NC = ({ Group, Screen }) => {
+  return (
+    <Group screenOptions={{ headerShown: false }}>
+      <Screen
+        name={STACKS.GalleryMain.name}
+        component={GalleryMainStack}
+        options={{
+          presentation: 'modal',
+        }}
+      />
+    </Group>
+  );
 };

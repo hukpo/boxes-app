@@ -1,2 +1,2 @@
 export type { Box } from './models';
-export { BoxesMainScreen, BoxesMainStackConfig, BoxesCreateScreen, BoxesCreateStackConfig } from './navigation';
+export { BoxesMainScreen, BoxesMainNavigation, BoxesCreateScreen, BoxesCreateNavigation } from './navigation';

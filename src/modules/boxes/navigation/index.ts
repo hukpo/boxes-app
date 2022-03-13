@@ -1,2 +1,2 @@
-export * from './main.stack';
-export * from './create.stack';
+export * from './main';
+export * from './create';

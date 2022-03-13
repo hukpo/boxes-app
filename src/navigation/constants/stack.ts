@@ -1,16 +1,20 @@
-import { BottomMenuStackConfig } from '../stacks';
-import { AuthMainStackConfig, BoxesMainStackConfig, GalleryMainStackConfig, SettingsMainStackConfig } from '@/modules';
+import { AuthMainScreen, BoxesMainScreen, GalleryMainScreen } from '@/modules';
 
-export const STACKS = [
-  BottomMenuStackConfig,
-  BoxesMainStackConfig,
-  SettingsMainStackConfig,
-  AuthMainStackConfig,
-  GalleryMainStackConfig,
-].reduce<Record<string, string[]>>((stacks, stack) => {
-  stack.screens.forEach(screen => {
-    stacks[screen.name] = screen.children || [];
-  });
-
-  return stacks;
-}, {});
+export const STACKS = {
+  BottomMenu: {
+    name: '[STACKS] BOTTOM MENU',
+    screens: [],
+  },
+  AuthMain: {
+    name: '[STACKS] AUTH MAIN',
+    screens: Object.values(AuthMainScreen),
+  },
+  BoxesMain: {
+    name: '[STACKS] BOXES MAIN',
+    screens: Object.values(BoxesMainScreen),
+  },
+  GalleryMain: {
+    name: '[STACKS] GALLERY MAIN',
+    screens: Object.values(GalleryMainScreen),
+  },
+};

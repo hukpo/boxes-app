@@ -5,22 +5,13 @@ import { PortalProvider } from '@gorhom/portal';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { StackConfig } from '../types';
 import { Navigation } from '../navigation';
 import { useContainerTheme } from '@/themes';
 import { useDefaultScreenOptions } from '../hooks';
-import { BottomMenuStackConfig } from './bottom-menu.stack';
-import { AuthMainStackConfig, BoxesCreateStackConfig, ChatMainStackConfig, GalleryMainStackConfig } from '@/modules';
+import { BottomMenuNavigation } from './bottom-menu';
+import { AuthMainNavigation, BoxesCreateNavigation, ChatMainNavigation, GalleryMainNavigation } from '@/modules';
 
-const { Navigator, Group, Screen } = createNativeStackNavigator();
-
-const STACK_CONFIGS: StackConfig[] = [
-  BottomMenuStackConfig,
-  BoxesCreateStackConfig,
-  ChatMainStackConfig,
-  AuthMainStackConfig,
-  GalleryMainStackConfig,
-];
+const Stack = createNativeStackNavigator();
 
 export const MainStack = observer(() => {
   const theme = useContainerTheme();
@@ -34,15 +25,13 @@ export const MainStack = observer(() => {
       onReady={navigation.onReady}
       onStateChange={navigation.onStateChange}>
       <PortalProvider>
-        <Navigator screenOptions={defaultScreenOptions}>
-          {STACK_CONFIGS.map((config, index) => (
-            <Group key={index} screenOptions={config.parentOptions}>
-              {config.screens.map(screen => (
-                <Screen key={screen.name} name={screen.name} component={screen.component} options={screen.options} />
-              ))}
-            </Group>
-          ))}
-        </Navigator>
+        <Stack.Navigator screenOptions={defaultScreenOptions}>
+          {BottomMenuNavigation(Stack)}
+          {AuthMainNavigation(Stack)}
+          {BoxesCreateNavigation(Stack)}
+          {ChatMainNavigation(Stack)}
+          {GalleryMainNavigation(Stack)}
+        </Stack.Navigator>
       </PortalProvider>
     </NavigationContainer>
   );

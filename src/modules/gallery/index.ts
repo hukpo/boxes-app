@@ -1,2 +1,2 @@
 export { Gallery } from './refs';
-export { GalleryMainScreen, GalleryMainStackConfig } from './navigation';
+export { GalleryMainScreen, GalleryMainNavigation } from './navigation';

@@ -4,4 +4,4 @@ export { Navigation } from './navigation';
 export { HeaderButton, Background } from './components';
 export { useDefaultScreenOptions, useNavigationOptions, useHeaderHeight } from './hooks';
 
-export type { StackConfig, BottomTabConfig } from './types';
+export type { StackConfig, BottomTabConfig, NC, BNC } from './types';
