@@ -108,7 +108,7 @@ export const ActionSheetContainer = forwardRef<ActionSheetRef, ActionSheetContai
 
   return (
     <Portal>
-      <Animated.View style={[styles.container, animatedContainerStyle]}>
+      <Animated.View onTouchEnd={cancel} style={[styles.container, animatedContainerStyle]}>
         <GestureDetector gesture={Gesture.Pan().onUpdate(onPanUpdate).onEnd(onPanEnd)}>
           <View style={[styles.contentWrapper, contentWrapperStyle]}>
             <Animated.View style={[styles.contentContainer, contentContainerStyle, animatedContentStyle]}>
