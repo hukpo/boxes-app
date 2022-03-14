@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { setString } from 'expo-clipboard';
 import { autoInjectable } from 'tsyringe';
 
@@ -29,19 +30,26 @@ export class MessageTextVm {
       return [];
     }
 
-    const urlRegex = new RegExp(
-      '((?!mailto:)(?:(?:http|https|ftp)://)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?)',
-      'gi',
-    );
+    const urlRegex =
+      /((?!mailto:)(?:(?:http|https|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?:(?:[1-9]\d?|1\d\\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[0-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))|localhost)(?::\d{2,5})?(?:(\/|\?|#)[^\s]*)?)/gi;
 
-    return this._messageText.split(urlRegex).reduce<TextChunk[]>((chunks, chunk) => {
-      if (!chunk) {
-        return chunks;
-      }
+    const urls: string[] = [];
+    const divider = uuidv4();
 
-      if (urlRegex.test(chunk)) {
-        chunks.push({ type: 'uri', text: chunk });
-      } else {
+    const parsedString = this._messageText.replace(urlRegex, result => {
+      urls.push(result);
+
+      return divider;
+    });
+
+    return parsedString.split(new RegExp(`(${divider})`, 'g')).reduce<TextChunk[]>((chunks, chunk) => {
+      if (chunk === divider) {
+        const url = urls.shift();
+
+        if (url) {
+          chunks.push({ type: 'uri', text: url });
+        }
+      } else if (chunk) {
         chunks.push({ type: 'text', text: chunk });
       }
 
