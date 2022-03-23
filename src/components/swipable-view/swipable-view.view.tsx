@@ -1,5 +1,5 @@
+import React, { FC, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import React, { FC, Fragment, ReactNode } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Pressable, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
@@ -70,7 +70,7 @@ export const SwipableView: FC<SwipableViewProps> = ({ children, id, style, snapW
   }));
 
   return (
-    <Fragment>
+    <>
       <GestureDetector
         gesture={Gesture.Race(
           Gesture.Tap().maxDistance(0).onBegin(onTapBegin).onEnd(onTapEnd),
@@ -91,7 +91,7 @@ export const SwipableView: FC<SwipableViewProps> = ({ children, id, style, snapW
           <Text style={styles.deleteButtonTitle}>{t('delete')}</Text>
         </View>
       </Pressable>
-    </Fragment>
+    </>
   );
 };
 

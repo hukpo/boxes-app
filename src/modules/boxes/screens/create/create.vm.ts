@@ -1,6 +1,7 @@
 import { autoInjectable } from 'tsyringe';
 
 import { BoxesDB } from '../../db';
+import { Gallery } from '@/modules';
 import { Navigation } from '@/navigation';
 import { Box, BoxType } from '../../models';
 import { getRandomColor, logger } from '@/helpers';
@@ -13,7 +14,7 @@ export class CreateVm {
   private _type: BoxType | null = null;
   private _parentId: Box['parentId'] | null = null;
 
-  constructor(private _db: BoxesDB, private _navigation: Navigation) {
+  constructor(private _db: BoxesDB, private _navigation: Navigation, private _gallery: Gallery) {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
   }
 
@@ -48,4 +49,12 @@ export class CreateVm {
       logger.error(err);
     }
   }
+
+  openGallery(): void {
+    this._gallery.open({
+      selectAssets: this.selectAssets,
+    });
+  }
+
+  private async selectAssets(): Promise<void> {}
 }

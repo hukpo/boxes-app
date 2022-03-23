@@ -1,7 +1,8 @@
 import { Portal } from '@gorhom/portal';
 import { useTranslation } from 'react-i18next';
+import { FullWindowOverlay } from 'react-native-screens';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { StyleSheet, useWindowDimensions, View } from 'react-native';
+import { Keyboard, StyleSheet, useWindowDimensions, View } from 'react-native';
 import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import React, {
   useMemo,
@@ -49,6 +50,7 @@ export const ActionSheetContainer = forwardRef<ActionSheetRef, ActionSheetContai
     ref,
     () => ({
       open() {
+        Keyboard.dismiss();
         contentTranslateY.value = withTiming(0);
         containerOpacity.value = withTiming(MAX_CONTAINER_OPACITY);
       },
@@ -108,40 +110,42 @@ export const ActionSheetContainer = forwardRef<ActionSheetRef, ActionSheetContai
 
   return (
     <Portal>
-      <Animated.View onTouchEnd={cancel} style={[styles.container, animatedContainerStyle]}>
-        <GestureDetector gesture={Gesture.Pan().onUpdate(onPanUpdate).onEnd(onPanEnd)}>
-          <View style={[styles.contentWrapper, contentWrapperStyle]}>
-            <Animated.View style={[styles.contentContainer, contentContainerStyle, animatedContentStyle]}>
-              <View style={[styles.childrenContainer, { backgroundColor: colors.tertiary }]}>
-                {Children.map(children, (child, index) => {
-                  const _child = child as ReactElement<ActionSheetButtonProps>;
+      <FullWindowOverlay style={StyleSheet.absoluteFill}>
+        <Animated.View onTouchEnd={cancel} style={[styles.container, animatedContainerStyle]}>
+          <GestureDetector gesture={Gesture.Pan().onUpdate(onPanUpdate).onEnd(onPanEnd)}>
+            <View style={[styles.contentWrapper, contentWrapperStyle]}>
+              <Animated.View style={[styles.contentContainer, contentContainerStyle, animatedContentStyle]}>
+                <View style={[styles.childrenContainer, { backgroundColor: colors.tertiary }]}>
+                  {Children.map(children, (child, index) => {
+                    const _child = child as ReactElement<ActionSheetButtonProps>;
 
-                  const onChildPress = (): void => {
-                    cancel();
-                    _child.props.onPress?.();
-                  };
+                    const onChildPress = (): void => {
+                      cancel();
+                      _child.props.onPress?.();
+                    };
 
-                  const isLastChild = Array.isArray(children) && index === children.length - 1;
+                    const isLastChild = Array.isArray(children) && index === children.length - 1;
 
-                  return cloneElement(
-                    _child,
-                    isLastChild
-                      ? { containerStyle: { borderBottomWidth: 0 }, onPress: onChildPress }
-                      : { onPress: onChildPress },
-                  );
-                })}
-              </View>
+                    return cloneElement(
+                      _child,
+                      isLastChild
+                        ? { containerStyle: { borderBottomWidth: 0 }, onPress: onChildPress }
+                        : { onPress: onChildPress },
+                    );
+                  })}
+                </View>
 
-              <ActionSheetButton
-                containerStyle={styles.cancelContainer}
-                titleStyle={styles.cancelTitle}
-                title={t('cancel')}
-                onPress={cancel}
-              />
-            </Animated.View>
-          </View>
-        </GestureDetector>
-      </Animated.View>
+                <ActionSheetButton
+                  containerStyle={styles.cancelContainer}
+                  titleStyle={styles.cancelTitle}
+                  title={t('cancel')}
+                  onPress={cancel}
+                />
+              </Animated.View>
+            </View>
+          </GestureDetector>
+        </Animated.View>
+      </FullWindowOverlay>
     </Portal>
   );
 });
