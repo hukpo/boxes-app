@@ -27,8 +27,8 @@ target 'boxes' do
     # to enable hermes on iOS, change `false` to `true` and then install pods
     :hermes_enabled => true, # flags[:hermes_enabled],
     :fabric_enabled => flags[:fabric_enabled],
-    # An abosolute path to your application root.
-    :app_path => "#{Dir.pwd}/.."
+    # An absolute path to your application root.
+    :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
   target 'boxesTests' do
