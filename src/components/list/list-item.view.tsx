@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { ColorValue, StyleProp, StyleSheet, Switch, View, ViewStyle, Pressable } from 'react-native';
 
+import { useValue } from '@/hooks';
 import { useTheme } from '@/themes';
-import { useToggle } from '@/hooks';
 import { Icon, IconProps, Text } from '@/ui-kit';
 
 export type ListItemProps = {
@@ -38,7 +38,13 @@ export const ListItem: FC<ListItemProps> = ({
   onPress,
 }) => {
   const { colors } = useTheme();
-  const isPressed = useToggle(false, disabled);
+  const isPressed = useValue(false);
+
+  const onPressInOut = (): void => {
+    if (!disabled) {
+      isPressed.toggle();
+    }
+  };
 
   return (
     <Pressable
@@ -46,10 +52,10 @@ export const ListItem: FC<ListItemProps> = ({
       style={[
         styles.container,
         { backgroundColor: colors.tertiary },
-        isPressed.value && { backgroundColor: colors.highlight },
+        isPressed() && { backgroundColor: colors.highlight },
       ]}
-      onPressIn={isPressed.toggle}
-      onPressOut={isPressed.toggle}
+      onPressIn={onPressInOut}
+      onPressOut={onPressInOut}
       onPress={onPress}>
       {iconName ? (
         <View style={[styles.iconContainer, { backgroundColor: iconBackground }]}>
