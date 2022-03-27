@@ -47,25 +47,28 @@ export const List = observer(() => {
 
   return (
     <>
-      <Animated.FlatList
-        {...reanimatedProps}
-        style={{ backgroundColor: colors.secondary }}
-        contentContainerStyle={[
-          styles.contentContainer,
-          {
-            paddingTop: headerHeight,
-            paddingBottom: bottomMenuHeight,
-          },
-        ]}
-        data={vm.boxes}
-        scrollEnabled={!!vm.boxes}
-        renderItem={renderItem}
-        keyExtractor={keyExtractor}
-        getItemLayout={getItemLayout}
-        onScrollBeginDrag={rowsManager.closeAll}
-        removeClippedSubviews={false}
-        ListEmptyComponent={<ActivityIndicator style={styles.loader} />}
-      />
+      {vm.boxes ? (
+        <Animated.FlatList
+          {...reanimatedProps}
+          style={{ backgroundColor: colors.secondary }}
+          contentContainerStyle={[
+            styles.contentContainer,
+            {
+              paddingTop: headerHeight,
+              paddingBottom: bottomMenuHeight,
+            },
+          ]}
+          data={vm.boxes}
+          scrollEnabled={!!vm.boxes}
+          renderItem={renderItem}
+          keyExtractor={keyExtractor}
+          getItemLayout={getItemLayout}
+          onScrollBeginDrag={rowsManager.closeAll}
+          removeClippedSubviews={false}
+        />
+      ) : (
+        <ActivityIndicator style={styles.loader} />
+      )}
 
       <FAB onPress={actionSheetRef.current?.open} />
 
