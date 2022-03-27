@@ -1,5 +1,5 @@
 import { Portal } from '@gorhom/portal';
-import React, { cloneElement, FC, Fragment, ReactElement, useState } from 'react';
+import React, { cloneElement, FC, ReactElement, useState } from 'react';
 import { LayoutChangeEvent, StyleProp, StyleSheet, useWindowDimensions } from 'react-native';
 import Animated, {
   runOnJS,
@@ -143,7 +143,7 @@ export const ZoomableView: FC<ZoomableViewProps> = ({ children }: ZoomableViewPr
   }));
 
   return (
-    <Fragment>
+    <>
       <GestureDetector gesture={Gesture.Tap().maxDistance(0).onTouchesUp(onTapTouchesUp)}>
         <Animated.View onLayout={onChildLayout} style={animatedChildStyle}>
           {children}
@@ -168,7 +168,7 @@ export const ZoomableView: FC<ZoomableViewProps> = ({ children }: ZoomableViewPr
           </Animated.View>
         </GestureDetector>
       </Portal>
-    </Fragment>
+    </>
   );
 };
 

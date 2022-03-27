@@ -10,7 +10,7 @@ import { PopupMenu, Text } from '@/ui-kit';
 import { useMessageDefaults } from '../../hooks';
 import { MessageTextVm } from './message-text.vm';
 import { useRealmObjectUpdate, useVm } from '@/hooks';
-import { ChatMessageObject, ChatMessageText } from '../../models';
+import { ChatMessageObject, ChatMessageText } from '../../types';
 
 type MessageTextProps = {
   message: ChatMessageObject<ChatMessageText>;

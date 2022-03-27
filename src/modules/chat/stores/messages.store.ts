@@ -2,7 +2,7 @@ import { autoInjectable, singleton } from 'tsyringe';
 
 import { MessagesDB } from '../db';
 import { logger } from '@/helpers';
-import { ChatMessageObject } from '../models';
+import { ChatMessageObject } from '../types';
 import { makeSimpleAutoObservable } from '@/stores';
 
 @singleton()
@@ -16,7 +16,7 @@ export class MessagesStore {
     try {
       logger.info(`Trying to delete message with id: ${message._id}, type: ${message.type}`);
 
-      await this._db.delete(message);
+      this._db.delete(message);
     } catch (err) {
       logger.error(err);
     }

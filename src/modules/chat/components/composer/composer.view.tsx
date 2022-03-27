@@ -56,20 +56,17 @@ export const Composer = observer<ComposerProps>(({ parentId }) => {
   const currentInputHeight = useValue(0);
 
   const onInputLayout = ({ nativeEvent: { layout } }: LayoutChangeEvent): void => {
-    if (!initialInputHeight.value) {
-      initialInputHeight.value = layout.height;
+    if (!initialInputHeight()) {
+      initialInputHeight(layout.height);
     }
 
-    currentInputHeight.value = layout.height;
+    currentInputHeight(layout.height);
   };
 
   const extraInputSpace = (INPUT_PADDING + INPUT_BORDER_WIDTH) * 2;
-  const maxInputHeight = MAX_NUMBER_OF_LINES * (initialInputHeight.value - extraInputSpace) + extraInputSpace;
+  const maxInputHeight = MAX_NUMBER_OF_LINES * (initialInputHeight() - extraInputSpace) + extraInputSpace;
   const composerHeight =
-    bottom +
-    currentInputHeight.value +
-    COMPOSER_PADDING_VERTICAL * 2 +
-    (vm.editMessageText ? EDIT_CONTAINER_HEIGHT : 0);
+    bottom + currentInputHeight() + COMPOSER_PADDING_VERTICAL * 2 + (vm.editMessageText ? EDIT_CONTAINER_HEIGHT : 0);
 
   return (
     <Container style={styles.container}>
@@ -98,7 +95,7 @@ export const Composer = observer<ComposerProps>(({ parentId }) => {
         <View style={styles.composerContainer}>
           <TouchableOpacity onPress={vm.openGallery}>
             <Icon
-              style={[styles.attachmentIcon, { marginBottom: (initialInputHeight.value - ATTACHMENT_ICON_HEIGHT) / 2 }]}
+              style={[styles.attachmentIcon, { marginBottom: (initialInputHeight() - ATTACHMENT_ICON_HEIGHT) / 2 }]}
               name="paperclip"
               size={ATTACHMENT_ICON_HEIGHT}
               color={colors.greyLight}
@@ -115,7 +112,7 @@ export const Composer = observer<ComposerProps>(({ parentId }) => {
                 color: colors.text,
                 borderColor: colors.border,
                 backgroundColor: colors.secondary,
-                maxHeight: initialInputHeight.value ? maxInputHeight : undefined,
+                maxHeight: initialInputHeight() ? maxInputHeight : undefined,
               },
             ]}
             value={vm.composerText}
@@ -128,7 +125,7 @@ export const Composer = observer<ComposerProps>(({ parentId }) => {
 
           <TouchableOpacity disabled={vm.sendButtonDisabled} onPress={vm.sendMessage}>
             <Icon
-              style={[styles.sendIcon, { marginBottom: (initialInputHeight.value - SEND_ICON_HEIGHT) / 2 }]}
+              style={[styles.sendIcon, { marginBottom: (initialInputHeight() - SEND_ICON_HEIGHT) / 2 }]}
               name="send"
               size={SEND_ICON_HEIGHT}
               color={vm.sendButtonDisabled ? colors.textDisabled : colors.primary}

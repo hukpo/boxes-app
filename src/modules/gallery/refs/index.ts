@@ -5,7 +5,7 @@ import { Navigation } from '@/navigation';
 import { GalleryMainScreen } from '../navigation';
 
 type OpenOptions = {
-  selectAssets: (assets: Asset[]) => void;
+  selectAsset: (asset: Asset) => void;
 };
 
 @singleton()
@@ -14,8 +14,8 @@ export class Gallery {
 
   constructor(private _navigation: Navigation) {}
 
-  selectAssets(assets: Asset[]): void {
-    this._options?.selectAssets(assets);
+  selectAsset(asset: Asset): void {
+    this._options?.selectAsset(asset);
 
     this._options = null;
 

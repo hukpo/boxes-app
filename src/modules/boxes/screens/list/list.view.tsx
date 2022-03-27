@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
@@ -8,7 +8,7 @@ import Animated, { ILayoutAnimationBuilder, Layout } from 'react-native-reanimat
 import { ListVm } from './list.vm';
 import { useTheme } from '@/themes';
 import { ActionSheet } from '@/ui-kit';
-import { BoxObject } from '../../models';
+import { BoxObject } from '../../types';
 import { BoxListRow } from '../../components';
 import { useHeaderHeight } from '@/navigation';
 import { BOX_ROW_HEIGHT } from '../../constants';
@@ -46,7 +46,7 @@ export const List = observer(() => {
   };
 
   return (
-    <Fragment>
+    <>
       <Animated.FlatList
         {...reanimatedProps}
         style={{ backgroundColor: colors.secondary }}
@@ -71,7 +71,7 @@ export const List = observer(() => {
         <ActionSheet.Button title={t('createFolder')} onPress={vm.createFolder} />
         <ActionSheet.Button title={t('createChat')} onPress={vm.createChat} />
       </ActionSheet.Container>
-    </Fragment>
+    </>
   );
 });
 

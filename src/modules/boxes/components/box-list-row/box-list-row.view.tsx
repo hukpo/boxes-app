@@ -6,7 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Text } from '@/ui-kit';
 import { useTheme } from '@/themes';
 import { BoxImage } from '../box-image';
-import { BoxObject } from '../../models';
+import { BoxObject } from '../../types';
 import { SwipableView } from '@/components';
 import { useRealmListUpdate, useVm } from '@/hooks';
 import { BoxListRowVm } from './box-list-row.vm';
@@ -46,11 +46,12 @@ const BoxListRowNoMemo = observer<BoxListRowProps>(({ box }) => {
       onPress={vm.openBox}
       onButtonPress={vm.deleteBox}>
       <BoxImage
+        type={box.type}
         containerStyle={styles.image}
         size={BOX_ROW_IMAGE_HEIGHT}
         color={box.imageBg}
         title={vm.getImageTitle(box.name)}
-        uri={''}
+        uriKey={box.key}
         onPress={vm.openBox}
       />
 
@@ -63,27 +64,17 @@ const BoxListRowNoMemo = observer<BoxListRowProps>(({ box }) => {
 
             return (
               <BoxImage
+                type={previewBox.type}
                 containerStyle={styles.previewItem}
                 key={previewBox._id}
                 size={BOX_PREVIEW_ITEM_HEIGHT}
                 color={previewBox.imageBg}
                 title={vm.getImageTitle(previewBox.name)}
-                uri={''}
+                uriKey={previewBox.key}
                 onPress={onPress}
               />
             );
           })}
-
-          {(vm.previewBoxes?.length || 0) > BOX_PREVIEW_MAX_ITEMS ? (
-            <BoxImage
-              containerStyle={styles.previewItem}
-              size={BOX_PREVIEW_ITEM_HEIGHT}
-              color={'#8f8f8f'}
-              title={'...'}
-              uri={''}
-              onPress={vm.openBox}
-            />
-          ) : null}
         </View>
       </View>
     </SwipableView>

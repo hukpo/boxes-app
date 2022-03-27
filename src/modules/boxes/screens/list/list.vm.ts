@@ -5,7 +5,7 @@ import { logger } from '@/helpers';
 import { BoxesDB } from '../../db';
 import { Navigation } from '@/navigation';
 import { BoxesCreateScreen } from '@/modules';
-import { Box, Boxes, BoxType } from '../../models';
+import { Box, Boxes, BoxType } from '../../types';
 import { AppStore, makeSimpleAutoObservable } from '@/stores';
 
 @autoInjectable()
@@ -42,7 +42,7 @@ export class ListVm {
 
       logger.info(`Trying to get Boxes, parentId: ${this._parentId}`);
 
-      const boxes = await this._db.getByParentId(this._parentId);
+      const boxes = this._db.getByParentId(this._parentId);
 
       runInAction(() => (this._boxes = boxes));
     } catch (err) {

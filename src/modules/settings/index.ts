@@ -1,2 +1,2 @@
-export { AutoNightMode } from './models';
+export { AutoNightMode } from './types';
 export { SettingsMainScreen, SettingsMainNavigation } from './navigation';

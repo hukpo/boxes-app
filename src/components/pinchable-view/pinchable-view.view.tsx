@@ -1,5 +1,5 @@
 import { Portal } from '@gorhom/portal';
-import React, { FC, Fragment, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { LayoutChangeEvent, StyleSheet } from 'react-native';
 import Animated, {
   runOnJS,
@@ -119,7 +119,7 @@ export const PinchableView: FC<PinchableViewProps> = ({ children }) => {
   }));
 
   return (
-    <Fragment>
+    <>
       <GestureDetector
         gesture={Gesture.Pinch()
           .onTouchesDown(onTouchesDown)
@@ -136,7 +136,7 @@ export const PinchableView: FC<PinchableViewProps> = ({ children }) => {
           {children}
         </Animated.View>
       </Portal>
-    </Fragment>
+    </>
   );
 };
 

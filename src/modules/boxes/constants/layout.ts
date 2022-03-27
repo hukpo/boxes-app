@@ -1,6 +1,7 @@
 export const BOX_SPACING = 7;
 export const BOX_ROW_HEIGHT = 75;
-export const BOX_ROW_IMAGE_HEIGHT = 50;
+export const BOX_ROW_ICON_HEIGHT = 35;
+export const BOX_ROW_IMAGE_HEIGHT = 60;
 export const BOX_NAME_LINE_HEIGHT = 20;
 
 export const BOX_PREVIEW_MARGIN_TOP = 3;

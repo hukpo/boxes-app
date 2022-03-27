@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useRoute, Route, useFocusEffect } from '@react-navigation/core';
 import React, { RefObject, useCallback, useEffect, useRef } from 'react';
 
-import { Box } from '../../models';
+import { Box } from '../../types';
 import { ListVm } from './list.vm';
 import { ActionSheetRef } from '@/ui-kit';
 import { HeaderButton, useNavigationOptions } from '@/navigation';

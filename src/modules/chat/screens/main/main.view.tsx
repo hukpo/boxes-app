@@ -5,7 +5,7 @@ import { StyleSheet, ListRenderItem, View, FlatList } from 'react-native';
 
 import { MainVm } from './main.vm';
 import { useHeaderHeight } from '@/navigation';
-import { ChatMessageObject } from '../../models';
+import { ChatMessageObject } from '../../types';
 import { MESSAGE_MARGIN } from '../../constants';
 import { useRealmListUpdate, useVm } from '@/hooks';
 import { useMainNavigation } from './main.navigation';

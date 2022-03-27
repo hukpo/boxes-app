@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Route, useRoute } from '@react-navigation/core';
 
 import { CreateVm } from './create.vm';
-import { Box, BoxType } from '../../models';
+import { Box, BoxType } from '../../types';
 import { HeaderButton, useNavigationOptions } from '@/navigation';
 
 export const useCreateNavigation = (vm: CreateVm): { type: BoxType } => {
@@ -21,14 +21,14 @@ export const useCreateNavigation = (vm: CreateVm): { type: BoxType } => {
   useNavigationOptions(
     () => ({
       headerTitle: t(type === BoxType.FOLDER ? 'createFolder' : 'createChat', { ns: 'boxes' }),
-      headerRight: () => <HeaderButton title={t('save')} onPress={vm.saveBox} disabled={!vm.boxName.value.trim()} />,
+      headerRight: () => <HeaderButton title={t('save')} onPress={vm.saveBox} disabled={!vm.name.value.trim()} />,
       ...Platform.select({
         ios: {
           headerLeft: () => <HeaderButton />,
         },
       }),
     }),
-    [t, type, vm.boxName.value, vm.saveBox],
+    [t, type, vm.name.value, vm.saveBox],
   );
 
   return { type };

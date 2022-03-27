@@ -46,7 +46,7 @@ export const Album = observer(() => {
     return (
       <View style={styles.rowContainer}>
         {item.map((asset, index) => {
-          const onPress = (): void => container.resolve(Gallery).selectAssets([asset]);
+          const onPress = (): void => container.resolve(Gallery).selectAsset(asset);
 
           return (
             <Pressable key={asset.id} onPress={onPress}>

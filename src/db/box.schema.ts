@@ -5,8 +5,10 @@ export const boxSchema: ObjectSchema = {
   properties: {
     _id: 'string',
     name: 'string',
+    key: 'string?',
     type: 'string',
     imageBg: 'string',
+    aspectRatio: 'float?',
     parentId: { type: 'string', indexed: true },
     createdAt: 'date',
   },

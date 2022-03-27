@@ -1,6 +1,4 @@
 export { getHHMM } from './date';
 export { logger } from './logger';
-export { getS3Image } from './s3';
+export { uploadImage, getImageUri } from './images';
 export { shadeColor, getRandomColor } from './colors';
-
-export type { S3Image } from './s3';

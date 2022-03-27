@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { ColorValue, StyleProp, StyleSheet, Text as RNText, TextStyle } from 'react-native';
 
-import { useToggle } from '@/hooks';
+import { useValue } from '@/hooks';
 
 type TextProps = {
   onPress?: () => void;
@@ -11,7 +11,7 @@ type TextProps = {
 };
 
 export const Text: FC<TextProps> = ({ children, numberOfLines, onPress, highlightColor, style }) => {
-  const highlightActive = useToggle(false);
+  const highlightActive = useValue(false);
 
   return (
     <RNText
@@ -23,7 +23,7 @@ export const Text: FC<TextProps> = ({ children, numberOfLines, onPress, highligh
       style={[
         styles.text,
         style,
-        !!highlightColor && (onPress ? highlightActive.value : true) && { backgroundColor: highlightColor },
+        !!highlightColor && (onPress ? highlightActive() : true) && { backgroundColor: highlightColor },
       ]}>
       {children}
     </RNText>

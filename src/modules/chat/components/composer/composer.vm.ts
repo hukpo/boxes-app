@@ -1,20 +1,13 @@
 import { runInAction } from 'mobx';
-import { v4 as uuidv4 } from 'uuid';
 import { autoInjectable } from 'tsyringe';
 import { Asset } from 'expo-media-library';
-import storage from '@react-native-firebase/storage';
 
-import { logger } from '@/helpers';
 import { MessagesDB } from '../../db';
 import { Box, Gallery } from '@/modules';
+import { ImageUploadStatus } from '@/types';
+import { logger, uploadImage } from '@/helpers';
 import { makeSimpleAutoObservable } from '@/stores';
-import {
-  ChatMessageText,
-  ChatMessageType,
-  ChatMessageImage,
-  ChatMessageObject,
-  ChatMessageImageUploadStatus,
-} from '../../models';
+import { ChatMessageText, ChatMessageType, ChatMessageImage, ChatMessageObject } from '../../types';
 
 export type ComposerMethods = {
   focus(): void;
@@ -65,7 +58,7 @@ export class ComposerVm {
 
   openGallery(): void {
     this._gallery.open({
-      selectAssets: this.selectAssets,
+      selectAsset: this.selectAsset,
     });
   }
 
@@ -79,14 +72,14 @@ export class ComposerVm {
 
       if (this._editMessage) {
         if (parsedComposerText !== this._editMessage.text) {
-          await this._db.update(this._editMessage, {
+          this._db.update(this._editMessage, {
             text: parsedComposerText,
           });
         }
 
         runInAction(() => (this._editMessage = null));
       } else {
-        await this._db.save<ChatMessageText>({
+        this._db.save<ChatMessageText>({
           parentId: this._parentId,
           text: parsedComposerText,
           type: ChatMessageType.TEXT,
@@ -99,29 +92,26 @@ export class ComposerVm {
     }
   }
 
-  async selectAssets(assets: Asset[]): Promise<void> {
-    const uploaders = assets.map(async asset => {
-      try {
-        if (!this._parentId) {
-          throw new Error('No parentId found');
-        }
-        const newMessage = await this._db.save<ChatMessageImage>({
-          aspectRatio: asset.width / asset.height,
-          parentId: this._parentId,
-          type: ChatMessageType.IMAGE,
-          status: ChatMessageImageUploadStatus.IN_PROGRESS,
-        });
-
-        const result = await storage().ref(uuidv4()).putFile(asset.uri);
-
-        await this._db.update(newMessage, {
-          key: result.metadata.name,
-          status: ChatMessageImageUploadStatus.DONE,
-        });
-      } catch (err) {
-        logger.error(err);
+  public async selectAsset(asset: Asset): Promise<void> {
+    try {
+      if (!this._parentId) {
+        throw new Error('No parentId found');
       }
-    });
-    await Promise.all(uploaders);
+      const newMessage = this._db.save<ChatMessageImage>({
+        aspectRatio: asset.width / asset.height,
+        parentId: this._parentId,
+        type: ChatMessageType.IMAGE,
+        status: ImageUploadStatus.IN_PROGRESS,
+      });
+
+      const { key } = await uploadImage(asset.uri);
+
+      this._db.update(newMessage, {
+        key,
+        status: ImageUploadStatus.DONE,
+      });
+    } catch (err) {
+      logger.error(err);
+    }
   }
 }
