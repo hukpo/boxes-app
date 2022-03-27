@@ -9,9 +9,9 @@ import { ListVm } from './list.vm';
 import { useTheme } from '@/themes';
 import { ActionSheet } from '@/ui-kit';
 import { BoxObject } from '../../types';
-import { BoxListRow } from '../../components';
 import { useHeaderHeight } from '@/navigation';
 import { BOX_ROW_HEIGHT } from '../../constants';
+import { BoxListRow, FAB } from '../../components';
 import { useListNavigation } from './list.navigation';
 import { useRealmListUpdate, useSwipableRows, useVm } from '@/hooks';
 
@@ -66,6 +66,8 @@ export const List = observer(() => {
         removeClippedSubviews={false}
         ListEmptyComponent={<ActivityIndicator style={styles.loader} />}
       />
+
+      <FAB onPress={actionSheetRef.current?.open} />
 
       <ActionSheet.Container ref={actionSheetRef}>
         <ActionSheet.Button title={t('createFolder')} onPress={vm.createFolder} />
