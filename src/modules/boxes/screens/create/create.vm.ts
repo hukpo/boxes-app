@@ -41,6 +41,7 @@ export class CreateVm {
     this._parentId = value;
   }
 
+  // TODO LOADER
   async saveBox(): Promise<void> {
     try {
       if (!this._type || !this._parentId) {
