@@ -3,7 +3,7 @@ import { Alert } from 'react-native';
 import { autoInjectable } from 'tsyringe';
 
 import { logger } from '@/helpers';
-import { BoxesDB } from '../../db';
+import { BoxesDb } from '../../db';
 import { Navigation } from '@/navigation';
 import { SwipableRowsManager } from '@/hooks';
 import { makeSimpleAutoObservable } from '@/stores';
@@ -16,7 +16,7 @@ export class BoxListRowVm {
 
   constructor(
     private _box: BoxObject,
-    private _db: BoxesDB,
+    private _db: BoxesDb,
     private _navigation: Navigation,
     private _rowsManager: SwipableRowsManager,
   ) {
@@ -27,14 +27,6 @@ export class BoxListRowVm {
 
   get previewBoxes(): Boxes | null {
     return this._previewBoxes;
-  }
-
-  getImageTitle(name: string): string {
-    if (!name) {
-      return '';
-    }
-
-    return name[0].toUpperCase();
   }
 
   async getPreviewBoxes(): Promise<void> {

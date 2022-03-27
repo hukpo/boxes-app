@@ -1,16 +1,16 @@
-import { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useRoute, Route, useFocusEffect } from '@react-navigation/core';
 
 import { MainVm } from './main.vm';
-import { Box } from '../../../boxes';
 import { useNavigationOptions } from '@/navigation';
+import { Box, BoxImageHeader } from '../../../boxes';
 
 export const useMainNavigation = (vm: MainVm): { parentId: Box['_id'] | undefined } => {
   const { params } = useRoute<Route<string, { parentId: Box['_id']; parentName: Box['name'] } | undefined>>();
 
   useEffect(() => {
     if (params?.parentId) {
-      vm.setParentId(params.parentId);
+      vm.setParent(params.parentId);
     }
   }, [vm, params?.parentId]);
 
@@ -23,8 +23,9 @@ export const useMainNavigation = (vm: MainVm): { parentId: Box['_id'] | undefine
   useNavigationOptions(
     () => ({
       headerTitle: params?.parentName,
+      headerRight: () => (vm.parent ? <BoxImageHeader box={vm.parent} /> : null),
     }),
-    [params?.parentName],
+    [params?.parentName, vm.parent],
   );
 
   return { parentId: params?.parentId };

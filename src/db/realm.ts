@@ -20,7 +20,7 @@ type Model = {
 type ModelObject = Model & Realm.Object;
 
 @singleton()
-export class RealmDB {
+export class RealmDb {
   private _realm!: Realm;
   private _realmApp = new Realm.App({
     id: config.REALM_ID,

@@ -2,16 +2,17 @@ import { runInAction } from 'mobx';
 import { autoInjectable } from 'tsyringe';
 
 import { logger } from '@/helpers';
-import { MessagesDB } from '../../db';
+import { MessagesDb } from '../../db';
+import { ChatMessages } from '../../types';
 import { makeSimpleAutoObservable } from '@/stores';
-import { ChatMessage, ChatMessages } from '../../types';
+import { BoxesDb, BoxObject, Box } from '@/modules';
 
 @autoInjectable()
 export class MainVm {
+  private _parent: BoxObject | null = null;
   private _messages: ChatMessages | null = null;
-  private _parentId: ChatMessage['parentId'] | null = null;
 
-  constructor(private _db: MessagesDB) {
+  constructor(private _db: MessagesDb, private _boxesDb: BoxesDb) {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
   }
 
@@ -19,19 +20,34 @@ export class MainVm {
     return this._messages;
   }
 
-  setParentId(value: ChatMessage['parentId']): void {
-    this._parentId = value;
+  get parentId(): string | null {
+    if (!this._parent) {
+      return null;
+    }
+
+    return this._parent._id;
+  }
+
+  get parent(): BoxObject | null {
+    return this._parent;
+  }
+  setParent(parentId: Box['parentId']): void {
+    const parent = this._boxesDb.getById(parentId);
+
+    if (parent) {
+      this._parent = parent;
+    }
   }
 
   async getMessages(): Promise<void> {
     try {
-      if (!this._parentId) {
+      if (!this.parentId) {
         throw new Error('No parentId found');
       }
 
-      logger.info(`Trying to get Messages, parentId: ${this._parentId}`);
+      logger.info(`Trying to get Messages, parentId: ${this.parentId}`);
 
-      const messages = this._db.getByParentId(this._parentId);
+      const messages = this._db.getByParentId(this.parentId);
 
       runInAction(() => (this._messages = messages));
     } catch (err) {

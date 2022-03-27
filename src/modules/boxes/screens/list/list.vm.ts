@@ -2,10 +2,10 @@ import { runInAction, when } from 'mobx';
 import { autoInjectable } from 'tsyringe';
 
 import { logger } from '@/helpers';
-import { BoxesDB } from '../../db';
+import { BoxesDb } from '../../db';
 import { Navigation } from '@/navigation';
 import { BoxesCreateScreen } from '@/modules';
-import { Box, Boxes, BoxType } from '../../types';
+import { Box, Boxes, BoxObject, BoxType } from '../../types';
 import { AppStore, makeSimpleAutoObservable } from '@/stores';
 
 @autoInjectable()
@@ -13,9 +13,9 @@ export class ListVm {
   private _ROOT_PARENT_ID = '*';
 
   private _boxes: Boxes | null = null;
-  private _parentId: Box['parentId'] = this._ROOT_PARENT_ID;
+  private _parent: BoxObject | null = null;
 
-  constructor(private _appStore: AppStore, private _db: BoxesDB, private _navigation: Navigation) {
+  constructor(private _appStore: AppStore, private _db: BoxesDb, private _navigation: Navigation) {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
   }
 
@@ -23,8 +23,23 @@ export class ListVm {
     return this._boxes;
   }
 
-  setParentId(value: Box['parentId']): void {
-    this._parentId = value;
+  get parentId(): string {
+    if (!this._parent) {
+      return this._ROOT_PARENT_ID;
+    }
+
+    return this._parent._id;
+  }
+
+  get parent(): BoxObject | null {
+    return this._parent;
+  }
+  setParent(parentId: Box['parentId']): void {
+    const parent = this._db.getById(parentId);
+
+    if (parent) {
+      this._parent = parent;
+    }
   }
 
   async getBoxes(): Promise<void> {
@@ -40,9 +55,9 @@ export class ListVm {
         return;
       }
 
-      logger.info(`Trying to get Boxes, parentId: ${this._parentId}`);
+      logger.info(`Trying to get Boxes, parentId: ${this.parentId}`);
 
-      const boxes = this._db.getByParentId(this._parentId);
+      const boxes = this._db.getByParentId(this.parentId);
 
       runInAction(() => (this._boxes = boxes));
     } catch (err) {
@@ -53,14 +68,14 @@ export class ListVm {
   createFolder(): void {
     this._navigation.navigate(BoxesCreateScreen.MAIN, {
       type: BoxType.FOLDER,
-      parentId: this._parentId,
+      parentId: this.parentId,
     });
   }
 
   createChat(): void {
     this._navigation.navigate(BoxesCreateScreen.MAIN, {
       type: BoxType.CHAT,
-      parentId: this._parentId,
+      parentId: this.parentId,
     });
   }
 }

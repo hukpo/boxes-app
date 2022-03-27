@@ -21,7 +21,7 @@ type BoxImageProps = {
 };
 
 export const BoxImage = observer<BoxImageProps>(({ color, type, uriKey, size, title, containerStyle, onPress }) => {
-  const vm = useVm(BoxImageVm, uriKey);
+  const vm = useVm(BoxImageVm, title, uriKey);
 
   const onTapEnd = (): void => onPress?.();
 
@@ -37,7 +37,7 @@ export const BoxImage = observer<BoxImageProps>(({ color, type, uriKey, size, ti
           <Image uri={vm.uri} style={StyleSheet.absoluteFillObject} />
         ) : (
           <LinearGradient colors={[shadeColor(color, 70), color]} style={styles.noImageContainer}>
-            <Text style={[styles.noImageTitle, { fontSize: size / 2 }]}>{title}</Text>
+            <Text style={[styles.noImageTitle, { fontSize: size / 2 }]}>{vm.title}</Text>
           </LinearGradient>
         )}
       </View>

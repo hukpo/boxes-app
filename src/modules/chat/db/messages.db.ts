@@ -1,11 +1,11 @@
 import { singleton } from 'tsyringe';
 
-import { CollectionName, RealmDB } from '@/db';
+import { CollectionName, RealmDb } from '@/db';
 import { ChatMessage, ChatMessages, ChatMessageObject } from '../types';
 
 @singleton()
-export class MessagesDB {
-  constructor(private _realmDB: RealmDB) {}
+export class MessagesDb {
+  constructor(private _realmDB: RealmDb) {}
 
   getByParentId(parentId: ChatMessage['parentId']): ChatMessages {
     return this._realmDB

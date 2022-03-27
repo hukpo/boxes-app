@@ -1,6 +1,6 @@
 import { autoInjectable } from 'tsyringe';
 
-import { RealmDB } from '@/db';
+import { RealmDb } from '@/db';
 import { logger } from '@/helpers';
 import { AuthStore } from '../../stores';
 import { Navigation } from '@/navigation';
@@ -10,7 +10,7 @@ import { InputStore, makeSimpleAutoObservable } from '@/stores';
 export class CodeVm {
   private _code = new InputStore('');
 
-  constructor(private _authStore: AuthStore, private _realmDB: RealmDB, private _navigation: Navigation) {
+  constructor(private _authStore: AuthStore, private _realmDB: RealmDb, private _navigation: Navigation) {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
   }
 

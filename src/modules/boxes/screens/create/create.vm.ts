@@ -2,7 +2,7 @@ import { runInAction } from 'mobx';
 import { autoInjectable } from 'tsyringe';
 import { Asset } from 'expo-media-library';
 
-import { BoxesDB } from '../../db';
+import { BoxesDb } from '../../db';
 import { Gallery } from '@/modules';
 import { Navigation } from '@/navigation';
 import { Box, BoxType } from '../../types';
@@ -17,7 +17,7 @@ export class CreateVm {
   private _type: BoxType | null = null;
   private _parentId: Box['parentId'] | null = null;
 
-  constructor(private _db: BoxesDB, private _navigation: Navigation, private _gallery: Gallery) {
+  constructor(private _db: BoxesDb, private _navigation: Navigation, private _gallery: Gallery) {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
   }
 

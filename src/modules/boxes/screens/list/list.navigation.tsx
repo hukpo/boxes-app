@@ -1,10 +1,11 @@
 import { useTranslation } from 'react-i18next';
-import { RefObject, useCallback, useEffect, useRef } from 'react';
 import { useRoute, Route, useFocusEffect } from '@react-navigation/core';
+import React, { RefObject, useCallback, useEffect, useRef } from 'react';
 
 import { Box } from '../../types';
 import { ListVm } from './list.vm';
 import { ActionSheetRef } from '@/ui-kit';
+import { BoxImageHeader } from '../../components';
 import { useNavigationOptions } from '@/navigation';
 
 export const useListNavigation = (vm: ListVm): { actionSheetRef: RefObject<ActionSheetRef> } => {
@@ -14,7 +15,7 @@ export const useListNavigation = (vm: ListVm): { actionSheetRef: RefObject<Actio
 
   useEffect(() => {
     if (params?.parentId) {
-      vm.setParentId(params.parentId);
+      vm.setParent(params.parentId);
     }
   }, [vm, params?.parentId]);
 
@@ -27,8 +28,9 @@ export const useListNavigation = (vm: ListVm): { actionSheetRef: RefObject<Actio
   useNavigationOptions(
     () => ({
       headerTitle: params?.parentName || t('boxes:boxes'),
+      headerRight: () => (vm.parent ? <BoxImageHeader box={vm.parent} /> : null),
     }),
-    [params?.parentName, t],
+    [params?.parentName, vm.parent, t],
   );
 
   return {

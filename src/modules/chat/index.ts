@@ -1,2 +1,2 @@
-export { MessagesDB } from './db';
+export { MessagesDb } from './db';
 export { ChatMainScreen, ChatMainNavigation } from './navigation';

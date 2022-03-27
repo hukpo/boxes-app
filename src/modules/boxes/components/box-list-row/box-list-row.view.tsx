@@ -50,7 +50,7 @@ const BoxListRowNoMemo = observer<BoxListRowProps>(({ box }) => {
         containerStyle={styles.image}
         size={BOX_ROW_IMAGE_HEIGHT}
         color={box.imageBg}
-        title={vm.getImageTitle(box.name)}
+        title={box.name}
         uriKey={box.key}
         onPress={vm.openBox}
       />
@@ -69,7 +69,7 @@ const BoxListRowNoMemo = observer<BoxListRowProps>(({ box }) => {
                 key={previewBox._id}
                 size={BOX_PREVIEW_ITEM_HEIGHT}
                 color={previewBox.imageBg}
-                title={vm.getImageTitle(previewBox.name)}
+                title={previewBox.name}
                 uriKey={previewBox.key}
                 onPress={onPress}
               />

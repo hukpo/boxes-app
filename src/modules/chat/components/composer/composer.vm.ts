@@ -2,7 +2,7 @@ import { runInAction } from 'mobx';
 import { autoInjectable } from 'tsyringe';
 import { Asset } from 'expo-media-library';
 
-import { MessagesDB } from '../../db';
+import { MessagesDb } from '../../db';
 import { Box, Gallery } from '@/modules';
 import { ImageUploadStatus } from '@/types';
 import { logger, uploadImage } from '@/helpers';
@@ -21,7 +21,7 @@ export class ComposerVm {
   constructor(
     private _parentId: Box['_id'],
     private _methods: ComposerMethods,
-    private _db: MessagesDB,
+    private _db: MessagesDb,
     private _gallery: Gallery,
   ) {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });

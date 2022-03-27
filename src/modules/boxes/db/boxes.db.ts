@@ -1,13 +1,17 @@
 import { autoInjectable, singleton } from 'tsyringe';
 
-import { MessagesDB } from '../../chat';
-import { CollectionName, RealmDB } from '@/db';
+import { MessagesDb } from '../../chat';
+import { CollectionName, RealmDb } from '@/db';
 import { Box, Boxes, BoxObject, BoxType } from '../types';
 
 @singleton()
 @autoInjectable()
-export class BoxesDB {
-  constructor(private _realmDB: RealmDB, private _messagesDB: MessagesDB) {}
+export class BoxesDb {
+  constructor(private _realmDB: RealmDb, private _messagesDB: MessagesDb) {}
+
+  getById(id: Box['_id']): BoxObject | undefined {
+    return this._realmDB.get(CollectionName.BOX, id);
+  }
 
   getByParentId(parentId: Box['parentId']): Boxes {
     return this._realmDB

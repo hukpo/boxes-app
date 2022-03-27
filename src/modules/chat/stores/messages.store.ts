@@ -1,6 +1,6 @@
 import { autoInjectable, singleton } from 'tsyringe';
 
-import { MessagesDB } from '../db';
+import { MessagesDb } from '../db';
 import { logger } from '@/helpers';
 import { ChatMessageObject } from '../types';
 import { makeSimpleAutoObservable } from '@/stores';
@@ -8,7 +8,7 @@ import { makeSimpleAutoObservable } from '@/stores';
 @singleton()
 @autoInjectable()
 export class MessagesStore {
-  constructor(private _db: MessagesDB) {
+  constructor(private _db: MessagesDb) {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
   }
 

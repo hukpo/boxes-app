@@ -1,1 +1,1 @@
-export { RealmDB, CollectionName } from './realm';
+export { RealmDb, CollectionName } from './realm';

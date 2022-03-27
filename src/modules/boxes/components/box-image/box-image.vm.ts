@@ -6,7 +6,7 @@ import { makeSimpleAutoObservable } from '@/stores';
 export class BoxImageVm {
   private _uri: string | null = null;
 
-  constructor(_uriKey: string | undefined) {
+  constructor(private _title: string, _uriKey: string | undefined) {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
 
     if (_uriKey) {
@@ -16,6 +16,14 @@ export class BoxImageVm {
 
   get uri(): string | null {
     return this._uri;
+  }
+
+  get title(): string {
+    if (!this._title) {
+      return '';
+    }
+
+    return this._title[0].toUpperCase();
   }
 
   private async getUri(key: string): Promise<void> {

@@ -2,7 +2,7 @@ import { runInAction } from 'mobx';
 import auth from '@react-native-firebase/auth';
 import { autoInjectable, singleton } from 'tsyringe';
 
-import { RealmDB } from '@/db';
+import { RealmDb } from '@/db';
 import { logger } from '@/helpers';
 import { Navigation } from '@/navigation';
 import { AuthMainScreen } from '@/modules';
@@ -13,7 +13,7 @@ import { makeSimpleAutoObservable } from './utils';
 export class AppStore {
   private _isLoaded = false;
 
-  constructor(private _navigation: Navigation, private _realmDB: RealmDB) {
+  constructor(private _navigation: Navigation, private _realmDB: RealmDb) {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
   }
 
