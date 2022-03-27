@@ -21,14 +21,14 @@ export const useCreateNavigation = (vm: CreateVm): { type: BoxType } => {
   useNavigationOptions(
     () => ({
       headerTitle: t(type === BoxType.FOLDER ? 'createFolder' : 'createChat', { ns: 'boxes' }),
-      headerRight: () => <HeaderButton title={t('save')} onPress={vm.saveBox} disabled={!vm.boxName.value.trim()} />,
+      headerRight: () => <HeaderButton title={t('save')} onPress={vm.saveBox} disabled={!vm.name.value.trim()} />,
       ...Platform.select({
         ios: {
           headerLeft: () => <HeaderButton />,
         },
       }),
     }),
-    [t, type, vm.boxName.value, vm.saveBox],
+    [t, type, vm.name.value, vm.saveBox],
   );
 
   return { type };

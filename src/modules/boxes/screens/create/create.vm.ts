@@ -1,16 +1,19 @@
+import { runInAction } from 'mobx';
 import { autoInjectable } from 'tsyringe';
+import { Asset } from 'expo-media-library';
 
 import { BoxesDB } from '../../db';
 import { Gallery } from '@/modules';
 import { Navigation } from '@/navigation';
 import { Box, BoxType } from '../../models';
-import { getRandomColor, logger } from '@/helpers';
+import { ImageUploadStatus } from '@/types';
+import { getRandomColor, logger, uploadImage } from '@/helpers';
 import { InputStore, makeSimpleAutoObservable } from '@/stores';
 
 @autoInjectable()
 export class CreateVm {
-  private _boxName = new InputStore();
-
+  private _name = new InputStore();
+  private _photo: Asset | null = null;
   private _type: BoxType | null = null;
   private _parentId: Box['parentId'] | null = null;
 
@@ -18,8 +21,16 @@ export class CreateVm {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
   }
 
-  get boxName(): InputStore {
-    return this._boxName;
+  get photoUri(): string | null {
+    if (!this._photo) {
+      return null;
+    }
+
+    return this._photo.uri;
+  }
+
+  get name(): InputStore {
+    return this._name;
   }
 
   setType(value: BoxType): void {
@@ -36,13 +47,26 @@ export class CreateVm {
         throw new Error('No create type or parentId found');
       }
 
-      await this._db.save({
+      const newBox = this._db.save({
         type: this._type,
         parentId: this._parentId,
         imageBg: getRandomColor(),
-        name: this._boxName.value.trim(),
+        name: this._name.value.trim(),
         createdAt: new Date(),
+        ...(this._photo && {
+          aspectRatio: this._photo.width / this._photo.height,
+          status: ImageUploadStatus.IN_PROGRESS,
+        }),
       });
+
+      if (this._photo) {
+        const { key } = await uploadImage(this._photo.uri);
+
+        this._db.update(newBox, {
+          key,
+          status: ImageUploadStatus.DONE,
+        });
+      }
 
       this._navigation.goBack();
     } catch (err) {
@@ -52,9 +76,15 @@ export class CreateVm {
 
   openGallery(): void {
     this._gallery.open({
-      selectAssets: this.selectAssets,
+      selectAsset: this.selectAsset,
     });
   }
 
-  private async selectAssets(): Promise<void> {}
+  removePhoto(): void {
+    this._photo = null;
+  }
+
+  private async selectAsset(asset: Asset): Promise<void> {
+    runInAction(() => (this._photo = asset));
+  }
 }

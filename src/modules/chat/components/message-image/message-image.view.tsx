@@ -3,12 +3,13 @@ import { observer } from 'mobx-react-lite';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import { useTheme } from '@/themes';
+import { ImageUploadStatus } from '@/types';
 import { useMessageDefaults } from '../../hooks';
 import { Image, PopupMenu, Text } from '@/ui-kit';
 import { MessageImageVm } from './message-image.vm';
 import { useRealmObjectUpdate, useVm } from '@/hooks';
 import { PinchableView, ZoomableView } from '@/components';
-import { ChatMessageObject, ChatMessageImage, ChatMessageImageUploadStatus } from '../../models';
+import { ChatMessageObject, ChatMessageImage } from '../../models';
 
 type MessageTextProps = {
   message: ChatMessageObject<ChatMessageImage>;
@@ -33,11 +34,9 @@ export const MessageImage = observer<MessageTextProps>(({ style, message }) => {
       <PinchableView>
         <ZoomableView>
           <View style={[styles.imageContainer, { aspectRatio: message.aspectRatio }]}>
-            {message.status === ChatMessageImageUploadStatus.IN_PROGRESS ? <Text>Uploading</Text> : null}
+            {message.status === ImageUploadStatus.IN_PROGRESS ? <Text>Uploading</Text> : null}
 
-            {vm.image ? (
-              <Image uri={vm.image.uri} headers={vm.image.headers} style={StyleSheet.absoluteFillObject} />
-            ) : null}
+            {vm.imageUri ? <Image uri={vm.imageUri} style={StyleSheet.absoluteFillObject} /> : null}
           </View>
         </ZoomableView>
       </PinchableView>

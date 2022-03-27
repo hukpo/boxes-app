@@ -117,6 +117,10 @@ export const ActionSheetContainer = forwardRef<ActionSheetRef, ActionSheetContai
               <Animated.View style={[styles.contentContainer, contentContainerStyle, animatedContentStyle]}>
                 <View style={[styles.childrenContainer, { backgroundColor: colors.tertiary }]}>
                   {Children.map(children, (child, index) => {
+                    if (!child) {
+                      return null;
+                    }
+
                     const _child = child as ReactElement<ActionSheetButtonProps>;
 
                     const onChildPress = (): void => {

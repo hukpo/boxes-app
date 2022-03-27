@@ -7,11 +7,18 @@ import { useTheme } from '@/themes';
 export type ActionSheetButtonProps = {
   title: string;
   onPress: () => void;
+  type?: 'default' | 'destructive';
   containerStyle?: StyleProp<ViewStyle>;
   titleStyle?: StyleProp<TextStyle>;
 };
 
-export const ActionSheetButton: FC<ActionSheetButtonProps> = ({ title, onPress, containerStyle, titleStyle }) => {
+export const ActionSheetButton: FC<ActionSheetButtonProps> = ({
+  type = 'default',
+  title,
+  onPress,
+  containerStyle,
+  titleStyle,
+}) => {
   const { colors } = useTheme();
 
   return (
@@ -19,7 +26,9 @@ export const ActionSheetButton: FC<ActionSheetButtonProps> = ({ title, onPress, 
       style={[styles.container, containerStyle, { backgroundColor: colors.tertiary, borderColor: colors.border }]}
       onPress={onPress}
       underlayColor={colors.highlight}>
-      <Text style={[styles.title, titleStyle, { color: colors.primary }]}>{title}</Text>
+      <Text style={[styles.title, titleStyle, { color: type === 'default' ? colors.primary : colors.red }]}>
+        {title}
+      </Text>
     </TouchableHighlight>
   );
 };

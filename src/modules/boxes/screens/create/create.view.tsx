@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
-import { Pressable, StyleSheet, TextInput, View } from 'react-native';
+import { Pressable, StyleSheet, TextInput, View, Image } from 'react-native';
 
 import { useVm } from '@/hooks';
 import { useTheme } from '@/themes';
@@ -40,7 +40,11 @@ export const Create = observer(() => {
               },
             ]}
             onPress={onImagePress}>
-            <Icon name="camera" color={colors.primary} size={BOX_ROW_ICON_HEIGHT} />
+            {vm.photoUri ? (
+              <Image source={{ uri: vm.photoUri }} style={StyleSheet.absoluteFillObject} />
+            ) : (
+              <Icon name="camera" color={colors.primary} size={BOX_ROW_ICON_HEIGHT} />
+            )}
           </Pressable>
 
           <TextInput
@@ -49,14 +53,17 @@ export const Create = observer(() => {
             style={[styles.input, { color: colors.text }]}
             placeholder={t(type === BoxType.FOLDER ? 'folderName' : 'chatName')}
             placeholderTextColor={colors.greyLight}
-            value={vm.boxName.value}
-            onChangeText={vm.boxName.setValue}
+            value={vm.name.value}
+            onChangeText={vm.name.setValue}
           />
         </View>
       </View>
 
       <ActionSheet.Container ref={actionSheetRef}>
         <ActionSheet.Button title={t('gallery:openGallery')} onPress={vm.openGallery} />
+        {vm.photoUri ? (
+          <ActionSheet.Button type="destructive" title={t('gallery:removePhoto')} onPress={vm.removePhoto} />
+        ) : null}
       </ActionSheet.Container>
     </>
   );
@@ -76,6 +83,7 @@ const styles = StyleSheet.create({
   image: {
     aspectRatio: 1,
     marginRight: 10,
+    overflow: 'hidden',
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -7,30 +7,28 @@ import { ChatMessage, ChatMessages, ChatMessageObject } from '../models';
 export class MessagesDB {
   constructor(private _realmDB: RealmDB) {}
 
-  async getByParentId(parentId: ChatMessage['parentId']): Promise<ChatMessages> {
+  getByParentId(parentId: ChatMessage['parentId']): ChatMessages {
     return this._realmDB
       .objects<ChatMessage>(CollectionName.MESSAGE)
       .filtered('parentId == $0', parentId)
       .sorted('createdAt', true);
   }
 
-  async save<T extends ChatMessage>(message: Omit<T, '_id' | 'createdAt'>): Promise<ChatMessageObject<T>> {
+  save<T extends ChatMessage>(message: Omit<T, '_id' | 'createdAt'>): ChatMessageObject<T> {
     const _message = Object.assign(message, { createdAt: new Date() }) as Omit<T, '_id'>;
 
     return this._realmDB.create(CollectionName.MESSAGE, _message);
   }
 
-  async update<T extends ChatMessageObject>(message: T, updateObj: Partial<T>): Promise<void> {
-    await this._realmDB.update(message, updateObj);
+  update<T extends ChatMessageObject>(message: T, updateObj: Partial<T>): void {
+    this._realmDB.update(message, updateObj);
   }
 
-  async delete<T extends ChatMessageObject>(message: T): Promise<void> {
-    await this._realmDB.delete(message);
+  delete<T extends ChatMessageObject>(message: T): void {
+    this._realmDB.delete(message);
   }
 
-  async deleteByParentId(parentId: ChatMessage['parentId']): Promise<void> {
-    const messages = await this.getByParentId(parentId);
-
-    await this._realmDB.delete(messages);
+  deleteByParentId(parentId: ChatMessage['parentId']): void {
+    this._realmDB.delete(this.getByParentId(parentId));
   }
 }

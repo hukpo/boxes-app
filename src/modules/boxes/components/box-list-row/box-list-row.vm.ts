@@ -39,7 +39,7 @@ export class BoxListRowVm {
 
   async getPreviewBoxes(): Promise<void> {
     try {
-      const boxes = await this._db.getByParentId(this._box._id);
+      const boxes = this._db.getByParentId(this._box._id);
 
       runInAction(() => (this._previewBoxes = boxes));
     } catch (err) {
@@ -65,13 +65,10 @@ export class BoxListRowVm {
       {
         text: 'Delete',
         style: 'destructive',
-        onPress: async () => {
-          try {
-            // TODO loader
-            await this._db.delete(this._box);
-          } catch (err) {
-            logger.error(err);
-          }
+        onPress: () => {
+          // TODO loader
+          // TODO delete images
+          this._db.delete(this._box);
         },
       },
     ]);

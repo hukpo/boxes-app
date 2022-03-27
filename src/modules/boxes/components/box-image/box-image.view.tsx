@@ -1,28 +1,40 @@
-import React, { FC } from 'react';
+import React from 'react';
+import { observer } from 'mobx-react-lite';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { Image, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import { Text } from '@/ui-kit';
+import { useVm } from '@/hooks';
 import { shadeColor } from '@/helpers';
+import { BoxType } from '../../models';
+import { BoxImageVm } from './box-image.vm';
 
 type BoxImageProps = {
-  uri: string;
   size: number;
   title: string;
   color: string;
+  type: BoxType;
+  uriKey: string | undefined;
   containerStyle?: StyleProp<ViewStyle>;
   onPress?: () => void;
 };
 
-export const BoxImage: FC<BoxImageProps> = ({ color, uri, size, title, containerStyle, onPress }) => {
+export const BoxImage = observer<BoxImageProps>(({ color, type, uriKey, size, title, containerStyle, onPress }) => {
+  const vm = useVm(BoxImageVm, uriKey);
+
   const onTapEnd = (): void => onPress?.();
 
   return (
     <GestureDetector gesture={Gesture.Tap().maxDistance(0).onEnd(onTapEnd)}>
-      <View style={[styles.container, { height: size, borderRadius: size / 2 }, containerStyle]}>
-        {uri ? (
-          <Image source={{ uri }} />
+      <View
+        style={[
+          styles.container,
+          { height: size, borderRadius: type === BoxType.CHAT ? size / 2 : size / 4 },
+          containerStyle,
+        ]}>
+        {vm.uri ? (
+          <Image source={{ uri: vm.uri }} style={StyleSheet.absoluteFillObject} />
         ) : (
           <LinearGradient colors={[shadeColor(color, 70), color]} style={styles.noImageContainer}>
             <Text style={[styles.noImageTitle, { fontSize: size / 2 }]}>{title}</Text>
@@ -31,7 +43,7 @@ export const BoxImage: FC<BoxImageProps> = ({ color, uri, size, title, container
       </View>
     </GestureDetector>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {

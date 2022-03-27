@@ -31,7 +31,7 @@ export class MainVm {
 
       logger.info(`Trying to get Messages, parentId: ${this._parentId}`);
 
-      const messages = await this._db.getByParentId(this._parentId);
+      const messages = this._db.getByParentId(this._parentId);
 
       runInAction(() => (this._messages = messages));
     } catch (err) {

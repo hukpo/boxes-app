@@ -42,7 +42,7 @@ export class ListVm {
 
       logger.info(`Trying to get Boxes, parentId: ${this._parentId}`);
 
-      const boxes = await this._db.getByParentId(this._parentId);
+      const boxes = this._db.getByParentId(this._parentId);
 
       runInAction(() => (this._boxes = boxes));
     } catch (err) {
