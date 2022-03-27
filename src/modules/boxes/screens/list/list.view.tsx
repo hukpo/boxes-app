@@ -8,7 +8,7 @@ import Animated, { ILayoutAnimationBuilder, Layout } from 'react-native-reanimat
 import { ListVm } from './list.vm';
 import { useTheme } from '@/themes';
 import { ActionSheet } from '@/ui-kit';
-import { BoxObject } from '../../models';
+import { BoxObject } from '../../types';
 import { BoxListRow } from '../../components';
 import { useHeaderHeight } from '@/navigation';
 import { BOX_ROW_HEIGHT } from '../../constants';

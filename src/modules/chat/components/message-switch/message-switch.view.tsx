@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 import { MessageText } from '../message-text';
 import { MessageImage } from '../message-image';
 import { MESSAGE_MARGIN } from '../../constants';
-import { ChatMessageObject, ChatMessageType } from '../../models';
+import { ChatMessageObject, ChatMessageType } from '../../types';
 
 type MessageSwitch = {
   message: ChatMessageObject;

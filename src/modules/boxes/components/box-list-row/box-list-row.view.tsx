@@ -6,7 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Text } from '@/ui-kit';
 import { useTheme } from '@/themes';
 import { BoxImage } from '../box-image';
-import { BoxObject } from '../../models';
+import { BoxObject } from '../../types';
 import { SwipableView } from '@/components';
 import { useRealmListUpdate, useVm } from '@/hooks';
 import { BoxListRowVm } from './box-list-row.vm';

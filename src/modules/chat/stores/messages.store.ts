@@ -2,7 +2,7 @@ import { autoInjectable, singleton } from 'tsyringe';
 
 import { MessagesDB } from '../db';
 import { logger } from '@/helpers';
-import { ChatMessageObject } from '../models';
+import { ChatMessageObject } from '../types';
 import { makeSimpleAutoObservable } from '@/stores';
 
 @singleton()

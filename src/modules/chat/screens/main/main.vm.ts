@@ -4,7 +4,7 @@ import { autoInjectable } from 'tsyringe';
 import { logger } from '@/helpers';
 import { MessagesDB } from '../../db';
 import { makeSimpleAutoObservable } from '@/stores';
-import { ChatMessage, ChatMessages } from '../../models';
+import { ChatMessage, ChatMessages } from '../../types';
 
 @autoInjectable()
 export class MainVm {

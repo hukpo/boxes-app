@@ -9,7 +9,7 @@ import { Image, PopupMenu, Text } from '@/ui-kit';
 import { MessageImageVm } from './message-image.vm';
 import { useRealmObjectUpdate, useVm } from '@/hooks';
 import { PinchableView, ZoomableView } from '@/components';
-import { ChatMessageObject, ChatMessageImage } from '../../models';
+import { ChatMessageObject, ChatMessageImage } from '../../types';
 
 type MessageTextProps = {
   message: ChatMessageObject<ChatMessageImage>;

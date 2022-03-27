@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Route, useRoute } from '@react-navigation/core';
 
 import { CreateVm } from './create.vm';
-import { Box, BoxType } from '../../models';
+import { Box, BoxType } from '../../types';
 import { HeaderButton, useNavigationOptions } from '@/navigation';
 
 export const useCreateNavigation = (vm: CreateVm): { type: BoxType } => {

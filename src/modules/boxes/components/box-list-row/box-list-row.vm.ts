@@ -7,7 +7,7 @@ import { BoxesDB } from '../../db';
 import { Navigation } from '@/navigation';
 import { SwipableRowsManager } from '@/hooks';
 import { makeSimpleAutoObservable } from '@/stores';
-import { Boxes, BoxObject, BoxType } from '../../models';
+import { Boxes, BoxObject, BoxType } from '../../types';
 import { BoxesMainScreen, ChatMainScreen } from '@/modules';
 
 @autoInjectable()

@@ -7,7 +7,7 @@ import { Box, Gallery } from '@/modules';
 import { ImageUploadStatus } from '@/types';
 import { logger, uploadImage } from '@/helpers';
 import { makeSimpleAutoObservable } from '@/stores';
-import { ChatMessageText, ChatMessageType, ChatMessageImage, ChatMessageObject } from '../../models';
+import { ChatMessageText, ChatMessageType, ChatMessageImage, ChatMessageObject } from '../../types';
 
 export type ComposerMethods = {
   focus(): void;

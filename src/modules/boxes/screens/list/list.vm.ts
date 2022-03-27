@@ -5,7 +5,7 @@ import { logger } from '@/helpers';
 import { BoxesDB } from '../../db';
 import { Navigation } from '@/navigation';
 import { BoxesCreateScreen } from '@/modules';
-import { Box, Boxes, BoxType } from '../../models';
+import { Box, Boxes, BoxType } from '../../types';
 import { AppStore, makeSimpleAutoObservable } from '@/stores';
 
 @autoInjectable()

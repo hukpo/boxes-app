@@ -5,7 +5,7 @@ import { Asset } from 'expo-media-library';
 import { BoxesDB } from '../../db';
 import { Gallery } from '@/modules';
 import { Navigation } from '@/navigation';
-import { Box, BoxType } from '../../models';
+import { Box, BoxType } from '../../types';
 import { ImageUploadStatus } from '@/types';
 import { getRandomColor, logger, uploadImage } from '@/helpers';
 import { InputStore, makeSimpleAutoObservable } from '@/stores';

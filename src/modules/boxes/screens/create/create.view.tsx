@@ -6,7 +6,7 @@ import { Pressable, StyleSheet, TextInput, View, Image } from 'react-native';
 import { useVm } from '@/hooks';
 import { useTheme } from '@/themes';
 import { CreateVm } from './create.vm';
-import { BoxType } from '../../models';
+import { BoxType } from '../../types';
 import { useHeaderHeight } from '@/navigation';
 import { useCreateNavigation } from './create.navigation';
 import { ActionSheet, ActionSheetRef, Icon } from '@/ui-kit';

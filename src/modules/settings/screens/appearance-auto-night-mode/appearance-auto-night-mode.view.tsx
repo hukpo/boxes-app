@@ -6,7 +6,7 @@ import { ScrollView, StyleSheet } from 'react-native';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 import { ThemeStore } from '@/stores';
-import { AutoNightMode } from '../../models';
+import { AutoNightMode } from '../../types';
 import { useHeaderHeight } from '@/navigation';
 import { ListContainer, ListItem } from '@/components';
 

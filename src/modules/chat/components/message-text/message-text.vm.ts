@@ -4,7 +4,7 @@ import { autoInjectable } from 'tsyringe';
 
 import { ComposerVm } from '../composer';
 import { makeSimpleAutoObservable } from '@/stores';
-import { ChatMessageObject, ChatMessageText } from '../../models';
+import { ChatMessageObject, ChatMessageText } from '../../types';
 
 type TextChunk =
   | {

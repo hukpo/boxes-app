@@ -5,8 +5,8 @@ import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 
 import { useVm } from '@/hooks';
+import { BoxType } from '../../types';
 import { shadeColor } from '@/helpers';
-import { BoxType } from '../../models';
 import { Text, Image } from '@/ui-kit';
 import { BoxImageVm } from './box-image.vm';
 

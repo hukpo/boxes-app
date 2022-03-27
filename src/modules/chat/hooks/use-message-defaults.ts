@@ -5,7 +5,7 @@ import { UIStore } from '@/stores';
 import { getHHMM } from '@/helpers';
 import { PopupMenuItem } from '@/ui-kit';
 import { MessagesStore } from '../stores';
-import { ChatMessageObject } from '../models';
+import { ChatMessageObject } from '../types';
 
 type PopupMenuItems = {
   delete: PopupMenuItem;
