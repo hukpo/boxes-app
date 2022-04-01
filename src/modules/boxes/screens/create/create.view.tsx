@@ -5,11 +5,12 @@ import { Pressable, StyleSheet, TextInput, View, Image } from 'react-native';
 
 import { useVm } from '@/hooks';
 import { useTheme } from '@/themes';
-import { CreateVm } from './create.vm';
 import { BoxType } from '../../types';
+import { CreateVm } from './create.vm';
+import { PhotoSheet } from '@/components';
 import { useHeaderHeight } from '@/navigation';
+import { ActionSheetRef, Icon } from '@/ui-kit';
 import { useCreateNavigation } from './create.navigation';
-import { ActionSheet, ActionSheetRef, Icon } from '@/ui-kit';
 import { BOX_ROW_ICON_HEIGHT, BOX_ROW_IMAGE_HEIGHT } from '../../constants';
 
 const CONTAINER_PADDING = 15;
@@ -20,10 +21,10 @@ export const Create = observer(() => {
   const headerHeight = useHeaderHeight(true);
   const { t } = useTranslation(['boxes']);
   const { type } = useCreateNavigation(vm);
-  const actionSheetRef = useRef<ActionSheetRef>(null);
+  const photoSheetRef = useRef<ActionSheetRef>(null);
 
   const onImagePress = (): void => {
-    actionSheetRef.current?.open();
+    photoSheetRef.current?.open();
   };
 
   return (
@@ -40,8 +41,8 @@ export const Create = observer(() => {
               },
             ]}
             onPress={onImagePress}>
-            {vm.photoUri ? (
-              <Image source={{ uri: vm.photoUri }} style={StyleSheet.absoluteFillObject} />
+            {vm.photo.selected ? (
+              <Image source={{ uri: vm.photo.selected.uri }} style={StyleSheet.absoluteFillObject} />
             ) : (
               <Icon name="camera" color={colors.primary} size={BOX_ROW_ICON_HEIGHT} />
             )}
@@ -59,12 +60,12 @@ export const Create = observer(() => {
         </View>
       </View>
 
-      <ActionSheet.Container ref={actionSheetRef}>
-        <ActionSheet.Button title={t('gallery:openGallery')} onPress={vm.openGallery} />
-        {vm.photoUri ? (
-          <ActionSheet.Button type="destructive" title={t('gallery:removePhoto')} onPress={vm.removePhoto} />
-        ) : null}
-      </ActionSheet.Container>
+      <PhotoSheet
+        ref={photoSheetRef}
+        selected={!!vm.photo.selected}
+        onGalleryPress={vm.photo.openGallery}
+        onRemovePress={vm.photo.removePhoto}
+      />
     </>
   );
 });

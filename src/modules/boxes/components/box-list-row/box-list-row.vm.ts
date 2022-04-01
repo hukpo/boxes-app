@@ -16,9 +16,9 @@ export class BoxListRowVm {
 
   constructor(
     private _box: BoxObject,
-    private _db: BoxesDb,
-    private _navigation: Navigation,
-    private _rowsManager: SwipableRowsManager,
+    private _db?: BoxesDb,
+    private _navigation?: Navigation,
+    private _rowsManager?: SwipableRowsManager,
   ) {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
 
@@ -31,7 +31,7 @@ export class BoxListRowVm {
 
   async getPreviewBoxes(): Promise<void> {
     try {
-      const boxes = this._db.getByParentId(this._box._id);
+      const boxes = this._db!.getByParentId(this._box._id);
 
       runInAction(() => (this._previewBoxes = boxes));
     } catch (err) {
@@ -42,15 +42,15 @@ export class BoxListRowVm {
   openBox(box = this._box): void {
     switch (box.type) {
       case BoxType.FOLDER:
-        return this._navigation.push(BoxesMainScreen.LIST, { parentId: box._id, parentName: box.name });
+        return this._navigation!.push(BoxesMainScreen.LIST, { parentId: box._id, parentName: box.name });
 
       case BoxType.CHAT:
-        return this._navigation.navigate(ChatMainScreen.MAIN, { parentId: box._id, parentName: box.name });
+        return this._navigation!.navigate(ChatMainScreen.MAIN, { parentId: box._id, parentName: box.name });
     }
   }
 
   deleteBox(): void {
-    this._rowsManager.closeAll();
+    this._rowsManager!.closeAll();
 
     Alert.alert(`Are you sure you want to delete ${this._box.name}?`, undefined, [
       { text: 'Cancel', style: 'cancel' },
@@ -60,7 +60,7 @@ export class BoxListRowVm {
         onPress: () => {
           // TODO loader
           // TODO delete images
-          this._db.delete(this._box);
+          this._db!.delete(this._box);
         },
       },
     ]);

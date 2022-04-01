@@ -21,7 +21,7 @@ export class MessageTextVm {
   private _messageText: string | null = null;
   private _message: ChatMessageObject<ChatMessageText> | null = null;
 
-  constructor(private _composerVm: ComposerVm) {
+  constructor(private _composerVm?: ComposerVm) {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
   }
 
@@ -70,7 +70,7 @@ export class MessageTextVm {
 
   editMessage(): void {
     if (this._message) {
-      this._composerVm.editMessage(this._message);
+      this._composerVm!.editMessage(this._message);
     }
   }
 }

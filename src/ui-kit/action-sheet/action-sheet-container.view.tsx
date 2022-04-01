@@ -110,7 +110,7 @@ export const ActionSheetContainer = forwardRef<ActionSheetRef, ActionSheetContai
 
   return (
     <Portal>
-      <FullWindowOverlay style={StyleSheet.absoluteFill}>
+      <FullWindowOverlay style={StyleSheet.absoluteFillObject}>
         <Animated.View onTouchEnd={cancel} style={[styles.container, animatedContainerStyle]}>
           <GestureDetector gesture={Gesture.Pan().onUpdate(onPanUpdate).onEnd(onPanEnd)}>
             <View style={[styles.contentWrapper, contentWrapperStyle]}>

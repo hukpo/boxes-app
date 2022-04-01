@@ -37,7 +37,7 @@ const EDIT_CONTAINER_PADDING_VERTICAL = 5;
 const EDIT_CONTAINER_HEIGHT = EDIT_TEXT_LINE_HEIGHT * 2 + EDIT_CONTAINER_PADDING_VERTICAL * 2;
 
 type ComposerProps = {
-  parentId: Box['_id'] | undefined;
+  parentId: Box['_id'];
 };
 
 const Container = Platform.OS === 'ios' ? InputAccessoryView : Fragment;

@@ -25,6 +25,10 @@ export const Main = observer(() => {
     return <MessageSwitch message={item} />;
   }, []);
 
+  if (!parentId) {
+    return null;
+  }
+
   return (
     <View style={styles.container}>
       <FlatList

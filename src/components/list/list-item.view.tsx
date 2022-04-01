@@ -1,14 +1,26 @@
 import React, { FC } from 'react';
-import { ColorValue, StyleProp, StyleSheet, Switch, View, ViewStyle, Pressable } from 'react-native';
+import {
+  ColorValue,
+  StyleProp,
+  StyleSheet,
+  Switch,
+  View,
+  ViewStyle,
+  Pressable,
+  TextInputProps,
+  TextInput,
+} from 'react-native';
 
 import { useValue } from '@/hooks';
 import { useTheme } from '@/themes';
 import { Icon, IconProps, Text } from '@/ui-kit';
 
 export type ListItemProps = {
-  title: string;
+  title?: string;
   subtitle?: string;
-  onPress: () => void;
+  onPress?: () => void;
+
+  inputProps?: TextInputProps;
 
   toggled?: boolean;
   selected?: boolean;
@@ -32,6 +44,7 @@ export const ListItem: FC<ListItemProps> = ({
   selected,
   hasArrow,
   iconName,
+  inputProps,
   titleStyle,
   iconColor = '#fff',
   iconBackground = 'transparent',
@@ -41,7 +54,7 @@ export const ListItem: FC<ListItemProps> = ({
   const isPressed = useValue(false);
 
   const onPressInOut = (): void => {
-    if (!disabled) {
+    if (!disabled && onPress) {
       isPressed.toggle();
     }
   };
@@ -65,13 +78,18 @@ export const ListItem: FC<ListItemProps> = ({
 
       <View style={[styles.infoContainer, infoContainerStyle]}>
         <View style={styles.textContainer}>
-          <Text
-            style={[
-              styles.title,
-              { color: disabled ? colors.textDisabled : titleStyle === 'destructive' ? colors.red : colors.text },
-            ]}>
-            {title}
-          </Text>
+          {inputProps ? <TextInput {...inputProps} style={[styles.title, styles.input, inputProps.style]} /> : null}
+
+          {title ? (
+            <Text
+              style={[
+                styles.title,
+                { color: disabled ? colors.textDisabled : titleStyle === 'destructive' ? colors.red : colors.text },
+              ]}>
+              {title}
+            </Text>
+          ) : null}
+
           {subtitle ? (
             <Text style={[styles.subtitle, { color: disabled ? colors.textDisabled : colors.text }]}>{subtitle}</Text>
           ) : null}
@@ -111,6 +129,7 @@ const styles = StyleSheet.create({
   },
 
   textContainer: {
+    flexGrow: 1,
     paddingVertical: 10,
   },
   title: {
@@ -119,5 +138,8 @@ const styles = StyleSheet.create({
   subtitle: {
     marginTop: 3,
     fontSize: 15,
+  },
+  input: {
+    flexGrow: 1,
   },
 });

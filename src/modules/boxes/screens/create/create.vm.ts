@@ -1,32 +1,25 @@
-import { runInAction } from 'mobx';
 import { autoInjectable } from 'tsyringe';
-import { Asset } from 'expo-media-library';
 
 import { BoxesDb } from '../../db';
-import { Gallery } from '@/modules';
 import { Navigation } from '@/navigation';
 import { Box, BoxType } from '../../types';
 import { ImageUploadStatus } from '@/types';
 import { getRandomColor, logger, uploadImage } from '@/helpers';
-import { InputStore, makeSimpleAutoObservable } from '@/stores';
+import { InputStore, PhotoSelectStore, makeSimpleAutoObservable } from '@/stores';
 
 @autoInjectable()
 export class CreateVm {
   private _name = new InputStore();
-  private _photo: Asset | null = null;
+  private _photo = new PhotoSelectStore();
   private _type: BoxType | null = null;
   private _parentId: Box['parentId'] | null = null;
 
-  constructor(private _db: BoxesDb, private _navigation: Navigation, private _gallery: Gallery) {
+  constructor(private _db?: BoxesDb, private _navigation?: Navigation) {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
   }
 
-  get photoUri(): string | null {
-    if (!this._photo) {
-      return null;
-    }
-
-    return this._photo.uri;
+  get photo(): PhotoSelectStore {
+    return this._photo;
   }
 
   get name(): InputStore {
@@ -48,44 +41,30 @@ export class CreateVm {
         throw new Error('No create type or parentId found');
       }
 
-      const newBox = this._db.save({
+      const newBox = this._db!.save({
         type: this._type,
         parentId: this._parentId,
         imageBg: getRandomColor(),
         name: this._name.value.trim(),
         createdAt: new Date(),
-        ...(this._photo && {
-          aspectRatio: this._photo.width / this._photo.height,
+        ...(this._photo.selected && {
+          aspectRatio: this._photo.selected.width / this._photo.selected.height,
           status: ImageUploadStatus.IN_PROGRESS,
         }),
       });
 
-      if (this._photo) {
-        const { key } = await uploadImage(this._photo.uri);
+      if (this._photo.selected) {
+        const { key } = await uploadImage(this._photo.selected.uri);
 
-        this._db.update(newBox, {
+        this._db!.update(newBox, {
           key,
           status: ImageUploadStatus.DONE,
         });
       }
 
-      this._navigation.goBack();
+      this._navigation!.goBack();
     } catch (err) {
       logger.error(err);
     }
-  }
-
-  openGallery(): void {
-    this._gallery.open({
-      selectAsset: this.selectAsset,
-    });
-  }
-
-  removePhoto(): void {
-    this._photo = null;
-  }
-
-  private async selectAsset(asset: Asset): Promise<void> {
-    runInAction(() => (this._photo = asset));
   }
 }

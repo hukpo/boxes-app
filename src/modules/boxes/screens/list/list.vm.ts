@@ -15,7 +15,7 @@ export class ListVm {
   private _boxes: Boxes | null = null;
   private _parent: BoxObject | null = null;
 
-  constructor(private _appStore: AppStore, private _db: BoxesDb, private _navigation: Navigation) {
+  constructor(private _appStore?: AppStore, private _db?: BoxesDb, private _navigation?: Navigation) {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
   }
 
@@ -35,7 +35,7 @@ export class ListVm {
     return this._parent;
   }
   setParent(parentId: Box['parentId']): void {
-    const parent = this._db.getById(parentId);
+    const parent = this._db!.getById(parentId);
 
     if (parent) {
       this._parent = parent;
@@ -49,15 +49,15 @@ export class ListVm {
       }
 
       // Boxes screen is main so this function can be called before database initialization
-      await when(() => this._appStore.isLoaded);
+      await when(() => this._appStore!.isLoaded);
 
-      if (!this._appStore.isAuthorized) {
+      if (!this._appStore!.isAuthorized) {
         return;
       }
 
       logger.info(`Trying to get Boxes, parentId: ${this.parentId}`);
 
-      const boxes = this._db.getByParentId(this.parentId);
+      const boxes = this._db!.getByParentId(this.parentId);
 
       runInAction(() => (this._boxes = boxes));
     } catch (err) {
@@ -66,14 +66,14 @@ export class ListVm {
   }
 
   createFolder(): void {
-    this._navigation.navigate(BoxesCreateScreen.MAIN, {
+    this._navigation!.navigate(BoxesCreateScreen.MAIN, {
       type: BoxType.FOLDER,
       parentId: this.parentId,
     });
   }
 
   createChat(): void {
-    this._navigation.navigate(BoxesCreateScreen.MAIN, {
+    this._navigation!.navigate(BoxesCreateScreen.MAIN, {
       type: BoxType.CHAT,
       parentId: this.parentId,
     });

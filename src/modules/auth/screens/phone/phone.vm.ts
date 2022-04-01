@@ -12,7 +12,7 @@ export class PhoneVm {
   private _phoneCode = new InputStore('+380');
   private _phoneNumber = new InputStore('');
 
-  constructor(private _authStore: AuthStore, private _navigation: Navigation) {
+  constructor(private _authStore?: AuthStore, private _navigation?: Navigation) {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
   }
 
@@ -33,10 +33,10 @@ export class PhoneVm {
 
       const confirmation = await auth().signInWithPhoneNumber(fullNumber);
 
-      this._authStore.setConfirmation(confirmation);
-      this._authStore.setPhoneNumber(fullNumber);
+      this._authStore!.setConfirmation(confirmation);
+      this._authStore!.setPhoneNumber(fullNumber);
 
-      this._navigation.navigate(AuthMainScreen.CODE);
+      this._navigation!.navigate(AuthMainScreen.CODE);
     } catch (err) {
       logger.error(err);
     }
