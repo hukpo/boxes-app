@@ -78,7 +78,9 @@ export const ListItem: FC<ListItemProps> = ({
 
       <View style={[styles.infoContainer, infoContainerStyle]}>
         <View style={styles.textContainer}>
-          {inputProps ? <TextInput {...inputProps} style={[styles.title, styles.input, inputProps.style]} /> : null}
+          {inputProps ? (
+            <TextInput {...inputProps} style={[styles.title, styles.input, { color: colors.text }, inputProps.style]} />
+          ) : null}
 
           {title ? (
             <Text
