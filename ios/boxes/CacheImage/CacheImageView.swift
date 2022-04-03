@@ -30,6 +30,8 @@ final class CacheImageView: UIImageView {
     }
         
     self.sd_imageIndicator = SDWebImageActivityIndicator.white;
+    self.sd_imageTransition = SDWebImageTransition.fade;
     self.sd_setImage(with: URL(string: self.uri!))
+    self.contentMode = UIView.ContentMode.scaleAspectFill
   }
 }
