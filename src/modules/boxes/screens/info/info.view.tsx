@@ -3,19 +3,20 @@ import { StyleSheet } from 'react-native';
 import { observer } from 'mobx-react-lite';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { useVm } from '@/hooks';
 import { Text } from '@/ui-kit';
 import { InfoVm } from './info.vm';
 import { useTheme } from '@/themes';
 import { BoxImage } from '../../components';
 import { PHOTO_PREVIEW_SIZE } from '../../constants';
 import { useInfoNavigation } from './info.navigation';
+import { useRealmObjectUpdate, useVm } from '@/hooks';
 
 export const Info = observer(() => {
   const vm = useVm(InfoVm);
   const { colors } = useTheme();
 
   useInfoNavigation(vm);
+  useRealmObjectUpdate(vm.parent);
 
   if (!vm.parent) {
     return null;

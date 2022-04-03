@@ -3,7 +3,6 @@ import { useEffect, useReducer } from 'react';
 
 export const useRealmListUpdate = <T extends Realm.Results<any>>(objects: T | null): void => {
   const [, forceUpdate] = useReducer(x => x + 1, 0);
-
   useEffect(() => {
     objects?.addListener((_, changes) => {
       if (changes.deletions.length || changes.insertions.length) {
@@ -15,12 +14,16 @@ export const useRealmListUpdate = <T extends Realm.Results<any>>(objects: T | nu
   }, [objects]);
 };
 
-export const useRealmObjectUpdate = <T extends Realm.Object>(object: T): void => {
+export const useRealmObjectUpdate = <T extends Realm.Object>(object: T | null): void => {
   const [, forceUpdate] = useReducer(x => x + 1, 0);
 
   useEffect(() => {
-    object.addListener((_, { changedProperties }) => {
-      if (changedProperties.length) {
+    if (!object) {
+      return;
+    }
+
+    object.addListener((_, changes) => {
+      if (changes.changedProperties.length) {
         forceUpdate();
       }
     });

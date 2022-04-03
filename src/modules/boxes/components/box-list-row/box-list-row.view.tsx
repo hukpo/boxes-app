@@ -8,8 +8,8 @@ import { useTheme } from '@/themes';
 import { BoxImage } from '../box-image';
 import { BoxObject } from '../../types';
 import { SwipableView } from '@/components';
-import { useRealmListUpdate, useVm } from '@/hooks';
 import { BoxListRowVm } from './box-list-row.vm';
+import { useRealmListUpdate, useVm } from '@/hooks';
 import {
   BOX_SPACING,
   BOX_ROW_HEIGHT,

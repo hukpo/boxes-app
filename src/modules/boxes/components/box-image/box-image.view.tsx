@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
@@ -22,7 +22,11 @@ type BoxImageProps = {
 
 export const BoxImage = observer<BoxImageProps>(
   ({ color, type, uriKey, size, title, containerStyle, onPress }) => {
-    const vm = useVm(BoxImageVm, title, uriKey);
+    const vm = useVm(BoxImageVm);
+
+    useEffect(() => {
+      vm.getUri(uriKey);
+    }, [uriKey, vm]);
 
     const onTapEnd = (): void => onPress?.();
 
@@ -38,7 +42,9 @@ export const BoxImage = observer<BoxImageProps>(
             <Image source={{ uri: vm.uri }} style={StyleSheet.absoluteFillObject} />
           ) : (
             <LinearGradient colors={[shadeColor(color, 70), color]} style={styles.noImageContainer}>
-              <Text style={[styles.noImageTitle, { fontSize: size / 2 }]}>{vm.title}</Text>
+              <Text style={[styles.noImageTitle, { fontSize: size / 2 }]}>
+                {vm.getTitle(title)}
+              </Text>
             </LinearGradient>
           )}
         </View>

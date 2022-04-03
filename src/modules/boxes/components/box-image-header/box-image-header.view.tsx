@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 import { BoxImage } from '../box-image';
 import { BoxObject } from '../../types';
 import { Navigation } from '@/navigation';
+import { useRealmObjectUpdate } from '@/hooks';
 import { BoxesManageScreen } from '../../navigation';
 
 type BoxImageheaderProps = {
@@ -11,6 +12,8 @@ type BoxImageheaderProps = {
 };
 
 export const BoxImageHeader: FC<BoxImageheaderProps> = ({ box }) => {
+  useRealmObjectUpdate(box);
+
   const onPress = (): void => {
     container.resolve(Navigation).navigate(BoxesManageScreen.INFO, { boxId: box._id });
   };
