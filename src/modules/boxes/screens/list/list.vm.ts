@@ -1,4 +1,4 @@
-import { runInAction, when } from 'mobx';
+import { when } from 'mobx';
 import { autoInjectable } from 'tsyringe';
 
 import { logger } from '@/helpers';
@@ -15,12 +15,19 @@ export class ListVm {
   private _boxes: Boxes | null = null;
   private _parent: BoxObject | null = null;
 
-  constructor(private _appStore?: AppStore, private _db?: BoxesDb, private _navigation?: Navigation) {
+  constructor(
+    private _appStore?: AppStore,
+    private _db?: BoxesDb,
+    private _navigation?: Navigation,
+  ) {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
   }
 
   get boxes(): Boxes | null {
     return this._boxes;
+  }
+  setBoxes(value: Boxes): void {
+    this._boxes = value;
   }
 
   get parentId(): string {
@@ -59,7 +66,7 @@ export class ListVm {
 
       const boxes = this._db!.getByParentId(this.parentId);
 
-      runInAction(() => (this._boxes = boxes));
+      this.setBoxes(boxes);
     } catch (err) {
       logger.error(err);
     }

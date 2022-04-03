@@ -15,5 +15,14 @@ export const BoxImageHeader: FC<BoxImageheaderProps> = ({ box }) => {
     container.resolve(Navigation).navigate(BoxesManageScreen.INFO, { boxId: box._id });
   };
 
-  return <BoxImage size={30} title={box.name} color={box.imageBg} type={box.type} uriKey={box.key} onPress={onPress} />;
+  return (
+    <BoxImage
+      size={30}
+      title={box.name}
+      color={box.imageBg}
+      type={box.type}
+      uriKey={box.key}
+      onPress={onPress}
+    />
+  );
 };

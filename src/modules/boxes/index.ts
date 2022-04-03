@@ -9,4 +9,5 @@ export {
   BoxesManageNavigation,
 } from './navigation';
 
+export { BoxType } from './types';
 export type { Box, BoxObject } from './types';

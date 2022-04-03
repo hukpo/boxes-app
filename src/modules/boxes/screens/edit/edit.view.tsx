@@ -1,24 +1,23 @@
 import React, { useRef } from 'react';
+import { StyleSheet } from 'react-native';
 import { observer } from 'mobx-react-lite';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useVm } from '@/hooks';
 import { EditVm } from './edit.vm';
-import { useTheme } from '@/themes';
-import { BoxImage } from '../../components';
-import { ActionSheetRef, Text } from '@/ui-kit';
-import { useInfoNavigation } from './edit.navigation';
-import { ListContainer, ListItem, PhotoSheet } from '@/components';
-
-const IMAGE_SIZE = 120;
+import { BoxType } from '../../types';
+import { ActionSheetRef, List } from '@/ui-kit';
+import { PHOTO_PREVIEW_SIZE } from '../../constants';
+import { useEditNavigation } from './edit.navigation';
+import { PhotoSheet, SelectPhoto } from '@/components';
 
 export const Edit = observer(() => {
   const vm = useVm(EditVm);
-  const { colors } = useTheme();
+  const { t } = useTranslation(['boxes']);
   const photoSheetRef = useRef<ActionSheetRef>(null);
 
-  useInfoNavigation(vm);
+  useEditNavigation(vm);
 
   const changePhoto = (): void => {
     photoSheetRef.current?.open();
@@ -31,31 +30,24 @@ export const Edit = observer(() => {
   return (
     <>
       <SafeAreaView style={styles.container}>
-        <BoxImage
-          containerStyle={styles.previewItem}
-          type={vm.parent.type}
-          key={vm.parent._id}
-          size={IMAGE_SIZE}
-          color={vm.parent.imageBg}
-          title={vm.parent.name}
-          uriKey={vm.parent.key}
+        <SelectPhoto
+          hasButton
+          size={PHOTO_PREVIEW_SIZE}
           onPress={changePhoto}
+          boxType={vm.parent.type}
+          source={vm.photo.selected?.source}
         />
 
-        <TouchableOpacity style={styles.setPhotoButton} onPress={changePhoto}>
-          <Text style={[styles.setPhotoButtonTitle, { color: colors.primary }]}>Set New Photo</Text>
-        </TouchableOpacity>
-
-        <ListContainer style={styles.editText}>
-          <ListItem
+        <List.Container style={styles.editText}>
+          <List.Item
             inputProps={{
               value: vm.name.value,
               clearButtonMode: 'always',
               onChangeText: vm.name.setValue,
-              placeholder: 'Channel name',
+              placeholder: t(vm.parent.type === BoxType.FOLDER ? 'folderName' : 'chatName'),
             }}
           />
-        </ListContainer>
+        </List.Container>
       </SafeAreaView>
 
       <PhotoSheet
@@ -73,13 +65,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     alignItems: 'center',
-  },
-  previewItem: {},
-  setPhotoButton: {
-    marginTop: 15,
-  },
-  setPhotoButtonTitle: {
-    fontSize: 18,
   },
   editText: {
     marginTop: 15,

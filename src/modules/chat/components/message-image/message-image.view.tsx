@@ -1,13 +1,11 @@
-import React, { useEffect } from 'react';
-import { observer } from 'mobx-react-lite';
+import React, { FC } from 'react';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import { useTheme } from '@/themes';
 import { ImageUploadStatus } from '@/types';
+import { useRealmObjectUpdate } from '@/hooks';
 import { useMessageDefaults } from '../../hooks';
 import { Image, PopupMenu, Text } from '@/ui-kit';
-import { MessageImageVm } from './message-image.vm';
-import { useRealmObjectUpdate, useVm } from '@/hooks';
 import { PinchableView, ZoomableView } from '@/components';
 import { ChatMessageObject, ChatMessageImage } from '../../types';
 
@@ -16,27 +14,24 @@ type MessageTextProps = {
   style?: StyleProp<ViewStyle>;
 };
 
-export const MessageImage = observer<MessageTextProps>(({ style, message }) => {
+export const MessageImage: FC<MessageTextProps> = ({ style, message }) => {
   const { colors } = useTheme();
-  const vm = useVm(MessageImageVm);
   const { time, popupMenuItems } = useMessageDefaults(message);
 
   useRealmObjectUpdate(message);
 
-  useEffect(() => {
-    if (message.key) {
-      vm.getUri(message.key);
-    }
-  }, [vm, message.key]);
-
   return (
-    <PopupMenu style={[styles.container, { backgroundColor: colors.tertiary }, style]} items={[popupMenuItems.delete]}>
+    <PopupMenu
+      style={[styles.container, { backgroundColor: colors.tertiary }, style]}
+      items={[popupMenuItems.delete]}>
       <PinchableView>
         <ZoomableView>
           <View style={[styles.imageContainer, { aspectRatio: message.aspectRatio }]}>
             {message.status === ImageUploadStatus.IN_PROGRESS ? <Text>Uploading</Text> : null}
 
-            {vm.imageUri ? <Image uri={vm.imageUri} style={StyleSheet.absoluteFillObject} /> : null}
+            {message.key ? (
+              <Image source={{ uriKey: message.key }} style={StyleSheet.absoluteFillObject} />
+            ) : null}
           </View>
         </ZoomableView>
       </PinchableView>
@@ -44,7 +39,7 @@ export const MessageImage = observer<MessageTextProps>(({ style, message }) => {
       <Text style={[styles.time, { color: colors.greyLight }]}>{time}</Text>
     </PopupMenu>
   );
-});
+};
 
 const styles = StyleSheet.create({
   container: {

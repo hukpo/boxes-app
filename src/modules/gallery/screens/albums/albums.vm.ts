@@ -40,6 +40,9 @@ export class AlbumsVm {
   }
 
   openAlbum(album: Album): void {
-    this._navigation!.navigate(GalleryMainScreen.ALBUM, { albumId: album.id, albumTitle: album.title });
+    this._navigation!.navigate(GalleryMainScreen.ALBUM, {
+      albumId: album.id,
+      albumTitle: album.title,
+    });
   }
 }

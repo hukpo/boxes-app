@@ -23,7 +23,11 @@ const objectPrototype = Object.prototype;
  *
  * See https://github.com/mobxjs/mobx/discussions/2850
  */
-export const makeSimpleAutoObservable: typeof makeAutoObservable = (target, _overrides, _options) => {
+export const makeSimpleAutoObservable: typeof makeAutoObservable = (
+  target,
+  _overrides,
+  _options,
+) => {
   const overrides = _overrides || {};
   const options = _options || {};
 

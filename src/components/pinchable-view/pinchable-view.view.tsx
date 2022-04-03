@@ -132,7 +132,13 @@ export const PinchableView: FC<PinchableViewProps> = ({ children }) => {
       </GestureDetector>
 
       <Portal>
-        <Animated.View style={[styles.pinchableContainer, pinchablePosition, childLayout, animatedPinchableStyle]}>
+        <Animated.View
+          style={[
+            styles.pinchableContainer,
+            pinchablePosition,
+            childLayout,
+            animatedPinchableStyle,
+          ]}>
           {children}
         </Animated.View>
       </Portal>

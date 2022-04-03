@@ -5,8 +5,8 @@ export const useRealmListUpdate = <T extends Realm.Results<any>>(objects: T | nu
   const [, forceUpdate] = useReducer(x => x + 1, 0);
 
   useEffect(() => {
-    objects?.addListener((_, { deletions, insertions }) => {
-      if (deletions.length || insertions.length) {
+    objects?.addListener((_, changes) => {
+      if (changes.deletions.length || changes.insertions.length) {
         forceUpdate();
       }
     });

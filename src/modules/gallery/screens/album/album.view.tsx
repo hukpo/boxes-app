@@ -3,7 +3,15 @@ import React, { useMemo } from 'react';
 import { Asset } from 'expo-media-library';
 import { observer } from 'mobx-react-lite';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { FlatList, Image, ListRenderItem, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
+import {
+  FlatList,
+  Image,
+  ListRenderItem,
+  Pressable,
+  StyleSheet,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 
 import { useVm } from '@/hooks';
 import { AlbumVm } from './album.vm';

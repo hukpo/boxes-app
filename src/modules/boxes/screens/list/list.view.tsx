@@ -41,36 +41,40 @@ export const List = observer(() => {
     offset: BOX_ROW_HEIGHT * index,
   });
 
+  const onFABPress = (): void => {
+    actionSheetRef.current?.open();
+  };
+
   const reanimatedProps: { itemLayoutAnimation: ILayoutAnimationBuilder } = {
     itemLayoutAnimation: Layout.duration(200),
   };
 
+  if (!vm.boxes) {
+    return <ActivityIndicator style={styles.loader} />;
+  }
+
   return (
     <>
-      {vm.boxes ? (
-        <Animated.FlatList
-          {...reanimatedProps}
-          style={{ backgroundColor: colors.secondary }}
-          contentContainerStyle={[
-            styles.contentContainer,
-            {
-              paddingTop: headerHeight,
-              paddingBottom: bottomMenuHeight,
-            },
-          ]}
-          data={vm.boxes}
-          scrollEnabled={!!vm.boxes}
-          renderItem={renderItem}
-          keyExtractor={keyExtractor}
-          getItemLayout={getItemLayout}
-          onScrollBeginDrag={rowsManager.closeAll}
-          removeClippedSubviews={false}
-        />
-      ) : (
-        <ActivityIndicator style={styles.loader} />
-      )}
+      <Animated.FlatList
+        {...reanimatedProps}
+        style={{ backgroundColor: colors.secondary }}
+        contentContainerStyle={[
+          styles.contentContainer,
+          {
+            paddingTop: headerHeight,
+            paddingBottom: bottomMenuHeight,
+          },
+        ]}
+        data={vm.boxes}
+        scrollEnabled={!!vm.boxes}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
+        getItemLayout={getItemLayout}
+        onScrollBeginDrag={rowsManager.closeAll}
+        removeClippedSubviews={false}
+      />
 
-      <FAB onPress={actionSheetRef.current?.open} />
+      <FAB onPress={onFABPress} />
 
       <ActionSheet.Container portal ref={actionSheetRef}>
         <ActionSheet.Button title={t('createFolder')} onPress={vm.createFolder} />

@@ -3,11 +3,11 @@ import { observer } from 'mobx-react-lite';
 import { ScrollView, StyleSheet } from 'react-native';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
+import { List } from '@/ui-kit';
 import { useVm } from '@/hooks';
 import { LANGUAGES } from '@/locales';
 import { LanguageVm } from './language.vm';
 import { useHeaderHeight } from '@/navigation';
-import { ListContainer, ListItem } from '@/components';
 
 export const Language = observer(() => {
   const vm = useVm(LanguageVm);
@@ -21,12 +21,12 @@ export const Language = observer(() => {
         paddingTop: headerHeight,
         paddingBottom: bottomMenuHeight,
       }}>
-      <ListContainer>
+      <List.Container>
         {LANGUAGES.map(({ name, nativeName, code }, index) => {
           const onPress = (): Promise<void> => vm.selectLanguage(code);
 
           return (
-            <ListItem
+            <List.Item
               key={index}
               title={name}
               subtitle={nativeName}
@@ -35,7 +35,7 @@ export const Language = observer(() => {
             />
           );
         })}
-      </ListContainer>
+      </List.Container>
     </ScrollView>
   );
 });

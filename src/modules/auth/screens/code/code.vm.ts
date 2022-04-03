@@ -10,7 +10,11 @@ import { InputStore, makeSimpleAutoObservable } from '@/stores';
 export class CodeVm {
   private _code = new InputStore('');
 
-  constructor(private _authStore?: AuthStore, private _realmDB?: RealmDb, private _navigation?: Navigation) {
+  constructor(
+    private _authStore?: AuthStore,
+    private _realmDB?: RealmDb,
+    private _navigation?: Navigation,
+  ) {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
   }
 

@@ -48,13 +48,13 @@ export class CreateVm {
         name: this._name.value.trim(),
         createdAt: new Date(),
         ...(this._photo.selected && {
-          aspectRatio: this._photo.selected.width / this._photo.selected.height,
+          aspectRatio: this._photo.selected.aspectRatio,
           status: ImageUploadStatus.IN_PROGRESS,
         }),
       });
 
-      if (this._photo.selected) {
-        const { key } = await uploadImage(this._photo.selected.uri);
+      if (this._photo.selected && 'uri' in this._photo.selected.source) {
+        const { key } = await uploadImage(this._photo.selected.source.uri);
 
         this._db!.update(newBox, {
           key,

@@ -15,7 +15,13 @@ type HeaderButtonProps = {
   onPress?: () => void;
 };
 
-export const HeaderButton: FC<HeaderButtonProps> = ({ title, disabled, canGoBack, backIconVisible, onPress }) => {
+export const HeaderButton: FC<HeaderButtonProps> = ({
+  title,
+  disabled,
+  canGoBack,
+  backIconVisible,
+  onPress,
+}) => {
   const { colors } = useTheme();
   const { t } = useTranslation();
   const navigation = container.resolve(Navigation);
@@ -43,7 +49,9 @@ export const HeaderButton: FC<HeaderButtonProps> = ({ title, disabled, canGoBack
         />
       ) : null}
 
-      <Text style={[styles.title, { color: disabled ? colors.textDisabled : colors.primary }]}>{title}</Text>
+      <Text style={[styles.title, { color: disabled ? colors.textDisabled : colors.primary }]}>
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };

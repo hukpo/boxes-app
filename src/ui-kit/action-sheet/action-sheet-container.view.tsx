@@ -3,7 +3,12 @@ import { useTranslation } from 'react-i18next';
 import { FullWindowOverlay } from 'react-native-screens';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Keyboard, StyleSheet, useWindowDimensions, View } from 'react-native';
-import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import Animated, {
+  runOnJS,
+  withTiming,
+  useSharedValue,
+  useAnimatedStyle,
+} from 'react-native-reanimated';
 import React, {
   FC,
   useMemo,
@@ -128,7 +133,8 @@ export const ActionSheetContainer = forwardRef<ActionSheetRef, ActionSheetContai
         <Animated.View onTouchEnd={cancel} style={[styles.container, animatedContainerStyle]}>
           <GestureDetector gesture={Gesture.Pan().onUpdate(onPanUpdate).onEnd(onPanEnd)}>
             <View style={[styles.contentWrapper, contentWrapperStyle]}>
-              <Animated.View style={[styles.contentContainer, contentContainerStyle, animatedContentStyle]}>
+              <Animated.View
+                style={[styles.contentContainer, contentContainerStyle, animatedContentStyle]}>
                 <View style={[styles.childrenContainer, { backgroundColor: colors.tertiary }]}>
                   {Children.map(children, (child, index) => {
                     if (!child) {

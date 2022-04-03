@@ -8,9 +8,8 @@ import { Text } from '@/ui-kit';
 import { InfoVm } from './info.vm';
 import { useTheme } from '@/themes';
 import { BoxImage } from '../../components';
+import { PHOTO_PREVIEW_SIZE } from '../../constants';
 import { useInfoNavigation } from './info.navigation';
-
-const IMAGE_SIZE = 120;
 
 export const Info = observer(() => {
   const vm = useVm(InfoVm);
@@ -28,7 +27,7 @@ export const Info = observer(() => {
         type={vm.parent.type}
         containerStyle={styles.previewItem}
         key={vm.parent._id}
-        size={IMAGE_SIZE}
+        size={PHOTO_PREVIEW_SIZE}
         color={vm.parent.imageBg}
         title={vm.parent.name}
         uriKey={vm.parent.key}

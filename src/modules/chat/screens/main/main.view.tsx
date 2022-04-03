@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StyleSheet, ListRenderItem, View, FlatList } from 'react-native';
@@ -19,11 +19,11 @@ export const Main = observer(() => {
 
   useRealmListUpdate(vm.messages);
 
-  const keyExtractor = useCallback((item: ChatMessageObject) => item._id, []);
+  const keyExtractor = (item: ChatMessageObject): string => item._id;
 
-  const renderItem = useCallback<ListRenderItem<ChatMessageObject>>(({ item }) => {
+  const renderItem: ListRenderItem<ChatMessageObject> = ({ item }) => {
     return <MessageSwitch message={item} />;
-  }, []);
+  };
 
   if (!parentId) {
     return null;

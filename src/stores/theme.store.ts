@@ -52,7 +52,10 @@ export class ThemeStore {
   }
 
   private async getStorageSettings(): Promise<void> {
-    const { autoNightMode, nightModeToggled } = await this._storage.getObject(['autoNightMode', 'nightModeToggled']);
+    const { autoNightMode, nightModeToggled } = await this._storage.getObject([
+      'autoNightMode',
+      'nightModeToggled',
+    ]);
 
     runInAction(() => {
       if (autoNightMode) {

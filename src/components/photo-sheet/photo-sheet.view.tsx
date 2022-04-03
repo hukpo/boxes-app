@@ -17,7 +17,9 @@ export const PhotoSheet = forwardRef<ActionSheetRef, PhotoSheetProps>(
     return (
       <ActionSheet.Container portal={portal} ref={ref}>
         <ActionSheet.Button title={t('openGallery')} onPress={onGalleryPress} />
-        {selected ? <ActionSheet.Button type="destructive" title={t('removePhoto')} onPress={onRemovePress} /> : null}
+        {selected ? (
+          <ActionSheet.Button type="destructive" title={t('removePhoto')} onPress={onRemovePress} />
+        ) : null}
       </ActionSheet.Container>
     );
   },

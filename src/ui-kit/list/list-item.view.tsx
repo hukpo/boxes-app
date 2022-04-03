@@ -79,26 +79,43 @@ export const ListItem: FC<ListItemProps> = ({
       <View style={[styles.infoContainer, infoContainerStyle]}>
         <View style={styles.textContainer}>
           {inputProps ? (
-            <TextInput {...inputProps} style={[styles.title, styles.input, { color: colors.text }, inputProps.style]} />
+            <TextInput
+              {...inputProps}
+              style={[styles.title, styles.input, { color: colors.text }, inputProps.style]}
+            />
           ) : null}
 
           {title ? (
             <Text
               style={[
                 styles.title,
-                { color: disabled ? colors.textDisabled : titleStyle === 'destructive' ? colors.red : colors.text },
+                {
+                  color: disabled
+                    ? colors.textDisabled
+                    : titleStyle === 'destructive'
+                    ? colors.red
+                    : colors.text,
+                },
               ]}>
               {title}
             </Text>
           ) : null}
 
           {subtitle ? (
-            <Text style={[styles.subtitle, { color: disabled ? colors.textDisabled : colors.text }]}>{subtitle}</Text>
+            <Text
+              style={[styles.subtitle, { color: disabled ? colors.textDisabled : colors.text }]}>
+              {subtitle}
+            </Text>
           ) : null}
         </View>
 
         {typeof toggled === 'boolean' ? (
-          <Switch disabled={disabled} pointerEvents="none" value={toggled} onValueChange={onPress} />
+          <Switch
+            disabled={disabled}
+            pointerEvents="none"
+            value={toggled}
+            onValueChange={onPress}
+          />
         ) : null}
         {selected ? <Icon name="checkmark" size={12} color={colors.primary} /> : null}
 

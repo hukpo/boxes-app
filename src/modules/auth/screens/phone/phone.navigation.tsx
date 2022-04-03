@@ -18,7 +18,9 @@ export const usePhoneNavigation = (vm: PhoneVm): void => {
 
   useNavigationOptions(
     () => ({
-      headerRight: () => <HeaderButton title={t('next')} onPress={vm.sendCode} disabled={vm.nextButtonDisabled} />,
+      headerRight: () => (
+        <HeaderButton title={t('next')} onPress={vm.sendCode} disabled={vm.nextButtonDisabled} />
+      ),
     }),
     [t, vm.nextButtonDisabled, vm.sendCode],
   );

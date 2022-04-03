@@ -1,17 +1,17 @@
 import React, { useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
-import { Pressable, StyleSheet, TextInput, View, Image } from 'react-native';
+import { StyleSheet, TextInput, View } from 'react-native';
 
 import { useVm } from '@/hooks';
 import { useTheme } from '@/themes';
 import { BoxType } from '../../types';
 import { CreateVm } from './create.vm';
-import { PhotoSheet } from '@/components';
+import { ActionSheetRef } from '@/ui-kit';
 import { useHeaderHeight } from '@/navigation';
-import { ActionSheetRef, Icon } from '@/ui-kit';
+import { PhotoSheet, SelectPhoto } from '@/components';
+import { BOX_ROW_IMAGE_HEIGHT } from '../../constants';
 import { useCreateNavigation } from './create.navigation';
-import { BOX_ROW_ICON_HEIGHT, BOX_ROW_IMAGE_HEIGHT } from '../../constants';
 
 const CONTAINER_PADDING = 15;
 
@@ -31,22 +31,12 @@ export const Create = observer(() => {
     <>
       <View style={[styles.container, { paddingTop: headerHeight + CONTAINER_PADDING }]}>
         <View style={[styles.contentContainer, { backgroundColor: colors.tertiary }]}>
-          <Pressable
-            style={[
-              styles.image,
-              {
-                height: BOX_ROW_IMAGE_HEIGHT,
-                borderRadius: BOX_ROW_IMAGE_HEIGHT / 2,
-                backgroundColor: colors.primaryTransparent,
-              },
-            ]}
-            onPress={onImagePress}>
-            {vm.photo.selected ? (
-              <Image source={{ uri: vm.photo.selected.uri }} style={StyleSheet.absoluteFillObject} />
-            ) : (
-              <Icon name="camera" color={colors.primary} size={BOX_ROW_ICON_HEIGHT} />
-            )}
-          </Pressable>
+          <SelectPhoto
+            boxType={type}
+            onPress={onImagePress}
+            size={BOX_ROW_IMAGE_HEIGHT}
+            source={vm.photo.selected?.source}
+          />
 
           <TextInput
             autoFocus={true}
@@ -80,14 +70,6 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     flexDirection: 'row',
-  },
-
-  image: {
-    aspectRatio: 1,
-    marginRight: 10,
-    overflow: 'hidden',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 
   input: {

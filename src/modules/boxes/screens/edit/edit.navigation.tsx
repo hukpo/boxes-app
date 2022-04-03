@@ -6,7 +6,7 @@ import { Box } from '../../types';
 import { EditVm } from './edit.vm';
 import { HeaderButton, useNavigationOptions } from '@/navigation';
 
-export const useInfoNavigation = (vm: EditVm): void => {
+export const useEditNavigation = (vm: EditVm): void => {
   const {
     params: { boxId },
   } = useRoute<Route<string, { boxId: Box['parentId'] }>>();
@@ -21,8 +21,8 @@ export const useInfoNavigation = (vm: EditVm): void => {
   useNavigationOptions(
     () => ({
       headerLeft: () => <HeaderButton title={t('cancel')} />,
-      headerRight: () => <HeaderButton title={t('done')} onPress={vm.saveChanged} />,
+      headerRight: () => <HeaderButton title={t('done')} onPress={vm.saveChanges} />,
     }),
-    [t, vm.saveChanged],
+    [t, vm.saveChanges],
   );
 };

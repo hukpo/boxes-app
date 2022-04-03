@@ -10,7 +10,13 @@ export const useCodeNavigation = (vm: CodeVm): void => {
   useNavigationOptions(
     () => ({
       headerTitle: vm.phoneNumber,
-      headerRight: () => <HeaderButton title={t('next')} onPress={vm.confirmPhone} disabled={vm.nextButtonDisabled} />,
+      headerRight: () => (
+        <HeaderButton
+          title={t('next')}
+          onPress={vm.confirmPhone}
+          disabled={vm.nextButtonDisabled}
+        />
+      ),
     }),
     [t, vm.confirmPhone, vm.nextButtonDisabled, vm.phoneNumber],
   );

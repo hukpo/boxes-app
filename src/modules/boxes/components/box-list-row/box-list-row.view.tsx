@@ -55,7 +55,8 @@ const BoxListRowNoMemo = observer<BoxListRowProps>(({ box }) => {
         onPress={vm.openBox}
       />
 
-      <View style={[styles.infoContainer, { borderBottomColor: colors.greyDark, paddingRight: right }]}>
+      <View
+        style={[styles.infoContainer, { borderBottomColor: colors.greyDark, paddingRight: right }]}>
         <Text style={[styles.name, { color: colors.text }]}>{box.name}</Text>
 
         <View style={styles.previewContainer}>
@@ -81,7 +82,10 @@ const BoxListRowNoMemo = observer<BoxListRowProps>(({ box }) => {
   );
 });
 
-export const BoxListRow = memo<BoxListRowProps>(BoxListRowNoMemo, (prev, curr) => prev.box._id === curr.box._id);
+export const BoxListRow = memo<BoxListRowProps>(
+  BoxListRowNoMemo,
+  (prev, curr) => prev.box._id === curr.box._id,
+);
 
 BoxListRow.whyDidYouRender = true;
 

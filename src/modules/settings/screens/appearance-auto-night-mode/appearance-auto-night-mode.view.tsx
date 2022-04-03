@@ -5,10 +5,10 @@ import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet } from 'react-native';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
+import { List } from '@/ui-kit';
 import { ThemeStore } from '@/stores';
 import { AutoNightMode } from '../../types';
 import { useHeaderHeight } from '@/navigation';
-import { ListContainer, ListItem } from '@/components';
 
 export const AppearanceAutoNightMode = observer(() => {
   const headerHeight = useHeaderHeight();
@@ -23,18 +23,18 @@ export const AppearanceAutoNightMode = observer(() => {
         paddingTop: headerHeight,
         paddingBottom: bottomMenuHeight,
       }}>
-      <ListContainer>
-        <ListItem
+      <List.Container>
+        <List.Item
           title={t('system')}
           selected={themeStore.autoNightMode === AutoNightMode.SYSTEM}
           onPress={themeStore.selectSystemMode}
         />
-        <ListItem
+        <List.Item
           title={t('disabled')}
           selected={themeStore.autoNightMode === AutoNightMode.DISABLED}
           onPress={themeStore.selectDisabledMode}
         />
-      </ListContainer>
+      </List.Container>
     </ScrollView>
   );
 });

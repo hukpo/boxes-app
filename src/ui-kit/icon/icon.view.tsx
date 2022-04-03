@@ -69,7 +69,11 @@ export const Icon: FC<IconProps> = ({ style, name, color, size, width = 0, heigh
 
     case 'arrow.left':
       return (
-        <Svg style={style} width={width || (height / 20) * 11} height={height || (width / 11) * 20} viewBox="0 0 11 20">
+        <Svg
+          style={style}
+          width={width || (height / 20) * 11}
+          height={height || (width / 11) * 20}
+          viewBox="0 0 11 20">
           <G fill="none" fillRule="evenodd">
             <Path opacity={0.87} d="M-6-2h24v24H-6z" />
             <Path

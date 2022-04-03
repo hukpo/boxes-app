@@ -42,10 +42,16 @@ export class BoxListRowVm {
   openBox(box = this._box): void {
     switch (box.type) {
       case BoxType.FOLDER:
-        return this._navigation!.push(BoxesMainScreen.LIST, { parentId: box._id, parentName: box.name });
+        return this._navigation!.push(BoxesMainScreen.LIST, {
+          parentId: box._id,
+          parentName: box.name,
+        });
 
       case BoxType.CHAT:
-        return this._navigation!.navigate(ChatMainScreen.MAIN, { parentId: box._id, parentName: box.name });
+        return this._navigation!.navigate(ChatMainScreen.MAIN, {
+          parentId: box._id,
+          parentName: box.name,
+        });
     }
   }
 

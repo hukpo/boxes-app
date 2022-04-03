@@ -42,19 +42,21 @@ export class MessageTextVm {
       return divider;
     });
 
-    return parsedString.split(new RegExp(`(${divider})`, 'g')).reduce<TextChunk[]>((chunks, chunk) => {
-      if (chunk === divider) {
-        const url = urls.shift();
+    return parsedString
+      .split(new RegExp(`(${divider})`, 'g'))
+      .reduce<TextChunk[]>((chunks, chunk) => {
+        if (chunk === divider) {
+          const url = urls.shift();
 
-        if (url) {
-          chunks.push({ type: 'uri', text: url });
+          if (url) {
+            chunks.push({ type: 'uri', text: url });
+          }
+        } else if (chunk) {
+          chunks.push({ type: 'text', text: chunk });
         }
-      } else if (chunk) {
-        chunks.push({ type: 'text', text: chunk });
-      }
 
-      return chunks;
-    }, []);
+        return chunks;
+      }, []);
   }
 
   setMessage(value: ChatMessageObject<ChatMessageText>): void {

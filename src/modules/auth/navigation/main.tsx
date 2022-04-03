@@ -17,7 +17,12 @@ const AuthMainStack: FC = () => {
   const defaultScreenOptions = useDefaultScreenOptions();
 
   return (
-    <Stack.Navigator screenOptions={{ ...defaultScreenOptions, headerBlurEffect: undefined, gestureEnabled: false }}>
+    <Stack.Navigator
+      screenOptions={{
+        ...defaultScreenOptions,
+        headerBlurEffect: undefined,
+        gestureEnabled: false,
+      }}>
       <Stack.Screen
         name={AuthMainScreen.PHONE}
         component={Phone}

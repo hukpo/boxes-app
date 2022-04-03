@@ -23,7 +23,11 @@ export const Albums = observer(() => {
   );
 
   return (
-    <View style={[styles.container, { paddingTop: headerHeight, paddingLeft: left, paddingRight: right }]}>
+    <View
+      style={[
+        styles.container,
+        { paddingTop: headerHeight, paddingLeft: left, paddingRight: right },
+      ]}>
       <ScrollView>
         {vm.albums.map(album => {
           const onPress = (): void => vm.openAlbum(album);
@@ -33,7 +37,9 @@ export const Albums = observer(() => {
               <View style={styles.albumContainer}>
                 <View>
                   <Text style={[styles.title, { color: colors.text }]}>{album.title}</Text>
-                  <Text style={[styles.assetsCount, { color: colors.text }]}>{album.assetCount}</Text>
+                  <Text style={[styles.assetsCount, { color: colors.text }]}>
+                    {album.assetCount}
+                  </Text>
                 </View>
 
                 <Icon name="arrow.right" width={7} color={colors.greyLight} />
