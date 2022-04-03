@@ -1,14 +1,14 @@
 import { autoInjectable } from 'tsyringe';
 
 import { BoxesDb } from '../../db';
-import { Box, BoxObject } from '../../types';
-import { InputStore, PhotoSelectStore, makeSimpleAutoObservable } from '@/stores';
-import { logger } from '@/helpers';
 import { Navigation } from '@/navigation';
+import { Box, BoxObject } from '../../types';
+import { logger, uploadImage } from '@/helpers';
+import { InputStore, PhotoSelectStore, makeSimpleAutoObservable } from '@/stores';
 
 type Changes = {
   name?: string;
-  photo?: { uri: string } | { isRemoved: boolean };
+  photo?: { uri: string; aspectRatio: number } | { isRemoved: boolean };
 };
 
 @autoInjectable()
@@ -58,13 +58,14 @@ export class EditVm {
 
     const parentKey = this._parent?.key;
     const source = this._photo.selected?.source;
+    const aspectRatio = this._photo.selected?.aspectRatio;
 
     if (parentKey && !source) {
       changes.photo = { isRemoved: true };
     }
 
-    if (source && 'uri' in source) {
-      changes.photo = { uri: source.uri };
+    if (aspectRatio && source && 'uri' in source) {
+      changes.photo = { uri: source.uri, aspectRatio };
     }
 
     return changes;
@@ -84,7 +85,9 @@ export class EditVm {
 
       if (photo) {
         if ('uri' in photo) {
-          // TODO upload image
+          const { key } = await uploadImage(photo.uri);
+          updateObj.key = key;
+          updateObj.aspectRatio = photo.aspectRatio;
         } else {
           updateObj.key = undefined;
           updateObj.aspectRatio = undefined;
