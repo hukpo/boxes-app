@@ -13,7 +13,7 @@ import { useAlbumNavigation } from './album.navigation';
 
 export const Album = observer(() => {
   const vm = useVm(AlbumVm);
-  const headerHeight = useHeaderHeight(true);
+  const headerHeight = useHeaderHeight();
   const { left, right } = useSafeAreaInsets();
   const { width, height } = useWindowDimensions();
 

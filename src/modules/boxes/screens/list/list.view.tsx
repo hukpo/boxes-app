@@ -72,7 +72,7 @@ export const List = observer(() => {
 
       <FAB onPress={actionSheetRef.current?.open} />
 
-      <ActionSheet.Container ref={actionSheetRef}>
+      <ActionSheet.Container portal ref={actionSheetRef}>
         <ActionSheet.Button title={t('createFolder')} onPress={vm.createFolder} />
         <ActionSheet.Button title={t('createChat')} onPress={vm.createChat} />
       </ActionSheet.Container>

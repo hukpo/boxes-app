@@ -61,6 +61,7 @@ export const Create = observer(() => {
       </View>
 
       <PhotoSheet
+        portal
         ref={photoSheetRef}
         selected={!!vm.photo.selected}
         onGalleryPress={vm.photo.openGallery}

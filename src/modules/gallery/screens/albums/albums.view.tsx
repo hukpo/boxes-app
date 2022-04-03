@@ -13,7 +13,7 @@ import { useHeaderHeight } from '@/navigation';
 export const Albums = observer(() => {
   const vm = useVm(AlbumsVm);
   const { colors } = useTheme();
-  const headerHeight = useHeaderHeight(true);
+  const headerHeight = useHeaderHeight();
   const { left, right } = useSafeAreaInsets();
 
   useFocusEffect(

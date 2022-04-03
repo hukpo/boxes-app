@@ -5,6 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Keyboard, StyleSheet, useWindowDimensions, View } from 'react-native';
 import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import React, {
+  FC,
   useMemo,
   Children,
   ReactNode,
@@ -34,83 +35,96 @@ export type ActionSheetRef = {
 };
 
 type ActionSheetContainerProps = {
+  portal?: boolean;
   children: ReactNode;
 };
 
-export const ActionSheetContainer = forwardRef<ActionSheetRef, ActionSheetContainerProps>(({ children }, ref) => {
-  const { colors } = useTheme();
-  const { t } = useTranslation();
-  const { width, height } = useWindowDimensions();
-  const { left, bottom, right } = useSafeAreaInsets();
-
-  const containerOpacity = useSharedValue(0);
-  const contentTranslateY = useSharedValue(height);
-
-  useImperativeHandle(
-    ref,
-    () => ({
-      open() {
-        Keyboard.dismiss();
-        contentTranslateY.value = withTiming(0);
-        containerOpacity.value = withTiming(MAX_CONTAINER_OPACITY);
-      },
-    }),
-    [containerOpacity, contentTranslateY],
-  );
-
-  const cancel = (): void => {
-    contentTranslateY.value = withTiming(height);
-    containerOpacity.value = withTiming(0);
-  };
-
-  const onPanUpdate = (event: GestureUpdateEvent<PanGestureHandlerEventPayload>): void => {
-    if (event.translationY > 0) {
-      contentTranslateY.value = event.translationY;
-    } else {
-      contentTranslateY.value = event.translationY / SWIPE_UP_DELAY_COEFFICIENT;
-    }
-  };
-  const onPanEnd = (event: GestureStateChangeEvent<PanGestureHandlerEventPayload>): void => {
-    if (event.velocityY > MIN_VELOCITY_Y_TO_CLOSE_ACTION_SHEET) {
-      runOnJS(cancel)();
-    } else {
-      contentTranslateY.value = withTiming(0, { duration: 100 });
-    }
-  };
-
-  const animatedContentStyle = useAnimatedStyle(() => ({
-    transform: [{ translateY: contentTranslateY.value }],
-  }));
-
-  const animatedContainerStyle = useAnimatedStyle(() => ({
-    display: containerOpacity.value ? 'flex' : 'none',
-    backgroundColor: `rgba(0,0,0,${containerOpacity.value})`,
-  }));
-
-  const { contentWrapperStyle, contentContainerStyle } = useMemo(() => {
-    const bottomSpace = bottom || DEFAULT_PADDING;
-    const leftSpace = left || DEFAULT_PADDING;
-    const rightSpace = right || DEFAULT_PADDING;
-
-    const contentHeight = width < height ? height / 2 : height;
-
-    return {
-      contentWrapperStyle: {
-        width,
-        paddingLeft: leftSpace,
-        paddingRight: rightSpace,
-        paddingBottom: bottomSpace,
-        maxHeight: contentHeight,
-      },
-      contentContainerStyle: {
-        maxHeight: contentHeight - bottomSpace,
-      },
-    };
-  }, [width, height, bottom, left, right]);
+const ActionSheetContainerParent: FC<ActionSheetContainerProps> = ({ portal, children }) => {
+  if (!portal) {
+    return <>{children}</>;
+  }
 
   return (
     <Portal>
-      <FullWindowOverlay style={StyleSheet.absoluteFillObject}>
+      <FullWindowOverlay style={StyleSheet.absoluteFillObject}>{children}</FullWindowOverlay>
+    </Portal>
+  );
+};
+
+export const ActionSheetContainer = forwardRef<ActionSheetRef, ActionSheetContainerProps>(
+  ({ children, portal }, ref) => {
+    const { colors } = useTheme();
+    const { t } = useTranslation();
+    const { width, height } = useWindowDimensions();
+    const { left, bottom, right } = useSafeAreaInsets();
+
+    const containerOpacity = useSharedValue(0);
+    const contentTranslateY = useSharedValue(height);
+
+    useImperativeHandle(
+      ref,
+      () => ({
+        open() {
+          Keyboard.dismiss();
+          contentTranslateY.value = withTiming(0);
+          containerOpacity.value = withTiming(MAX_CONTAINER_OPACITY);
+        },
+      }),
+      [containerOpacity, contentTranslateY],
+    );
+
+    const cancel = (): void => {
+      contentTranslateY.value = withTiming(height);
+      containerOpacity.value = withTiming(0);
+    };
+
+    const onPanUpdate = (event: GestureUpdateEvent<PanGestureHandlerEventPayload>): void => {
+      if (event.translationY > 0) {
+        contentTranslateY.value = event.translationY;
+      } else {
+        contentTranslateY.value = event.translationY / SWIPE_UP_DELAY_COEFFICIENT;
+      }
+    };
+    const onPanEnd = (event: GestureStateChangeEvent<PanGestureHandlerEventPayload>): void => {
+      if (event.velocityY > MIN_VELOCITY_Y_TO_CLOSE_ACTION_SHEET) {
+        runOnJS(cancel)();
+      } else {
+        contentTranslateY.value = withTiming(0, { duration: 100 });
+      }
+    };
+
+    const animatedContentStyle = useAnimatedStyle(() => ({
+      transform: [{ translateY: contentTranslateY.value }],
+    }));
+
+    const animatedContainerStyle = useAnimatedStyle(() => ({
+      display: containerOpacity.value ? 'flex' : 'none',
+      backgroundColor: `rgba(0,0,0,${containerOpacity.value})`,
+    }));
+
+    const { contentWrapperStyle, contentContainerStyle } = useMemo(() => {
+      const bottomSpace = bottom || DEFAULT_PADDING;
+      const leftSpace = left || DEFAULT_PADDING;
+      const rightSpace = right || DEFAULT_PADDING;
+
+      const contentHeight = width < height ? height / 2 : height;
+
+      return {
+        contentWrapperStyle: {
+          width,
+          paddingLeft: leftSpace,
+          paddingRight: rightSpace,
+          paddingBottom: bottomSpace,
+          maxHeight: contentHeight,
+        },
+        contentContainerStyle: {
+          maxHeight: contentHeight - bottomSpace,
+        },
+      };
+    }, [width, height, bottom, left, right]);
+
+    return (
+      <ActionSheetContainerParent portal={portal}>
         <Animated.View onTouchEnd={cancel} style={[styles.container, animatedContainerStyle]}>
           <GestureDetector gesture={Gesture.Pan().onUpdate(onPanUpdate).onEnd(onPanEnd)}>
             <View style={[styles.contentWrapper, contentWrapperStyle]}>
@@ -149,10 +163,10 @@ export const ActionSheetContainer = forwardRef<ActionSheetRef, ActionSheetContai
             </View>
           </GestureDetector>
         </Animated.View>
-      </FullWindowOverlay>
-    </Portal>
-  );
-});
+      </ActionSheetContainerParent>
+    );
+  },
+);
 
 const styles = StyleSheet.create({
   container: {
