@@ -45,7 +45,7 @@ export const GalleryMainNavigation: NC = ({ Group, Screen }) => {
         name={STACKS.GalleryMain.name}
         component={GalleryMainStack}
         options={{
-          presentation: 'modal',
+          presentation: 'fullScreenModal',
         }}
       />
     </Group>

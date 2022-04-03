@@ -29,7 +29,11 @@ export const Phone = observer(() => {
         <TextInput
           maxLength={4}
           keyboardType="phone-pad"
-          style={[styles.input, styles.phoneCode, { borderColor: colors.border, color: colors.text }]}
+          style={[
+            styles.input,
+            styles.phoneCode,
+            { borderColor: colors.border, color: colors.text },
+          ]}
           value={vm.phoneCode.value}
         />
 
@@ -37,7 +41,11 @@ export const Phone = observer(() => {
           autoFocus
           maxLength={9}
           keyboardType="phone-pad"
-          style={[styles.input, styles.phoneNumber, { borderColor: colors.border, color: colors.text }]}
+          style={[
+            styles.input,
+            styles.phoneNumber,
+            { borderColor: colors.border, color: colors.text },
+          ]}
           value={vm.phoneNumber.value}
           onChangeText={vm.phoneNumber.setValue}
         />

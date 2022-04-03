@@ -1,16 +1,17 @@
 import React, { useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
-import { Pressable, StyleSheet, TextInput, View, Image } from 'react-native';
+import { StyleSheet, TextInput, View } from 'react-native';
 
 import { useVm } from '@/hooks';
 import { useTheme } from '@/themes';
-import { CreateVm } from './create.vm';
 import { BoxType } from '../../types';
+import { CreateVm } from './create.vm';
+import { ActionSheetRef } from '@/ui-kit';
 import { useHeaderHeight } from '@/navigation';
+import { PhotoSheet, SelectPhoto } from '@/components';
+import { BOX_ROW_IMAGE_HEIGHT } from '../../constants';
 import { useCreateNavigation } from './create.navigation';
-import { ActionSheet, ActionSheetRef, Icon } from '@/ui-kit';
-import { BOX_ROW_ICON_HEIGHT, BOX_ROW_IMAGE_HEIGHT } from '../../constants';
 
 const CONTAINER_PADDING = 15;
 
@@ -20,32 +21,22 @@ export const Create = observer(() => {
   const headerHeight = useHeaderHeight(true);
   const { t } = useTranslation(['boxes']);
   const { type } = useCreateNavigation(vm);
-  const actionSheetRef = useRef<ActionSheetRef>(null);
+  const photoSheetRef = useRef<ActionSheetRef>(null);
 
   const onImagePress = (): void => {
-    actionSheetRef.current?.open();
+    photoSheetRef.current?.open();
   };
 
   return (
     <>
       <View style={[styles.container, { paddingTop: headerHeight + CONTAINER_PADDING }]}>
         <View style={[styles.contentContainer, { backgroundColor: colors.tertiary }]}>
-          <Pressable
-            style={[
-              styles.image,
-              {
-                height: BOX_ROW_IMAGE_HEIGHT,
-                borderRadius: BOX_ROW_IMAGE_HEIGHT / 2,
-                backgroundColor: colors.primaryTransparent,
-              },
-            ]}
-            onPress={onImagePress}>
-            {vm.photoUri ? (
-              <Image source={{ uri: vm.photoUri }} style={StyleSheet.absoluteFillObject} />
-            ) : (
-              <Icon name="camera" color={colors.primary} size={BOX_ROW_ICON_HEIGHT} />
-            )}
-          </Pressable>
+          <SelectPhoto
+            boxType={type}
+            onPress={onImagePress}
+            size={BOX_ROW_IMAGE_HEIGHT}
+            source={vm.photo.selected?.source}
+          />
 
           <TextInput
             autoFocus={true}
@@ -59,12 +50,13 @@ export const Create = observer(() => {
         </View>
       </View>
 
-      <ActionSheet.Container ref={actionSheetRef}>
-        <ActionSheet.Button title={t('gallery:openGallery')} onPress={vm.openGallery} />
-        {vm.photoUri ? (
-          <ActionSheet.Button type="destructive" title={t('gallery:removePhoto')} onPress={vm.removePhoto} />
-        ) : null}
-      </ActionSheet.Container>
+      <PhotoSheet
+        portal
+        ref={photoSheetRef}
+        selected={!!vm.photo.selected}
+        onGalleryPress={vm.photo.openGallery}
+        onRemovePress={vm.photo.removePhoto}
+      />
     </>
   );
 });
@@ -78,14 +70,6 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     flexDirection: 'row',
-  },
-
-  image: {
-    aspectRatio: 1,
-    marginRight: 10,
-    overflow: 'hidden',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 
   input: {

@@ -21,7 +21,7 @@ export class MessageTextVm {
   private _messageText: string | null = null;
   private _message: ChatMessageObject<ChatMessageText> | null = null;
 
-  constructor(private _composerVm: ComposerVm) {
+  constructor(private _composerVm?: ComposerVm) {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
   }
 
@@ -42,19 +42,21 @@ export class MessageTextVm {
       return divider;
     });
 
-    return parsedString.split(new RegExp(`(${divider})`, 'g')).reduce<TextChunk[]>((chunks, chunk) => {
-      if (chunk === divider) {
-        const url = urls.shift();
+    return parsedString
+      .split(new RegExp(`(${divider})`, 'g'))
+      .reduce<TextChunk[]>((chunks, chunk) => {
+        if (chunk === divider) {
+          const url = urls.shift();
 
-        if (url) {
-          chunks.push({ type: 'uri', text: url });
+          if (url) {
+            chunks.push({ type: 'uri', text: url });
+          }
+        } else if (chunk) {
+          chunks.push({ type: 'text', text: chunk });
         }
-      } else if (chunk) {
-        chunks.push({ type: 'text', text: chunk });
-      }
 
-      return chunks;
-    }, []);
+        return chunks;
+      }, []);
   }
 
   setMessage(value: ChatMessageObject<ChatMessageText>): void {
@@ -70,7 +72,7 @@ export class MessageTextVm {
 
   editMessage(): void {
     if (this._message) {
-      this._composerVm.editMessage(this._message);
+      this._composerVm!.editMessage(this._message);
     }
   }
 }

@@ -11,7 +11,9 @@ type PopupMenuItems = {
   delete: PopupMenuItem;
 };
 
-export const useMessageDefaults = (message: ChatMessageObject): { popupMenuItems: PopupMenuItems; time: string } => {
+export const useMessageDefaults = (
+  message: ChatMessageObject,
+): { popupMenuItems: PopupMenuItems; time: string } => {
   const { t } = useTranslation();
   const uiStore = container.resolve(UIStore);
   const messagesStore = container.resolve(MessagesStore);

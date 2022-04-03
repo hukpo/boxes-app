@@ -11,7 +11,8 @@ import { useNavigationOptions } from '@/navigation';
 export const useListNavigation = (vm: ListVm): { actionSheetRef: RefObject<ActionSheetRef> } => {
   const { t } = useTranslation();
   const actionSheetRef = useRef<ActionSheetRef>(null);
-  const { params } = useRoute<Route<string, { parentId: Box['parentId']; parentName: Box['name'] } | undefined>>();
+  const { params } =
+    useRoute<Route<string, { parentId: Box['parentId']; parentName: Box['name'] } | undefined>>();
 
   useEffect(() => {
     if (params?.parentId) {

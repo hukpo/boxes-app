@@ -14,12 +14,18 @@ export const Background: FC<BackgroundProps> = ({ children, style, absoluteFill 
 
   if (Platform.OS === 'android') {
     return (
-      <View style={[absoluteFill && StyleSheet.absoluteFill, { backgroundColor: colors.card }, style]}>{children}</View>
+      <View
+        style={[absoluteFill && StyleSheet.absoluteFill, { backgroundColor: colors.card }, style]}>
+        {children}
+      </View>
     );
   }
 
   return (
-    <BlurView tint={dark ? 'dark' : 'light'} intensity={100} style={[absoluteFill && StyleSheet.absoluteFill, style]}>
+    <BlurView
+      tint={dark ? 'dark' : 'light'}
+      intensity={100}
+      style={[absoluteFill && StyleSheet.absoluteFill, style]}>
       {children}
     </BlurView>
   );

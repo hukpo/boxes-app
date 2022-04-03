@@ -1,6 +1,11 @@
 import React, { FC } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
-import { ContextMenuView, MenuActionConfig, MenuAttributes, OnPressMenuItemEvent } from 'react-native-ios-context-menu';
+import {
+  MenuAttributes,
+  ContextMenuView,
+  MenuActionConfig,
+  OnPressMenuItemEvent,
+} from 'react-native-ios-context-menu';
 
 export type PopupMenuItem = {
   title: string;
@@ -48,7 +53,10 @@ export const PopupMenu: FC<PopupMenuProps> = ({ children, style, title = '', ite
   };
 
   return (
-    <ContextMenuView style={style} onPressMenuItem={onPressMenuItem} menuConfig={{ menuItems, menuTitle: title }}>
+    <ContextMenuView
+      style={style}
+      onPressMenuItem={onPressMenuItem}
+      menuConfig={{ menuItems, menuTitle: title }}>
       {children}
     </ContextMenuView>
   );

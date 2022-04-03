@@ -1,14 +1,29 @@
-import React, { FC } from 'react';
-import { StyleProp, ImageStyle } from 'react-native';
+import React, { useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
+import { ImageProps as RNImageProps, Image as RNImage } from 'react-native';
 
+import { useVm } from '@/hooks';
 import { CacheImage } from './cache-image';
+import { ImageSource, ImageVm } from './image.vm';
 
-type ImageProps = {
-  uri: string;
-  headers?: Record<string, string>;
-  style?: StyleProp<ImageStyle>;
+export type ImageProps = Omit<RNImageProps, 'source'> & {
+  source: ImageSource;
 };
 
-export const Image: FC<ImageProps> = ({ uri, headers, style }) => {
-  return <CacheImage uri={uri} headers={headers} style={style} />;
-};
+export const Image = observer<ImageProps>(({ source, ...props }) => {
+  const vm = useVm(ImageVm);
+
+  useEffect(() => {
+    vm.setSource(source);
+  }, [source, vm]);
+
+  if (!vm.uri) {
+    return null;
+  }
+
+  if (vm.uri.startsWith('https://')) {
+    return <CacheImage uri={vm.uri} style={props.style} />;
+  }
+
+  return <RNImage source={{ uri: vm.uri }} {...props} />;
+});

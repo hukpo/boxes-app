@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet } from 'react-native';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
+import { List } from '@/ui-kit';
 import { useVm } from '@/hooks';
 import { AppearanceVm } from './appearance.vm';
 import { useHeaderHeight } from '@/navigation';
-import { ListContainer, ListItem } from '@/components';
 
 export const Appearance = observer(() => {
   const vm = useVm(AppearanceVm);
@@ -22,15 +22,15 @@ export const Appearance = observer(() => {
         paddingTop: headerHeight,
         paddingBottom: bottomMenuHeight,
       }}>
-      <ListContainer>
-        <ListItem
+      <List.Container>
+        <List.Item
           title={t('nightMode')}
           onPress={vm.toggleNightMode}
           toggled={vm.nightModeToggled}
           disabled={!vm.nightModeEnabled}
         />
-        <ListItem title={t('autoNightMode')} hasArrow onPress={vm.openAutoNightMode} />
-      </ListContainer>
+        <List.Item title={t('autoNightMode')} hasArrow onPress={vm.openAutoNightMode} />
+      </List.Container>
     </ScrollView>
   );
 });

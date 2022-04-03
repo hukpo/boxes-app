@@ -11,7 +11,7 @@ import { GalleryMainScreen } from '../../navigation';
 export class AlbumsVm {
   private _albums: Album[] = [];
 
-  constructor(private _navigation: Navigation) {
+  constructor(private _navigation?: Navigation) {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
   }
 
@@ -40,6 +40,9 @@ export class AlbumsVm {
   }
 
   openAlbum(album: Album): void {
-    this._navigation.navigate(GalleryMainScreen.ALBUM, { albumId: album.id, albumTitle: album.title });
+    this._navigation!.navigate(GalleryMainScreen.ALBUM, {
+      albumId: album.id,
+      albumTitle: album.title,
+    });
   }
 }

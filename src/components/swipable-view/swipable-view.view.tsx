@@ -23,7 +23,14 @@ type SwipableViewProps = {
   style?: StyleProp<ViewStyle>;
 };
 
-export const SwipableView: FC<SwipableViewProps> = ({ children, id, style, snapWidth, onPress, onButtonPress }) => {
+export const SwipableView: FC<SwipableViewProps> = ({
+  children,
+  id,
+  style,
+  snapWidth,
+  onPress,
+  onButtonPress,
+}) => {
   const rowsManager = useSwipableRows();
   const { colors } = useTheme();
   const { t } = useTranslation();
@@ -84,7 +91,10 @@ export const SwipableView: FC<SwipableViewProps> = ({ children, id, style, snapW
         <Animated.View style={[style, animatedStyle]}>{children}</Animated.View>
       </GestureDetector>
       <Pressable
-        style={[styles.container, { backgroundColor: colors.red, paddingLeft: left, paddingRight: right }]}
+        style={[
+          styles.container,
+          { backgroundColor: colors.red, paddingLeft: left, paddingRight: right },
+        ]}
         onPress={onButtonPress}>
         <View style={styles.deleteButton}>
           <Icon name="trash" size={27} color="#fff" />

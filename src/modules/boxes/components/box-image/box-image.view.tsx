@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
@@ -20,30 +20,38 @@ type BoxImageProps = {
   onPress?: () => void;
 };
 
-export const BoxImage = observer<BoxImageProps>(({ color, type, uriKey, size, title, containerStyle, onPress }) => {
-  const vm = useVm(BoxImageVm, title, uriKey);
+export const BoxImage = observer<BoxImageProps>(
+  ({ color, type, uriKey, size, title, containerStyle, onPress }) => {
+    const vm = useVm(BoxImageVm);
 
-  const onTapEnd = (): void => onPress?.();
+    useEffect(() => {
+      vm.getUri(uriKey);
+    }, [uriKey, vm]);
 
-  return (
-    <GestureDetector gesture={Gesture.Tap().maxDistance(0).onEnd(onTapEnd)}>
-      <View
-        style={[
-          styles.container,
-          { height: size, borderRadius: type === BoxType.CHAT ? size / 2 : size / 4 },
-          containerStyle,
-        ]}>
-        {vm.uri ? (
-          <Image uri={vm.uri} style={StyleSheet.absoluteFillObject} />
-        ) : (
-          <LinearGradient colors={[shadeColor(color, 70), color]} style={styles.noImageContainer}>
-            <Text style={[styles.noImageTitle, { fontSize: size / 2 }]}>{vm.title}</Text>
-          </LinearGradient>
-        )}
-      </View>
-    </GestureDetector>
-  );
-});
+    const onTapEnd = (): void => onPress?.();
+
+    return (
+      <GestureDetector gesture={Gesture.Tap().maxDistance(0).onEnd(onTapEnd)}>
+        <View
+          style={[
+            styles.container,
+            { height: size, borderRadius: type === BoxType.CHAT ? size / 2 : size / 4 },
+            containerStyle,
+          ]}>
+          {vm.uri ? (
+            <Image source={{ uri: vm.uri }} style={StyleSheet.absoluteFillObject} />
+          ) : (
+            <LinearGradient colors={[shadeColor(color, 70), color]} style={styles.noImageContainer}>
+              <Text style={[styles.noImageTitle, { fontSize: size / 2 }]}>
+                {vm.getTitle(title)}
+              </Text>
+            </LinearGradient>
+          )}
+        </View>
+      </GestureDetector>
+    );
+  },
+);
 
 const styles = StyleSheet.create({
   container: {

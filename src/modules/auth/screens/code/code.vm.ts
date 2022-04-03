@@ -10,7 +10,11 @@ import { InputStore, makeSimpleAutoObservable } from '@/stores';
 export class CodeVm {
   private _code = new InputStore('');
 
-  constructor(private _authStore: AuthStore, private _realmDB: RealmDb, private _navigation: Navigation) {
+  constructor(
+    private _authStore?: AuthStore,
+    private _realmDB?: RealmDb,
+    private _navigation?: Navigation,
+  ) {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
   }
 
@@ -23,16 +27,16 @@ export class CodeVm {
   }
 
   get phoneNumber(): string {
-    return this._authStore.phoneNumber;
+    return this._authStore!.phoneNumber;
   }
 
   async confirmPhone(): Promise<void> {
     try {
-      await this._authStore.confirmation?.confirm(this._code.value);
-      await this._realmDB.init();
+      await this._authStore!.confirmation?.confirm(this._code.value);
+      await this._realmDB!.init();
 
-      this._navigation.popToTop();
-      this._navigation.goBack();
+      this._navigation!.popToTop();
+      this._navigation!.goBack();
     } catch (err) {
       logger.error(err);
     }

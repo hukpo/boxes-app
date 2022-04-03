@@ -10,7 +10,13 @@ type TextProps = {
   numberOfLines?: number;
 };
 
-export const Text: FC<TextProps> = ({ children, numberOfLines, onPress, highlightColor, style }) => {
+export const Text: FC<TextProps> = ({
+  style,
+  onPress,
+  children,
+  numberOfLines,
+  highlightColor,
+}) => {
   const highlightActive = useValue(false);
 
   return (
@@ -23,7 +29,8 @@ export const Text: FC<TextProps> = ({ children, numberOfLines, onPress, highligh
       style={[
         styles.text,
         style,
-        !!highlightColor && (onPress ? highlightActive() : true) && { backgroundColor: highlightColor },
+        !!highlightColor &&
+          (onPress ? highlightActive() : true) && { backgroundColor: highlightColor },
       ]}>
       {children}
     </RNText>

@@ -12,7 +12,7 @@ export class MainVm {
   private _parent: BoxObject | null = null;
   private _messages: ChatMessages | null = null;
 
-  constructor(private _db: MessagesDb, private _boxesDb: BoxesDb) {
+  constructor(private _db?: MessagesDb, private _boxesDb?: BoxesDb) {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
   }
 
@@ -32,7 +32,7 @@ export class MainVm {
     return this._parent;
   }
   setParent(parentId: Box['parentId']): void {
-    const parent = this._boxesDb.getById(parentId);
+    const parent = this._boxesDb!.getById(parentId);
 
     if (parent) {
       this._parent = parent;
@@ -47,7 +47,7 @@ export class MainVm {
 
       logger.info(`Trying to get Messages, parentId: ${this.parentId}`);
 
-      const messages = this._db.getByParentId(this.parentId);
+      const messages = this._db!.getByParentId(this.parentId);
 
       runInAction(() => (this._messages = messages));
     } catch (err) {

@@ -9,7 +9,13 @@ import { Navigation } from '../navigation';
 import { useContainerTheme } from '@/themes';
 import { useDefaultScreenOptions } from '../hooks';
 import { BottomMenuNavigation } from './bottom-menu';
-import { AuthMainNavigation, BoxesCreateNavigation, ChatMainNavigation, GalleryMainNavigation } from '@/modules';
+import {
+  AuthMainNavigation,
+  ChatMainNavigation,
+  BoxesCreateNavigation,
+  BoxesManageNavigation,
+  GalleryMainNavigation,
+} from '@/modules';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,6 +35,7 @@ export const MainStack = observer(() => {
           {BottomMenuNavigation(Stack)}
           {AuthMainNavigation(Stack)}
           {BoxesCreateNavigation(Stack)}
+          {BoxesManageNavigation(Stack)}
           {ChatMainNavigation(Stack)}
           {GalleryMainNavigation(Stack)}
         </Stack.Navigator>

@@ -21,7 +21,9 @@ export const useCreateNavigation = (vm: CreateVm): { type: BoxType } => {
   useNavigationOptions(
     () => ({
       headerTitle: t(type === BoxType.FOLDER ? 'createFolder' : 'createChat', { ns: 'boxes' }),
-      headerRight: () => <HeaderButton title={t('save')} onPress={vm.saveBox} disabled={!vm.name.value.trim()} />,
+      headerRight: () => (
+        <HeaderButton title={t('save')} onPress={vm.saveBox} disabled={!vm.name.value.trim()} />
+      ),
       ...Platform.select({
         ios: {
           headerLeft: () => <HeaderButton />,

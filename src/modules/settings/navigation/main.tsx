@@ -13,15 +13,15 @@ export enum SettingsMainScreen {
   LANGUAGE = '[SETTINGS] LANGUAGE',
 }
 
-const { Navigator, Screen } = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 
 const SettingsMainStack: FC = () => {
   const { t } = useTranslation(['settings']);
   const defaultScreenOptions = useDefaultScreenOptions();
 
   return (
-    <Navigator screenOptions={defaultScreenOptions}>
-      <Screen
+    <Stack.Navigator screenOptions={defaultScreenOptions}>
+      <Stack.Screen
         name={SettingsMainScreen.LIST}
         component={List}
         options={{
@@ -29,14 +29,14 @@ const SettingsMainStack: FC = () => {
         }}
       />
 
-      <Screen
+      <Stack.Screen
         name={SettingsMainScreen.APPEARANCE}
         component={Appearance}
         options={{
           headerTitle: t('appearance'),
         }}
       />
-      <Screen
+      <Stack.Screen
         name={SettingsMainScreen.APPEARANCE_AUTO_NIGHT_MODE}
         component={AppearanceAutoNightMode}
         options={{
@@ -44,14 +44,14 @@ const SettingsMainStack: FC = () => {
         }}
       />
 
-      <Screen
+      <Stack.Screen
         name={SettingsMainScreen.LANGUAGE}
         component={Language}
         options={{
           headerTitle: t('language'),
         }}
       />
-    </Navigator>
+    </Stack.Navigator>
   );
 };
 

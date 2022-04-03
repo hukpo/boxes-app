@@ -1,5 +1,5 @@
-import React, { memo } from 'react';
 import { observer } from 'mobx-react-lite';
+import React, { memo, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -8,8 +8,9 @@ import { useTheme } from '@/themes';
 import { BoxImage } from '../box-image';
 import { BoxObject } from '../../types';
 import { SwipableView } from '@/components';
-import { useRealmListUpdate, useVm } from '@/hooks';
 import { BoxListRowVm } from './box-list-row.vm';
+import { BoxListRowPreview } from '../box-list-row-preview';
+import { useRealmListUpdate, useRealmObjectUpdate, useVm } from '@/hooks';
 import {
   BOX_SPACING,
   BOX_ROW_HEIGHT,
@@ -17,7 +18,6 @@ import {
   BOX_ROW_IMAGE_HEIGHT,
   BOX_PREVIEW_MAX_ITEMS,
   BOX_PREVIEW_MARGIN_TOP,
-  BOX_PREVIEW_ITEM_HEIGHT,
   BOX_PREVIEW_ITEM_MARGIN_RIGHT,
 } from '../../constants';
 
@@ -30,7 +30,12 @@ const BoxListRowNoMemo = observer<BoxListRowProps>(({ box }) => {
   const vm = useVm(BoxListRowVm, box);
   const { left, right } = useSafeAreaInsets();
 
+  useRealmObjectUpdate(box);
   useRealmListUpdate(vm.previewBoxes);
+
+  if (Math.random()) {
+    const [] = useState();
+  }
 
   return (
     <SwipableView
@@ -55,25 +60,15 @@ const BoxListRowNoMemo = observer<BoxListRowProps>(({ box }) => {
         onPress={vm.openBox}
       />
 
-      <View style={[styles.infoContainer, { borderBottomColor: colors.greyDark, paddingRight: right }]}>
+      <View
+        style={[styles.infoContainer, { borderBottomColor: colors.greyDark, paddingRight: right }]}>
         <Text style={[styles.name, { color: colors.text }]}>{box.name}</Text>
 
         <View style={styles.previewContainer}>
           {vm.previewBoxes?.slice(0, BOX_PREVIEW_MAX_ITEMS)?.map(previewBox => {
             const onPress = (): void => vm.openBox(previewBox);
 
-            return (
-              <BoxImage
-                type={previewBox.type}
-                containerStyle={styles.previewItem}
-                key={previewBox._id}
-                size={BOX_PREVIEW_ITEM_HEIGHT}
-                color={previewBox.imageBg}
-                title={previewBox.name}
-                uriKey={previewBox.key}
-                onPress={onPress}
-              />
-            );
+            return <BoxListRowPreview key={previewBox._id} box={previewBox} onPress={onPress} />;
           })}
         </View>
       </View>
@@ -81,7 +76,10 @@ const BoxListRowNoMemo = observer<BoxListRowProps>(({ box }) => {
   );
 });
 
-export const BoxListRow = memo<BoxListRowProps>(BoxListRowNoMemo, (prev, curr) => prev.box._id === curr.box._id);
+export const BoxListRow = memo<BoxListRowProps>(
+  BoxListRowNoMemo,
+  (prev, curr) => prev.box._id === curr.box._id,
+);
 
 BoxListRow.whyDidYouRender = true;
 

@@ -21,8 +21,8 @@ export class ComposerVm {
   constructor(
     private _parentId: Box['_id'],
     private _methods: ComposerMethods,
-    private _db: MessagesDb,
-    private _gallery: Gallery,
+    private _db?: MessagesDb,
+    private _gallery?: Gallery,
   ) {
     makeSimpleAutoObservable(this, undefined, { autoBind: true });
   }
@@ -57,7 +57,7 @@ export class ComposerVm {
   }
 
   openGallery(): void {
-    this._gallery.open({
+    this._gallery!.open({
       selectAsset: this.selectAsset,
     });
   }
@@ -72,14 +72,14 @@ export class ComposerVm {
 
       if (this._editMessage) {
         if (parsedComposerText !== this._editMessage.text) {
-          this._db.update(this._editMessage, {
+          this._db!.update(this._editMessage, {
             text: parsedComposerText,
           });
         }
 
         runInAction(() => (this._editMessage = null));
       } else {
-        this._db.save<ChatMessageText>({
+        this._db!.save<ChatMessageText>({
           parentId: this._parentId,
           text: parsedComposerText,
           type: ChatMessageType.TEXT,
@@ -97,7 +97,7 @@ export class ComposerVm {
       if (!this._parentId) {
         throw new Error('No parentId found');
       }
-      const newMessage = this._db.save<ChatMessageImage>({
+      const newMessage = this._db!.save<ChatMessageImage>({
         aspectRatio: asset.width / asset.height,
         parentId: this._parentId,
         type: ChatMessageType.IMAGE,
@@ -106,7 +106,7 @@ export class ComposerVm {
 
       const { key } = await uploadImage(asset.uri);
 
-      this._db.update(newMessage, {
+      this._db!.update(newMessage, {
         key,
         status: ImageUploadStatus.DONE,
       });

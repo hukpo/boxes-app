@@ -23,10 +23,19 @@ export const ActionSheetButton: FC<ActionSheetButtonProps> = ({
 
   return (
     <TouchableHighlight
-      style={[styles.container, containerStyle, { backgroundColor: colors.tertiary, borderColor: colors.border }]}
+      style={[
+        styles.container,
+        containerStyle,
+        { backgroundColor: colors.tertiary, borderColor: colors.border },
+      ]}
       onPress={onPress}
       underlayColor={colors.highlight}>
-      <Text style={[styles.title, titleStyle, { color: type === 'default' ? colors.primary : colors.red }]}>
+      <Text
+        style={[
+          styles.title,
+          titleStyle,
+          { color: type === 'default' ? colors.primary : colors.red },
+        ]}>
         {title}
       </Text>
     </TouchableHighlight>

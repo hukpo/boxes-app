@@ -6,7 +6,8 @@ import { useNavigationOptions } from '@/navigation';
 import { Box, BoxImageHeader } from '../../../boxes';
 
 export const useMainNavigation = (vm: MainVm): { parentId: Box['_id'] | undefined } => {
-  const { params } = useRoute<Route<string, { parentId: Box['_id']; parentName: Box['name'] } | undefined>>();
+  const { params } =
+    useRoute<Route<string, { parentId: Box['_id']; parentName: Box['name'] } | undefined>>();
 
   useEffect(() => {
     if (params?.parentId) {

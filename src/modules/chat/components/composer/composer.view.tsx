@@ -37,7 +37,7 @@ const EDIT_CONTAINER_PADDING_VERTICAL = 5;
 const EDIT_CONTAINER_HEIGHT = EDIT_TEXT_LINE_HEIGHT * 2 + EDIT_CONTAINER_PADDING_VERTICAL * 2;
 
 type ComposerProps = {
-  parentId: Box['_id'] | undefined;
+  parentId: Box['_id'];
 };
 
 const Container = Platform.OS === 'ios' ? InputAccessoryView : Fragment;
@@ -64,22 +64,33 @@ export const Composer = observer<ComposerProps>(({ parentId }) => {
   };
 
   const extraInputSpace = (INPUT_PADDING + INPUT_BORDER_WIDTH) * 2;
-  const maxInputHeight = MAX_NUMBER_OF_LINES * (initialInputHeight() - extraInputSpace) + extraInputSpace;
+  const maxInputHeight =
+    MAX_NUMBER_OF_LINES * (initialInputHeight() - extraInputSpace) + extraInputSpace;
   const composerHeight =
-    bottom + currentInputHeight() + COMPOSER_PADDING_VERTICAL * 2 + (vm.editMessageText ? EDIT_CONTAINER_HEIGHT : 0);
+    bottom +
+    currentInputHeight() +
+    COMPOSER_PADDING_VERTICAL * 2 +
+    (vm.editMessageText ? EDIT_CONTAINER_HEIGHT : 0);
 
   return (
     <Container style={styles.container}>
       <View style={[{ borderColor: colors.border, borderTopWidth: StyleSheet.hairlineWidth }]}>
         {vm.editMessagePreviewText ? (
           <View style={styles.editContainer}>
-            <Icon style={styles.editIcon} name="pencil" size={EDIT_ICON_HEIGHT} color={colors.primary} />
+            <Icon
+              style={styles.editIcon}
+              name="pencil"
+              size={EDIT_ICON_HEIGHT}
+              color={colors.primary}
+            />
 
             <View style={styles.editInfoContainer}>
               <View style={[styles.editSeparator, { backgroundColor: colors.primary }]} />
 
               <View>
-                <Text style={[styles.editMessageText, { color: colors.primary }]}>{t('editMessage')}</Text>
+                <Text style={[styles.editMessageText, { color: colors.primary }]}>
+                  {t('editMessage')}
+                </Text>
                 <Text style={[styles.editMessageText, { color: colors.text }]} numberOfLines={1}>
                   {vm.editMessagePreviewText}
                 </Text>
@@ -87,7 +98,12 @@ export const Composer = observer<ComposerProps>(({ parentId }) => {
             </View>
 
             <TouchableOpacity onPress={vm.cancelEdit}>
-              <Icon style={styles.closeIcon} name="close" size={CLOSE_ICON_HEIGHT} color={colors.primary} />
+              <Icon
+                style={styles.closeIcon}
+                name="close"
+                size={CLOSE_ICON_HEIGHT}
+                color={colors.primary}
+              />
             </TouchableOpacity>
           </View>
         ) : null}
@@ -95,7 +111,10 @@ export const Composer = observer<ComposerProps>(({ parentId }) => {
         <View style={styles.composerContainer}>
           <TouchableOpacity onPress={vm.openGallery}>
             <Icon
-              style={[styles.attachmentIcon, { marginBottom: (initialInputHeight() - ATTACHMENT_ICON_HEIGHT) / 2 }]}
+              style={[
+                styles.attachmentIcon,
+                { marginBottom: (initialInputHeight() - ATTACHMENT_ICON_HEIGHT) / 2 },
+              ]}
               name="paperclip"
               size={ATTACHMENT_ICON_HEIGHT}
               color={colors.greyLight}
@@ -125,7 +144,10 @@ export const Composer = observer<ComposerProps>(({ parentId }) => {
 
           <TouchableOpacity disabled={vm.sendButtonDisabled} onPress={vm.sendMessage}>
             <Icon
-              style={[styles.sendIcon, { marginBottom: (initialInputHeight() - SEND_ICON_HEIGHT) / 2 }]}
+              style={[
+                styles.sendIcon,
+                { marginBottom: (initialInputHeight() - SEND_ICON_HEIGHT) / 2 },
+              ]}
               name="send"
               size={SEND_ICON_HEIGHT}
               color={vm.sendButtonDisabled ? colors.textDisabled : colors.primary}

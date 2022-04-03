@@ -30,7 +30,11 @@ export class RealmDb {
   async init(): Promise<void> {
     logger.info('Trying to init database');
 
-    let user: Realm.User<Realm.DefaultFunctionsFactory, Record<string, unknown>, Realm.DefaultUserProfileData>;
+    let user: Realm.User<
+      Realm.DefaultFunctionsFactory,
+      Record<string, unknown>,
+      Realm.DefaultUserProfileData
+    >;
 
     if (this._realmApp.currentUser) {
       logger.info('Got existing user');
@@ -96,7 +100,9 @@ export class RealmDb {
     });
   }
 
-  delete<K extends ModelObject | ModelObject[] | Realm.List<ModelObject> | Realm.Results<ModelObject>>(obj: K): void {
+  delete<
+    K extends ModelObject | ModelObject[] | Realm.List<ModelObject> | Realm.Results<ModelObject>,
+  >(obj: K): void {
     this._realm.write(() => {
       this._realm.delete(obj);
     });
