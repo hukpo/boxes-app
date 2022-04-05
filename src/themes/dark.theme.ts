@@ -8,6 +8,7 @@ export const DARK_THEME: Theme = {
 
     secondary: 'rgb(0,0,0)',
     tertiary: 'rgb(34,34,36)',
+    contrast: 'rgb(255, 255, 255)',
 
     background: 'rgb(1, 1, 1)',
     card: 'rgb(18, 18, 18)',
@@ -22,5 +23,6 @@ export const DARK_THEME: Theme = {
     greyLight: 'rgb(142,142,147)',
 
     red: 'rgb(255,69,58)',
+    green: 'rgb(48,209,88)',
   },
 };

@@ -16,7 +16,7 @@ export const ListContainer: FC<ListContainerProps> = ({ children, style }) => {
       {Children.map(children, (child, index) => {
         return cloneElement<ListItemProps>(
           child as ReactElement,
-          Array.isArray(children) && index !== children.length - 1
+          Array.isArray(children) && index !== Children.count(children) - 1
             ? { infoContainerStyle: [styles.child, { borderBottomColor: colors.greyDark }] }
             : undefined,
         );

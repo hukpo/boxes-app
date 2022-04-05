@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import {
   ColorValue,
   StyleProp,
@@ -15,6 +15,8 @@ import { useValue } from '@/hooks';
 import { useTheme } from '@/themes';
 import { Icon, IconProps, Text } from '@/ui-kit';
 
+const ICON_CONTAINER_PADDING = 4;
+
 export type ListItemProps = {
   title?: string;
   subtitle?: string;
@@ -27,11 +29,14 @@ export type ListItemProps = {
   disabled?: boolean;
   hasArrow?: boolean;
 
+  renderIcon?: () => ReactNode;
+  iconHeight?: number;
   iconName?: IconProps['name'];
   iconColor?: ColorValue;
   iconBackground?: ColorValue;
 
-  titleStyle?: 'destructive';
+  titleStyle?: 'destructive' | 'primary';
+  iconContainerStyle?: StyleProp<ViewStyle>;
   infoContainerStyle?: StyleProp<ViewStyle>;
 };
 
@@ -46,7 +51,10 @@ export const ListItem: FC<ListItemProps> = ({
   iconName,
   inputProps,
   titleStyle,
+  renderIcon,
+  iconHeight = 20,
   iconColor = '#fff',
+  iconContainerStyle,
   iconBackground = 'transparent',
   onPress,
 }) => {
@@ -70,9 +78,18 @@ export const ListItem: FC<ListItemProps> = ({
       onPressIn={onPressInOut}
       onPressOut={onPressInOut}
       onPress={onPress}>
-      {iconName ? (
-        <View style={[styles.iconContainer, { backgroundColor: iconBackground }]}>
-          <Icon name={iconName} size={20} color={iconColor as string} />
+      {iconName || renderIcon ? (
+        <View
+          style={[
+            styles.iconContainer,
+            { backgroundColor: iconBackground, height: iconHeight + ICON_CONTAINER_PADDING * 2 },
+            iconContainerStyle,
+          ]}>
+          {renderIcon ? (
+            renderIcon()
+          ) : iconName ? (
+            <Icon name={iconName} size={iconHeight} color={iconColor as string} />
+          ) : null}
         </View>
       ) : null}
 
@@ -94,6 +111,8 @@ export const ListItem: FC<ListItemProps> = ({
                     ? colors.textDisabled
                     : titleStyle === 'destructive'
                     ? colors.red
+                    : titleStyle === 'primary'
+                    ? colors.primary
                     : colors.text,
                 },
               ]}>
@@ -133,13 +152,16 @@ const styles = StyleSheet.create({
   },
 
   iconContainer: {
-    padding: 4,
+    padding: ICON_CONTAINER_PADDING,
     borderRadius: 7,
     marginRight: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   infoContainer: {
     flex: 1,
+    height: '100%',
     paddingRight: 15,
 
     flexDirection: 'row',

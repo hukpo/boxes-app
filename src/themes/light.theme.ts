@@ -8,6 +8,7 @@ export const LIGHT_THEME: Theme = {
 
     secondary: 'rgb(255,255,255)',
     tertiary: 'rgb(255,255,255)',
+    contrast: 'rgb(28, 28, 30)',
 
     text: 'rgb(28, 28, 30)',
     textDisabled: 'rgb(209, 209, 214)',
@@ -23,5 +24,6 @@ export const LIGHT_THEME: Theme = {
     greyLight: 'rgb(142,142,147)',
 
     red: 'rgb(255,59,48)',
+    green: 'rgb(52,199,89)',
   },
 };

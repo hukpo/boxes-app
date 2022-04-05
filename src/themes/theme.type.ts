@@ -21,6 +21,8 @@ export type Theme = {
      */
     tertiary: string;
 
+    contrast: string;
+
     text: string;
     textDisabled: string;
 
@@ -33,5 +35,6 @@ export type Theme = {
     greyDark: string;
     greyLight: string;
     red: string;
+    green: string;
   };
 };
