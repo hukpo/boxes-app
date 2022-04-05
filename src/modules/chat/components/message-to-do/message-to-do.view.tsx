@@ -44,7 +44,7 @@ export const MessageToDo: FC<MessageToDoProps> = ({ style }) => {
               renderIcon={renderIcon}
               iconContainerStyle={[
                 styles.iconContainer,
-                { borderColor: isSelected ? colors.green : colors.greyLight },
+                { borderColor: isSelected ? colors.green : colors.greyDark },
               ]}
             />
           );
