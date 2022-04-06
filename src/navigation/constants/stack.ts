@@ -1,4 +1,4 @@
-import { AuthMainScreen, BoxesMainScreen, GalleryMainScreen } from '@/modules';
+import { AuthMainScreen, BoxesMainScreen, GalleryMainScreen, SettingsMainScreen } from '@/modules';
 
 export const STACKS = {
   BottomMenu: {
@@ -16,5 +16,9 @@ export const STACKS = {
   GalleryMain: {
     name: '[STACKS] GALLERY MAIN',
     screens: Object.values(GalleryMainScreen),
+  },
+  SettingsMain: {
+    name: '[STACKS] SETTINGS MAIN',
+    screens: Object.values(SettingsMainScreen),
   },
 };

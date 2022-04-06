@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { Icon } from '@/ui-kit';
-import { BNC, useDefaultScreenOptions } from '@/navigation';
+import { BNC, STACKS, useDefaultScreenOptions } from '@/navigation';
 import { Appearance, AppearanceAutoNightMode, Language, List } from '../screens';
 
 export enum SettingsMainScreen {
@@ -64,7 +64,7 @@ export const SettingsMainNavigation: BNC = ({ Group, Screen }) => {
         tabBarLabel: t('settings'),
         tabBarIcon: ({ color, size }) => <Icon name="gear" size={size} color={color} />,
       }}>
-      <Screen name="[STACKS] SETTINGS MAIN" component={SettingsMainStack} />
+      <Screen name={STACKS.SettingsMain.name} component={SettingsMainStack} />
     </Group>
   );
 };
